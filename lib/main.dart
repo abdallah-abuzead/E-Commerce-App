@@ -1,9 +1,11 @@
 import 'package:dynamic_path_url_strategy/dynamic_path_url_strategy.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import 'firebase_options.dart';
 import 'my_app.dart';
 
-void main() {
+Future<void> main() async {
   // Ensure that widgets are initialized
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -11,6 +13,10 @@ void main() {
 
   // Remove # sign from URL
   setPathUrlStrategy();
+
+  // Initialize Firebase & Authentication Repository
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // .then((_) => Get.put(AuthRepository()));
 
   // Main App starts here...
   runApp(const MyApp());
