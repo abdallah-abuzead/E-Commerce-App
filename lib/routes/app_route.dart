@@ -1,19 +1,20 @@
+import 'package:ecommerce_admin_panel/routes/routes.dart';
 import 'package:ecommerce_admin_panel/screens/home_screen.dart';
 import 'package:ecommerce_admin_panel/screens/responsive_design_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AppRouter {
-  static const String home = '/';
-  static const String responsiveDesign = '/responsive-design';
-
+class AppRoute {
   static final List<GetPage> pages = [
-    GetPage(name: home, page: () => const HomeScreen()),
-    GetPage(name: responsiveDesign, page: () => ResponsiveDesignScreen()),
+    GetPage(name: Routes.home, page: () => const HomeScreen()),
+    GetPage(
+      name: Routes.responsiveDesign,
+      page: () => ResponsiveDesignScreen(),
+    ),
   ];
 
   static final unknownRoute = GetPage(
-    name: '/not-found',
+    name: Routes.unknown,
     page: () => const UnknownRouteScreen(),
   );
 }
