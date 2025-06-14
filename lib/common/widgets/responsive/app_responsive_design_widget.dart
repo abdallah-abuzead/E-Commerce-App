@@ -1,8 +1,8 @@
-import 'package:ecommerce_admin_panel/t_sizes.dart';
+import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 
-class ResponsiveWidget extends StatelessWidget {
-  const ResponsiveWidget({
+class AppResponsiveDesignWidget extends StatelessWidget {
+  const AppResponsiveDesignWidget({
     super.key,
     required this.desktop,
     required this.tablet,
@@ -17,9 +17,9 @@ class ResponsiveWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (_, constraints) {
-        if (constraints.maxWidth >= TSizes.desktopScreenSize) {
+        if (constraints.maxWidth >= AppSizes.desktopScreenSize) {
           return desktop;
-        } else if (constraints.maxWidth >= TSizes.tabletScreenSize) {
+        } else if (constraints.maxWidth >= AppSizes.tabletScreenSize) {
           return tablet;
         } else {
           return mobile;

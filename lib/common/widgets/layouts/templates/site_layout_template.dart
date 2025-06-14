@@ -1,11 +1,11 @@
-import 'package:ecommerce_admin_panel/widgets/desktop_layout.dart';
-import 'package:ecommerce_admin_panel/widgets/mobile_layout.dart';
-import 'package:ecommerce_admin_panel/widgets/responsive_widget.dart';
-import 'package:ecommerce_admin_panel/widgets/tablet_layout.dart';
+import 'package:ecommerce_admin_panel/common/widgets/responsive/app_responsive_design_widget.dart';
+import 'package:ecommerce_admin_panel/common/widgets/responsive/screens/desktop_layout.dart';
+import 'package:ecommerce_admin_panel/common/widgets/responsive/screens/mobile_layout.dart';
+import 'package:ecommerce_admin_panel/common/widgets/responsive/screens/tablet_layout.dart';
 import 'package:flutter/cupertino.dart';
 
-class SiteLayout extends StatelessWidget {
-  const SiteLayout({
+class SiteLayoutTemplate extends StatelessWidget {
+  const SiteLayoutTemplate({
     super.key,
     this.desktop,
     this.tablet,
@@ -19,7 +19,7 @@ class SiteLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveWidget(
+    return AppResponsiveDesignWidget(
       desktop: useLayout
           ? DesktopLayout(body: desktop)
           : desktop ?? const SizedBox.shrink(),

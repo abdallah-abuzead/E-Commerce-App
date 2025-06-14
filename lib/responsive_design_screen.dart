@@ -1,13 +1,14 @@
-import 'package:ecommerce_admin_panel/app_container.dart';
-import 'package:ecommerce_admin_panel/widgets/site_layout.dart';
+import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
 import 'package:flutter/material.dart';
+
+import 'common/widgets/layouts/templates/site_layout_template.dart';
 
 class ResponsiveDesignScreen extends StatelessWidget {
   const ResponsiveDesignScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SiteLayout(
+    return SiteLayoutTemplate(
       desktop: _DeskTop(),
       tablet: _Tablet(),
       mobile: _Mobile(),

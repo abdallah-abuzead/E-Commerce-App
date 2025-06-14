@@ -1,6 +1,6 @@
+import 'package:ecommerce_admin_panel/home_screen.dart';
+import 'package:ecommerce_admin_panel/responsive_design_screen.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
-import 'package:ecommerce_admin_panel/screens/home_screen.dart';
-import 'package:ecommerce_admin_panel/screens/responsive_design_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

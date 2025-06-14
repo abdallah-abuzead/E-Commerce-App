@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../app_container.dart';
+import '../../layouts/headers/app_header.dart';
 
 class DesktopLayout extends StatelessWidget {
   const DesktopLayout({super.key, this.body});
@@ -11,19 +11,11 @@ class DesktopLayout extends StatelessWidget {
     return Scaffold(
       body: Row(
         children: [
-          Expanded(child: const Drawer()),
+          const Expanded(child: Drawer()),
           Expanded(
             flex: 5,
             child: Column(
-              children: [
-                // header
-                AppContainer(
-                  height: 75,
-                  color: Colors.yellow.withValues(alpha: 0.2),
-                ),
-                // body
-                body ?? const SizedBox(),
-              ],
+              children: [const AppHeader(), body ?? const SizedBox()],
             ),
           ),
         ],
