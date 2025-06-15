@@ -2,13 +2,16 @@ import 'package:ecommerce_admin_panel/common/widgets/layouts/headers/app_header.
 import 'package:flutter/material.dart';
 
 class TabletLayout extends StatelessWidget {
-  const TabletLayout({super.key, this.body});
+  TabletLayout({super.key, this.body});
+
   final Widget? body;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppHeader(),
+      key: scaffoldKey,
+      appBar: AppHeader(scaffoldKey: scaffoldKey),
       drawer: const Drawer(),
       body: body ?? const SizedBox(),
     );

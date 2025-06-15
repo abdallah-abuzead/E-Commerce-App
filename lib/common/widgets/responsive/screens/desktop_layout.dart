@@ -4,6 +4,7 @@ import '../../layouts/headers/app_header.dart';
 
 class DesktopLayout extends StatelessWidget {
   const DesktopLayout({super.key, this.body});
+
   final Widget? body;
 
   @override
