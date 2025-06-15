@@ -1,10 +1,103 @@
+import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
+import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppTheme {
   static ThemeData lightTheme = ThemeData(
     fontFamily: 'Urbanist',
     brightness: Brightness.light,
-    primaryColor: Colors.blue,
+    primaryColor: AppColors.primary,
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      primary: AppColors.primary,
+      secondary: AppColors.secondary,
+      error: AppColors.error,
+      surface: AppColors.white,
+    ),
+    appBarTheme: const AppBarTheme(
+      centerTitle: false,
+      backgroundColor: AppColors.white,
+    ),
+
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppSizes.inputFieldRadius),
+        borderSide: const BorderSide(color: AppColors.grey),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppSizes.inputFieldRadius),
+        borderSide: const BorderSide(color: AppColors.primary),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppSizes.inputFieldRadius),
+        borderSide: const BorderSide(color: AppColors.grey),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(AppSizes.inputFieldRadius),
+        borderSide: const BorderSide(color: AppColors.error),
+      ),
+      hintStyle: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontSize: AppSizes.fontSizeSm,
+        color: AppColors.textSecondary,
+        fontWeight: FontWeight.w500,
+      ),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: AppSizes.md,
+        vertical: AppSizes.md,
+      ),
+      isDense: true,
+    ),
+    iconTheme: const IconThemeData(
+      color: AppColors.iconPrimary,
+      size: AppSizes.iconMd,
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        iconSize: WidgetStateProperty.all(AppSizes.iconMd),
+        foregroundColor: WidgetStateProperty.all(AppColors.iconPrimary),
+      ),
+    ),
+    textTheme: const TextTheme(
+      bodySmall: TextStyle(
+        fontSize: AppSizes.fontSizeSm,
+        color: AppColors.textPrimary,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: AppSizes.fontSizeMd,
+        color: AppColors.textPrimary,
+      ),
+      bodyLarge: TextStyle(
+        fontSize: AppSizes.fontSizeLg,
+        color: AppColors.textPrimary,
+      ),
+      titleSmall: TextStyle(
+        fontSize: AppSizes.fontSizeSm,
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w500,
+      ),
+      titleMedium: TextStyle(
+        fontSize: AppSizes.fontSizeMd,
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w500,
+      ),
+      titleLarge: TextStyle(
+        fontSize: AppSizes.fontSizeMd,
+        color: AppColors.textPrimary,
+        fontWeight: FontWeight.w600,
+      ),
+      labelSmall: TextStyle(
+        fontSize: AppSizes.fontSizeSm,
+        color: AppColors.textSecondary,
+      ),
+      labelMedium: TextStyle(
+        fontSize: AppSizes.fontSizeSm,
+        color: AppColors.textSecondary,
+      ),
+      labelLarge: TextStyle(
+        fontSize: AppSizes.fontSizeLg,
+        color: AppColors.textSecondary,
+      ),
+    ),
   );
   static ThemeData darkTheme = ThemeData(
     fontFamily: 'Urbanist',
