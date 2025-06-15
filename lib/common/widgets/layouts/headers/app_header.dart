@@ -1,7 +1,6 @@
 import 'package:ecommerce_admin_panel/common/widgets/images/app_rounded_image.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_images.dart';
-import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -53,7 +52,6 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           Row(
             children: [
               const AppRoundedImage(
-                imageType: ImageType.asset,
                 image: AppImages.user,
                 width: 40,
                 height: 40,
