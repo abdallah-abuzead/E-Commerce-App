@@ -18,7 +18,7 @@ class AppRoundedImage extends StatelessWidget {
     this.height = 56,
     this.memoryImage,
     this.overlayColor,
-    required this.imageType,
+    this.imageType = ImageType.asset,
     this.backgroundColor,
     this.padding = AppSizes.sm,
     this.margin,
@@ -33,7 +33,7 @@ class AppRoundedImage extends StatelessWidget {
   final BoxFit? fit;
   final String? image;
   final File? file;
-  final ImageType? imageType;
+  final ImageType imageType;
   final Color? overlayColor;
   final Color? backgroundColor;
   final Uint8List? memoryImage;
@@ -76,8 +76,6 @@ class AppRoundedImage extends StatelessWidget {
       case ImageType.asset:
         imageWidget = _buildAssetImage();
         break;
-      default:
-        imageWidget = Container();
     }
 
     return ClipRRect(

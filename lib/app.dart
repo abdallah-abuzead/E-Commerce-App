@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin_panel/routes/app_route.dart';
+import 'package:ecommerce_admin_panel/routes/app_route_observer.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_strings.dart';
 import 'package:ecommerce_admin_panel/utils/theme/theme.dart';
@@ -18,6 +19,7 @@ class App extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       initialRoute: Routes.responsiveDesign,
       getPages: AppRoute.pages,
+      navigatorObservers: [AppRouteObserver()],
       unknownRoute: AppRoute.unknownRoute,
     );
   }
