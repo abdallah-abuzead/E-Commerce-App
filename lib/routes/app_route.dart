@@ -9,7 +9,7 @@ class AppRoute {
     GetPage(name: Routes.home, page: () => const HomeScreen()),
     GetPage(
       name: Routes.responsiveDesign,
-      page: () => ResponsiveDesignScreen(),
+      page: () => const ResponsiveDesignScreen(),
     ),
   ];
 
