@@ -1,12 +1,13 @@
-import 'package:ecommerce_admin_panel/home_screen.dart';
 import 'package:ecommerce_admin_panel/responsive_design_screen.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../second_screen.dart';
+
 class AppRoute {
   static final List<GetPage> pages = [
-    GetPage(name: Routes.home, page: () => const HomeScreen()),
+    GetPage(name: Routes.secondScreen, page: () => const SecondScreen()),
     GetPage(
       name: Routes.responsiveDesign,
       page: () => const ResponsiveDesignScreen(),
