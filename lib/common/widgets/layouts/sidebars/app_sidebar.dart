@@ -48,7 +48,7 @@ class AppSidebar extends StatelessWidget {
                       itemName: 'Dashboard',
                     ),
                     const AppMenuItem(
-                      route: Routes.home,
+                      route: Routes.secondScreen,
                       icon: Iconsax.image,
                       itemName: 'Media',
                     ),
