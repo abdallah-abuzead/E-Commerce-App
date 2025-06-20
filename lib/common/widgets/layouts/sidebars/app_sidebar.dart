@@ -43,12 +43,12 @@ class AppSidebar extends StatelessWidget {
                       ).textTheme.bodySmall!.apply(letterSpacingDelta: 1.2),
                     ),
                     const AppMenuItem(
-                      route: Routes.responsiveDesign,
+                      route: Routes.dashboard,
                       icon: Iconsax.status,
                       itemName: 'Dashboard',
                     ),
                     const AppMenuItem(
-                      route: Routes.secondScreen,
+                      route: Routes.media,
                       icon: Iconsax.image,
                       itemName: 'Media',
                     ),

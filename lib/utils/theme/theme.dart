@@ -7,15 +7,51 @@ abstract class AppTheme {
     fontFamily: 'Urbanist',
     brightness: Brightness.light,
     primaryColor: AppColors.primary,
+    scaffoldBackgroundColor: AppColors.primaryBackgroundColor,
     colorScheme: ColorScheme.fromSwatch().copyWith(
       primary: AppColors.primary,
       secondary: AppColors.secondary,
       error: AppColors.error,
-      surface: AppColors.white,
+      surface: AppColors.primaryBackgroundColor,
     ),
     appBarTheme: const AppBarTheme(
       centerTitle: false,
       backgroundColor: AppColors.white,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.all(AppColors.primary),
+        foregroundColor: WidgetStateProperty.all(AppColors.white),
+        padding: WidgetStateProperty.all(
+          const EdgeInsets.symmetric(
+            horizontal: AppSizes.md,
+            vertical: AppSizes.sm,
+          ),
+        ),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSizes.buttonRadius),
+          ),
+        ),
+        textStyle: WidgetStateProperty.all(
+          const TextStyle(
+            fontSize: AppSizes.fontSizeSm,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+    ),
+
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(AppColors.primary),
+        textStyle: WidgetStateProperty.all(
+          const TextStyle(
+            fontSize: AppSizes.fontSizeSm,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
     ),
 
     inputDecorationTheme: InputDecorationTheme(
@@ -41,6 +77,8 @@ abstract class AppTheme {
         color: AppColors.textSecondary,
         fontWeight: FontWeight.w500,
       ),
+
+      labelStyle: const TextStyle(fontSize: AppSizes.fontSizeSm),
       contentPadding: const EdgeInsets.symmetric(
         horizontal: AppSizes.md,
         vertical: AppSizes.md,
@@ -63,7 +101,7 @@ abstract class AppTheme {
         color: AppColors.textPrimary,
       ),
       bodyMedium: TextStyle(
-        fontSize: AppSizes.fontSizeMd,
+        fontSize: AppSizes.fontSizeSm,
         color: AppColors.textPrimary,
       ),
       bodyLarge: TextStyle(

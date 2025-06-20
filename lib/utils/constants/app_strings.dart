@@ -1,11 +1,13 @@
 abstract class AppStrings {
   static const String appName = 'MyApp';
-  static const String welcomeMessage = 'Welcome to MyApp!';
-  static const String loginButton = 'Login';
-  static const String signupButton = 'Sign Up';
-  static const String logoutButton = 'Logout';
-  static const String errorMessage = 'An error occurred. Please try again.';
-  static const String loadingMessage = 'Loading...';
-  static const String settingsTitle = 'Settings';
-  static const String profileTitle = 'Profile';
+
+  // Authentication Strings
+  static const String loginTitle = 'Welcome back,';
+  static const String loginSubTitle =
+      'Discover Limitless Choices and unmatched Convenience.';
+  static const String email = 'E-Mail';
+  static const String password = 'Password';
+  static const String rememberMe = 'Remember Me';
+  static const String forgetPassword = 'Forget Password?';
+  static const String signIn = 'Sign In';
 }

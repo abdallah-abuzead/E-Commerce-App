@@ -3,11 +3,11 @@ import 'package:ecommerce_admin_panel/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../second_screen.dart';
+import '../features/authentication/screens/login/login_screen.dart';
 
 class AppRoute {
   static final List<GetPage> pages = [
-    GetPage(name: Routes.secondScreen, page: () => const SecondScreen()),
+    GetPage(name: Routes.login, page: () => const LoginScreen()),
     GetPage(
       name: Routes.responsiveDesign,
       page: () => const ResponsiveDesignScreen(),
