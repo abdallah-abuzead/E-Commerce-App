@@ -17,7 +17,7 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      initialRoute: Routes.login,
+      initialRoute: Routes.dashboard,
       getPages: AppRoute.pages,
       navigatorObservers: [AppRouteObserver()],
       unknownRoute: AppRoute.unknownRoute,
