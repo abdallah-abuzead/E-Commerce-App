@@ -1,4 +1,6 @@
+import 'package:ecommerce_admin_panel/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../utils/constants/app_sizes.dart';
@@ -46,7 +48,9 @@ class LoginForm extends StatelessWidget {
                   ],
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.forgetPassword);
+                  },
                   child: const Text(AppStrings.forgetPassword),
                 ),
               ],
