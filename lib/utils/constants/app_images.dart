@@ -5,4 +5,6 @@ abstract class AppImages {
 
   // User images
   static const String user = 'assets/images/content/avatar.png';
+  static const String deliveredEmailIllustration =
+      'assets/images/content/delivered_email_illustration.png';
 }

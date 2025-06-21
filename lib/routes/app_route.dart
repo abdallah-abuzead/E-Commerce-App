@@ -1,3 +1,5 @@
+import 'package:ecommerce_admin_panel/features/authentication/screens/forget_password/forget_password_screen.dart';
+import 'package:ecommerce_admin_panel/features/authentication/screens/reset_password/reset_password_screen.dart';
 import 'package:ecommerce_admin_panel/responsive_design_screen.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,14 @@ import '../features/authentication/screens/login/login_screen.dart';
 class AppRoute {
   static final List<GetPage> pages = [
     GetPage(name: Routes.login, page: () => const LoginScreen()),
+    GetPage(
+      name: Routes.forgetPassword,
+      page: () => const ForgetPasswordScreen(),
+    ),
+    GetPage(
+      name: Routes.resetPassword,
+      page: () => const ResetPasswordScreen(),
+    ),
     GetPage(
       name: Routes.responsiveDesign,
       page: () => const ResponsiveDesignScreen(),
