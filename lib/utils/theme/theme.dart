@@ -105,7 +105,7 @@ abstract class AppTheme {
         color: AppColors.textPrimary,
       ),
       bodyLarge: TextStyle(
-        fontSize: AppSizes.fontSizeLg,
+        fontSize: AppSizes.fontSizeSm,
         color: AppColors.textPrimary,
       ),
       titleSmall: TextStyle(
@@ -114,7 +114,7 @@ abstract class AppTheme {
         fontWeight: FontWeight.w500,
       ),
       titleMedium: TextStyle(
-        fontSize: AppSizes.fontSizeMd,
+        fontSize: AppSizes.fontSizeSm,
         color: AppColors.textPrimary,
         fontWeight: FontWeight.w500,
       ),
