@@ -1,5 +1,7 @@
 abstract class AppStrings {
   static const String appName = 'MyApp';
+  static const String adminEmail = 'admin@me.com';
+  static const String adminPassword = '121212';
 
   // Authentication Strings
   static const String loginTitle = 'Welcome back,';

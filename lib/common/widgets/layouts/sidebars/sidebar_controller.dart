@@ -3,6 +3,7 @@ import 'package:ecommerce_admin_panel/utils/device/device_utils.dart';
 import 'package:get/get.dart';
 
 class SidebarController extends GetxController {
+  static SidebarController get instance => Get.find<SidebarController>();
   final RxString activeItem = Routes.responsiveDesign.obs;
   final Rx<String> hoverItem = ''.obs;
 
