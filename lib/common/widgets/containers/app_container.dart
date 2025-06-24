@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 
 class AppContainer extends StatelessWidget {
@@ -13,6 +14,7 @@ class AppContainer extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
   final double? width;
   final double? height;
+  final Function()? onTap;
 
   const AppContainer({
     super.key,
@@ -28,6 +30,7 @@ class AppContainer extends StatelessWidget {
     this.boxShadow,
     this.width,
     this.height,
+    this.onTap,
   }) : assert(
          color == null || gradient == null,
          'Cannot provide both color and gradient',
@@ -35,21 +38,25 @@ class AppContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      padding: padding,
-      margin: margin,
-      alignment: alignment ?? Alignment.center,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: borderRadius ?? BorderRadius.circular(20),
-        border: border,
-        gradient: gradient,
-        image: decorationImage,
-        boxShadow: boxShadow,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: width,
+        height: height,
+        padding: padding,
+        margin: margin,
+        alignment: alignment ?? Alignment.center,
+        decoration: BoxDecoration(
+          color: color ?? Colors.white,
+          borderRadius:
+              borderRadius ?? BorderRadius.circular(AppSizes.cardRadiusLg),
+          border: border,
+          gradient: gradient,
+          image: decorationImage,
+          boxShadow: boxShadow,
+        ),
+        child: child,
       ),
-      child: child,
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:ecommerce_admin_panel/features/authentication/screens/forget_password/forget_password_screen.dart';
 import 'package:ecommerce_admin_panel/features/authentication/screens/reset_password/reset_password_screen.dart';
-import 'package:ecommerce_admin_panel/features/dashboard/screens/dashboard/dashboard_screen.dart';
 import 'package:ecommerce_admin_panel/responsive_design_screen.dart';
 import 'package:ecommerce_admin_panel/routes/route_middleware.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../features/authentication/screens/login/login_screen.dart';
+import '../features/shop/screens/dashboard/dashboard_screen.dart';
 
 class AppRoute {
   static final List<GetPage> pages = [
