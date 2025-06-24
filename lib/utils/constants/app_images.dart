@@ -9,5 +9,8 @@ abstract class AppImages {
       'assets/images/content/delivered_email_illustration.png';
 
   // Lottie animations
-  static const String docerAnimation = 'assets/images/animations/docer_animation.json';
+  static const String docerAnimation =
+      'assets/images/animations/docer_animation.json';
+  static const String packageAnimation =
+      'assets/images/animations/package_animation.json';
 }
