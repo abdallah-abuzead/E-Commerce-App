@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class AppContainer extends StatelessWidget {
   final BorderRadiusGeometry? borderRadius;
   final Border? border;
   final List<BoxShadow>? boxShadow;
+  final showShadow;
   final double? width;
   final double? height;
   final Function()? onTap;
@@ -19,7 +21,7 @@ class AppContainer extends StatelessWidget {
   const AppContainer({
     super.key,
     this.child,
-    this.padding,
+    this.padding = const EdgeInsets.all(AppSizes.md),
     this.margin,
     this.alignment,
     this.color,
@@ -28,13 +30,11 @@ class AppContainer extends StatelessWidget {
     this.borderRadius,
     this.border,
     this.boxShadow,
+    this.showShadow = true,
     this.width,
     this.height,
     this.onTap,
-  }) : assert(
-         color == null || gradient == null,
-         'Cannot provide both color and gradient',
-       );
+  }) : assert(color == null || gradient == null, 'Cannot provide both color and gradient');
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +48,21 @@ class AppContainer extends StatelessWidget {
         alignment: alignment ?? Alignment.center,
         decoration: BoxDecoration(
           color: color ?? Colors.white,
-          borderRadius:
-              borderRadius ?? BorderRadius.circular(AppSizes.cardRadiusLg),
+          borderRadius: borderRadius ?? BorderRadius.circular(AppSizes.cardRadiusLg),
           border: border,
           gradient: gradient,
           image: decorationImage,
-          boxShadow: boxShadow,
+          boxShadow: !showShadow
+              ? null
+              : boxShadow ??
+                    [
+                      BoxShadow(
+                        color: AppColors.grey.withValues(alpha: 0.1),
+                        blurRadius: 8,
+                        spreadRadius: 5,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
         ),
         child: child,
       ),

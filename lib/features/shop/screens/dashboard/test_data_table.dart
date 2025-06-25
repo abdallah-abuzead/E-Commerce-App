@@ -11,7 +11,7 @@ class DashboardDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DashboardController controller = Get.put(DashboardController());
+    final TestDashboardController controller = Get.put(TestDashboardController());
 
     return Padding(
       padding: const EdgeInsets.all(30),
@@ -62,7 +62,7 @@ class DashboardDesktop extends StatelessWidget {
 }
 
 class MyData extends DataTableSource {
-  final DashboardController controller = Get.put(DashboardController());
+  final TestDashboardController controller = Get.put(TestDashboardController());
 
   @override
   DataRow? getRow(int i) {
@@ -90,10 +90,9 @@ class MyData extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-class DashboardController extends GetxController {
+class TestDashboardController extends GetxController {
   final RxList<Map<String, dynamic>> dataList = <Map<String, dynamic>>[].obs;
-  final RxList<Map<String, dynamic>> filteredDataList =
-      <Map<String, dynamic>>[].obs;
+  final RxList<Map<String, dynamic>> filteredDataList = <Map<String, dynamic>>[].obs;
   final RxList<bool> selectedRows = <bool>[].obs;
   RxInt sortColumnIndex = 1.obs;
   RxBool sortAscending = true.obs;
@@ -122,8 +121,7 @@ class DashboardController extends GetxController {
       filteredDataList.value = dataList
           .where(
             (item) => item.values.any(
-              (value) =>
-                  value.toString().toLowerCase().contains(query.toLowerCase()),
+              (value) => value.toString().toLowerCase().contains(query.toLowerCase()),
             ),
           )
           .toList();
