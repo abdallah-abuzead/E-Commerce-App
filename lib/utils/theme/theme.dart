@@ -76,7 +76,7 @@ abstract class AppTheme {
       ),
     ),
     textTheme: const TextTheme(
-      bodySmall: TextStyle(fontSize: AppSizes.fontSizeSm, color: AppColors.textPrimary),
+      bodySmall: TextStyle(fontSize: AppSizes.fontSizeSm, color: AppColors.textSecondary),
       bodyMedium: TextStyle(fontSize: AppSizes.fontSizeSm, color: AppColors.textPrimary),
       bodyLarge: TextStyle(fontSize: AppSizes.fontSizeSm, color: AppColors.textPrimary),
       titleSmall: TextStyle(

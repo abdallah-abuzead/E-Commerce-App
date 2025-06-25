@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class SidebarController extends GetxController {
   static SidebarController get instance => Get.find<SidebarController>();
-  final RxString activeItem = Routes.responsiveDesign.obs;
+  final RxString activeItem = Routes.dashboard.obs;
   final Rx<String> hoverItem = ''.obs;
 
   void changeActiveItem(String route) => activeItem.value = route;

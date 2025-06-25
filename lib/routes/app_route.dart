@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/features/authentication/screens/forget_password/forget_password_screen.dart';
 import 'package:ecommerce_admin_panel/features/authentication/screens/reset_password/reset_password_screen.dart';
+import 'package:ecommerce_admin_panel/features/media/screens/media_screen.dart';
 import 'package:ecommerce_admin_panel/responsive_design_screen.dart';
 import 'package:ecommerce_admin_panel/routes/route_middleware.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
@@ -12,29 +13,18 @@ import '../features/shop/screens/dashboard/dashboard_screen.dart';
 class AppRoute {
   static final List<GetPage> pages = [
     GetPage(name: Routes.login, page: () => const LoginScreen()),
-    GetPage(
-      name: Routes.forgetPassword,
-      page: () => const ForgetPasswordScreen(),
-    ),
-    GetPage(
-      name: Routes.resetPassword,
-      page: () => const ResetPasswordScreen(),
-    ),
+    GetPage(name: Routes.forgetPassword, page: () => const ForgetPasswordScreen()),
+    GetPage(name: Routes.resetPassword, page: () => const ResetPasswordScreen()),
     GetPage(
       name: Routes.dashboard,
       page: () => const DashboardScreen(),
       middlewares: [RouteMiddleware()],
     ),
-    GetPage(
-      name: Routes.responsiveDesign,
-      page: () => const ResponsiveDesignScreen(),
-    ),
+    GetPage(name: Routes.media, page: () => const MediaScreen(), middlewares: [RouteMiddleware()]),
+    GetPage(name: Routes.responsiveDesign, page: () => const ResponsiveDesignScreen()),
   ];
 
-  static final unknownRoute = GetPage(
-    name: Routes.unknown,
-    page: () => const UnknownRouteScreen(),
-  );
+  static final unknownRoute = GetPage(name: Routes.unknown, page: () => const UnknownRouteScreen());
 }
 
 class UnknownRouteScreen extends StatelessWidget {
