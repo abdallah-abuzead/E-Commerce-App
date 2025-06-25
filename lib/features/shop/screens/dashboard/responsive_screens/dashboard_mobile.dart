@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../common/widgets/containers/app_container.dart';
 import '../../../../../utils/constants/app_sizes.dart';
 import '../widgets/dashboard_card.dart';
 import '../widgets/order_status_pie_chart.dart';
+import '../widgets/recent_orders.dart';
 import '../widgets/weekly_sales_bar_chart.dart';
 
 class DashboardMobile extends StatelessWidget {
@@ -34,7 +34,7 @@ class DashboardMobile extends StatelessWidget {
             const SizedBox(height: AppSizes.spaceBtwSections),
 
             /// Orders
-            const AppContainer(),
+            const RecentOrders(),
             const SizedBox(height: AppSizes.spaceBtwSections),
 
             /// Pie Chart

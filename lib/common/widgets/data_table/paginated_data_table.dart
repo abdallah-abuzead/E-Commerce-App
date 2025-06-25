@@ -50,63 +50,69 @@ class AppPaginatedDataTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        cardTheme: const CardThemeData(color: Colors.white, elevation: 0),
-      ),
-      child: PaginatedDataTable2(
-        /// Columns & Data Source
-        columns: columns,
-        source: source,
+    return SizedBox(
+      height: tableHeight,
+      child: Theme(
+        data: Theme.of(
+          context,
+        ).copyWith(cardTheme: const CardThemeData(color: Colors.white, elevation: 0)),
+        child: PaginatedDataTable2(
+          /// Columns & Data Source
+          columns: columns,
+          source: source,
 
-        /// Table properties & styles
-        columnSpacing: 12,
-        minWidth: minWidth,
-        dividerThickness: 0,
-        horizontalMargin: 12,
-        dataRowHeight: dataRowHeight,
-        headingTextStyle: Theme.of(context).textTheme.titleMedium,
-        headingRowColor: WidgetStateProperty.resolveWith(
-          (states) => AppColors.primaryBackgroundColor,
-        ),
-        headingRowDecoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(AppSizes.borderRadiusMd),
-            topRight: Radius.circular(AppSizes.borderRadiusMd),
+          /// Table properties & styles
+          columnSpacing: 12,
+
+          minWidth: minWidth,
+          dividerThickness: 0,
+          horizontalMargin: 12,
+          dataRowHeight: dataRowHeight,
+          headingTextStyle: Theme.of(
+            context,
+          ).textTheme.titleMedium!.apply(color: AppColors.textSecondary),
+          headingRowColor: WidgetStateProperty.resolveWith(
+            (states) => AppColors.primaryBackgroundColor,
           ),
+          headingRowDecoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(AppSizes.borderRadiusMd),
+              topRight: Radius.circular(AppSizes.borderRadiusMd),
+            ),
+          ),
+          empty: const AnimationLoaderWidget(
+            animation: AppImages.packageAnimation,
+            text: 'Nothing Found',
+            height: 200,
+            width: 200,
+          ),
+
+          /// Checkbox column for selecting rows
+          showCheckboxColumn: true,
+
+          /// Pagination
+          showFirstLastButtons: true,
+          onPageChanged: onPageChanged,
+          renderEmptyRowsInTheEnd: false,
+          onRowsPerPageChanged: (noOfRows) {},
+          rowsPerPage: rowsPerPage,
+
+          /// Sorting
+          sortAscending: sortAscending,
+          sortArrowAlwaysVisible: true,
+          sortArrowIcon: Icons.line_axis,
+          sortColumnIndex: sortColumnIndex,
+          sortArrowBuilder: (ascending, sorted) {
+            if (sorted) {
+              return Icon(
+                ascending ? Iconsax.arrow_up_3 : Iconsax.arrow_down,
+                size: AppSizes.iconSm,
+              );
+            } else {
+              return const Icon(Iconsax.arrow_3, size: AppSizes.iconSm);
+            }
+          },
         ),
-        empty: const AnimationLoaderWidget(
-          animation: AppImages.packageAnimation,
-          text: 'Nothing Found',
-          height: 200,
-          width: 200,
-        ),
-
-        /// Checkbox column for selecting rows
-        showCheckboxColumn: true,
-
-        /// Pagination
-        showFirstLastButtons: true,
-        onPageChanged: onPageChanged,
-        renderEmptyRowsInTheEnd: false,
-        onRowsPerPageChanged: (noOfRows) {},
-        rowsPerPage: rowsPerPage,
-
-        /// Sorting
-        sortAscending: sortAscending,
-        sortArrowAlwaysVisible: true,
-        sortArrowIcon: Icons.line_axis,
-        sortColumnIndex: sortColumnIndex,
-        sortArrowBuilder: (ascending, sorted) {
-          if (sorted) {
-            return Icon(
-              ascending ? Iconsax.arrow_up_3 : Iconsax.arrow_down,
-              size: AppSizes.iconSm,
-            );
-          } else {
-            return const Icon(Iconsax.arrow_3, size: AppSizes.iconSm);
-          }
-        },
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 abstract class HelperFunctions {
   static DateTime getStartOfWeek(DateTime date) {
@@ -29,5 +30,9 @@ abstract class HelperFunctions {
 
   static bool isLightMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.light;
+  }
+
+  static String getFormatedDate(DateTime date, {String format = 'dd MMM yyyy'}) {
+    return DateFormat(format).format(date);
   }
 }
