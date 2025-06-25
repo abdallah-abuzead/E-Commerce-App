@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../common/widgets/containers/app_container.dart';
 import '../../../../../utils/constants/app_sizes.dart';
 import '../widgets/dashboard_card.dart';
+import '../widgets/order_status_pie_chart.dart';
+import '../widgets/weekly_sales_bar_chart.dart';
 
 class DashboardMobile extends StatelessWidget {
   const DashboardMobile({super.key});
@@ -24,6 +27,18 @@ class DashboardMobile extends StatelessWidget {
             const DashboardCard(title: 'Total orders', subtitle: '36', stats: 44),
             const SizedBox(height: AppSizes.spaceBtwItems),
             const DashboardCard(title: 'Visitors', subtitle: '25,35', stats: 2),
+            const SizedBox(height: AppSizes.spaceBtwSections),
+
+            /// Bar Graph
+            const WeeklySalesBarChart(),
+            const SizedBox(height: AppSizes.spaceBtwSections),
+
+            /// Orders
+            const AppContainer(),
+            const SizedBox(height: AppSizes.spaceBtwSections),
+
+            /// Pie Chart
+            const OrderStatusPieChart(),
           ],
         ),
       ),
