@@ -4,23 +4,19 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../utils/popups/app_loaders.dart';
+import '../popups/app_loaders.dart';
 
 class NetworkManager extends GetxController {
   static NetworkManager get instance => Get.find<NetworkManager>();
 
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
-  final RxList<ConnectivityResult> _connectionStatus = [
-    ConnectivityResult.none,
-  ].obs;
+  final RxList<ConnectivityResult> _connectionStatus = [ConnectivityResult.none].obs;
 
   @override
   onInit() {
     super.onInit();
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(
-      _updateConnectionStatus,
-    );
+    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {

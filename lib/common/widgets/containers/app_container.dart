@@ -10,10 +10,10 @@ class AppContainer extends StatelessWidget {
   final Color? color;
   final Gradient? gradient;
   final DecorationImage? decorationImage;
-  final BorderRadiusGeometry? borderRadius;
+  final double? radius;
   final Border? border;
   final List<BoxShadow>? boxShadow;
-  final showShadow;
+  final bool showShadow;
   final double? width;
   final double? height;
   final Function()? onTap;
@@ -27,7 +27,7 @@ class AppContainer extends StatelessWidget {
     this.color,
     this.gradient,
     this.decorationImage,
-    this.borderRadius,
+    this.radius,
     this.border,
     this.boxShadow,
     this.showShadow = true,
@@ -48,7 +48,7 @@ class AppContainer extends StatelessWidget {
         alignment: alignment ?? Alignment.center,
         decoration: BoxDecoration(
           color: color ?? Colors.white,
-          borderRadius: borderRadius ?? BorderRadius.circular(AppSizes.cardRadiusLg),
+          borderRadius: BorderRadius.circular(radius ?? AppSizes.cardRadiusLg),
           border: border,
           gradient: gradient,
           image: decorationImage,

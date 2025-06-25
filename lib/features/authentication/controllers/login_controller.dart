@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../data/repositories/auth/auth_repository.dart';
-import '../../../data/services/network_manager.dart';
 import '../../../utils/constants/app_strings.dart';
+import '../../../utils/helpers/network_manager.dart';
 import '../../../utils/popups/full_screen_loader.dart';
 
 class LoginController extends GetxController {
@@ -34,10 +34,7 @@ class LoginController extends GetxController {
 
   Future<void> emailAndPasswordSignIn() async {
     try {
-      FullScreenLoader.openLoadingDialog(
-        'Logging you in ...',
-        AppImages.docerAnimation,
-      );
+      FullScreenLoader.openLoadingDialog('Logging you in ...', AppImages.docerAnimation);
       final bool isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         FullScreenLoader.stopLoadingDialog();
@@ -83,10 +80,7 @@ class LoginController extends GetxController {
 
   Future<void> registerAdmin() async {
     try {
-      FullScreenLoader.openLoadingDialog(
-        'Registering Admin Account...',
-        AppImages.docerAnimation,
-      );
+      FullScreenLoader.openLoadingDialog('Registering Admin Account...', AppImages.docerAnimation);
 
       final bool isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {

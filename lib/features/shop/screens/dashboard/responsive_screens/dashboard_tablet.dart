@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../../utils/constants/app_sizes.dart';
 import '../widgets/dashboard_card.dart';
+import '../widgets/order_status_pie_chart.dart';
+import '../widgets/recent_orders.dart';
+import '../widgets/weekly_sales_bar_chart.dart';
 
 class DashboardTablet extends StatelessWidget {
   const DashboardTablet({super.key});
@@ -40,6 +43,18 @@ class DashboardTablet extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: AppSizes.spaceBtwSections),
+
+            /// Bar Graph
+            const WeeklySalesBarChart(),
+            const SizedBox(height: AppSizes.spaceBtwSections),
+
+            /// Orders
+            const RecentOrders(),
+            const SizedBox(height: AppSizes.spaceBtwSections),
+
+            /// Pie Chart
+            const OrderStatusPieChart(),
           ],
         ),
       ),

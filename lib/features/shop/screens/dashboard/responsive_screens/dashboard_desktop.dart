@@ -1,4 +1,4 @@
-import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
+import 'package:ecommerce_admin_panel/features/shop/screens/dashboard/widgets/recent_orders.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/dashboard/widgets/weekly_sales_bar_chart.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,7 @@ class DashboardDesktop extends StatelessWidget {
 
             const SizedBox(height: AppSizes.spaceBtwSections),
 
-            /// Graph
+            /// Graphs
             const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -57,7 +57,7 @@ class DashboardDesktop extends StatelessWidget {
                       SizedBox(height: AppSizes.spaceBtwSections),
 
                       /// Orders
-                      AppContainer(),
+                      RecentOrders(),
                     ],
                   ),
                 ),
