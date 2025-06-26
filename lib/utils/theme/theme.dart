@@ -40,6 +40,22 @@ abstract class AppTheme {
       ),
     ),
 
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(AppColors.textPrimary),
+        side: WidgetStateProperty.all(const BorderSide(color: AppColors.borderPrimary)),
+        padding: WidgetStateProperty.all(
+          const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.sm),
+        ),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSizes.buttonRadius)),
+        ),
+        textStyle: WidgetStateProperty.all(
+          const TextStyle(fontSize: AppSizes.fontSizeSm, fontWeight: FontWeight.w500),
+        ),
+      ),
+    ),
+
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(AppSizes.inputFieldRadius),
