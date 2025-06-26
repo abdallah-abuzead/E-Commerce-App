@@ -12,6 +12,7 @@ class AppContainer extends StatelessWidget {
   final DecorationImage? decorationImage;
   final double? radius;
   final Border? border;
+  final bool showBorder;
   final List<BoxShadow>? boxShadow;
   final bool showShadow;
   final double? width;
@@ -29,6 +30,7 @@ class AppContainer extends StatelessWidget {
     this.decorationImage,
     this.radius,
     this.border,
+    this.showBorder = false,
     this.boxShadow,
     this.showShadow = true,
     this.width,
@@ -49,7 +51,7 @@ class AppContainer extends StatelessWidget {
         decoration: BoxDecoration(
           color: color ?? Colors.white,
           borderRadius: BorderRadius.circular(radius ?? AppSizes.cardRadiusLg),
-          border: border,
+          border: !showBorder ? null : border ?? Border.all(color: AppColors.borderPrimary),
           gradient: gradient,
           image: decorationImage,
           boxShadow: !showShadow
