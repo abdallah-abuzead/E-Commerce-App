@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
 import 'package:ecommerce_admin_panel/common/widgets/images/app_rounded_image.dart';
 import 'package:ecommerce_admin_panel/features/media/screens/widgets/media_folder_dropdown.dart';
@@ -7,9 +10,11 @@ import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
 import 'package:ecommerce_admin_panel/utils/device/device_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
+import 'package:universal_html/html.dart' as html;
 
 import '../../../../utils/constants/app_images.dart';
 import '../../controllers/media_controller.dart';
+import '../../models/image_model.dart';
 
 class MediaUploader extends StatelessWidget {
   const MediaUploader({super.key});
@@ -40,9 +45,22 @@ class MediaUploader extends StatelessWidget {
                       onHover: () => print('Zone hover'),
                       onLeave: () => print('Zone left'),
                       onCreated: (ctrl) => controller.dropzoneController = ctrl,
-                      onDropFile: (file) => print(file.name),
                       onDropInvalid: (ev) => print('Zone Invalid Mime: $ev'),
                       onDropFiles: (files) => print('Zone drop multiple files: $files'),
+                      onDropFile: (file) async {
+                        if (file is html.File) {
+                          final Uint8List bytes = await controller.dropzoneController.getFileData(
+                            file,
+                          );
+                          final ImageModel image = ImageModel(
+                            url: '',
+                            file: file as File,
+                            folder: '',
+                            fileName: file.name,
+                            localeImageToDisplay: Uint8List.fromList(bytes),
+                          );
+                        }
+                      },
                     ),
                     Column(
                       mainAxisSize: MainAxisSize.min,
