@@ -11,6 +11,10 @@ abstract class AppImages {
   // Default images
   static const String defaultMultipleImageIcon = 'assets/images/content/default_images_icon.png';
 
+  // Animations
+  static const String uploadImageIllustration =
+      'assets/images/animations/upload_image_to_cloud.gif';
+
   // Lottie animations
   static const String docerAnimation = 'assets/images/animations/docer_animation.json';
   static const String packageAnimation = 'assets/images/animations/package_animation.json';
