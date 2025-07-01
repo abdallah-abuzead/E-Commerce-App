@@ -3,10 +3,16 @@ abstract class AppStrings {
   static const String adminEmail = 'admin@me.com';
   static const String adminPassword = '121212';
 
+  // Storage Paths
+  static const String bannersStoragePath = '/Banners';
+  static const String brandsStoragePath = '/Brands';
+  static const String categoriesStoragePath = '/Categories';
+  static const String productsStoragePath = '/Products';
+  static const String usersStoragePath = '/Users';
+
   // Authentication Strings
   static const String loginTitle = 'Welcome back,';
-  static const String loginSubTitle =
-      'Discover Limitless Choices and unmatched Convenience.';
+  static const String loginSubTitle = 'Discover Limitless Choices and unmatched Convenience.';
   static const String email = 'E-Mail';
   static const String password = 'Password';
   static const String rememberMe = 'Remember Me';
@@ -26,8 +32,7 @@ abstract class AppStrings {
       'Shopping and Experience the Best of Our Services.';
   static const String emailNotReceivedMessage =
       'Didn\'t receive the email? check your junk/spam or resend it.';
-  static const String yourAccountCreatedTitle =
-      'Your Account Successfully Created!';
+  static const String yourAccountCreatedTitle = 'Your Account Successfully Created!';
   static const String yourAccountCreatedSubTitle =
       'Welcome to your Ultimate '
       'Shopping Experience! Your account is now ready to explore a world of '

@@ -45,12 +45,7 @@ class MediaDesktop extends StatelessWidget {
             const SizedBox(height: AppSizes.spaceBtwSections),
 
             /// Upload area
-            Obx(
-              () => Visibility(
-                visible: controller.showImagesUploaderSection.value,
-                child: const MediaUploader(),
-              ),
-            ),
+            const MediaUploader(),
             const SizedBox(height: AppSizes.spaceBtwSections),
 
             /// Media
