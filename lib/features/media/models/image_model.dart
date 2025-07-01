@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,7 +19,7 @@ class ImageModel {
   final String? contentType;
 
   // Not Mapped
-  final File? file;
+  final dynamic file;
   RxBool isSelected = false.obs;
   final Uint8List? localeImageToDisplay;
 
