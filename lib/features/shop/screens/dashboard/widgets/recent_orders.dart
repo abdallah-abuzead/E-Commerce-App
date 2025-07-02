@@ -11,6 +11,7 @@ class RecentOrders extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppContainer(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Recent Orders', style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: AppSizes.spaceBtwSections),

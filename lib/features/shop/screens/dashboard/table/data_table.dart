@@ -11,7 +11,7 @@ class DashboardOrderTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppPaginatedDataTable(
       minWidth: 700,
-      tableHeight: 500,
+      tableHeight: 350,
       dataRowHeight: AppSizes.xl * 1.3,
 
       columns: const [

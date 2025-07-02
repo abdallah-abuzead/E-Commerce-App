@@ -32,8 +32,8 @@ class WeeklySalesBarChart extends StatelessWidget {
                 ),
                 gridData: const FlGridData(
                   show: true,
-                  drawHorizontalLine: true,
-                  drawVerticalLine: false,
+                  drawHorizontalLine: false,
+                  drawVerticalLine: true,
                   horizontalInterval: 200,
                 ),
                 barGroups: controller.weeklySales
