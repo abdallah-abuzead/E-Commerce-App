@@ -1,4 +1,5 @@
 import 'package:dynamic_path_url_strategy/dynamic_path_url_strategy.dart';
+import 'package:ecommerce_admin_panel/utils/constants/appwrite.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,9 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((_) => Get.put(AuthRepository()));
+
+  // Initialize Appwrite
+  Appwrite.init();
 
   // Main App starts here...
   runApp(const App());

@@ -45,6 +45,10 @@ dependencies:
   cloud_firestore: ^5.6.9
   firebase_storage: ^12.4.7
 
+  # AppWrite
+  appwrite: ^17.0.1
+
+
   # Icons
   iconsax: ^0.0.8
   cupertino_icons: ^1.0.8
