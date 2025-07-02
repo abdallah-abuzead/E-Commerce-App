@@ -97,4 +97,23 @@ class ImageModel {
       contentType: metadata.contentType,
     );
   }
+
+  /// Map Firebase storage metadata to ImageModel
+  factory ImageModel.fromAppwriteMetadata({
+    required String folder,
+    required String fileName,
+    required String downloadUrl,
+    required int size,
+    required String createdAt,
+    required String updatedAt,
+  }) {
+    return ImageModel(
+      url: downloadUrl,
+      folder: folder,
+      fileName: fileName,
+      sizeBytes: size,
+      createdAt: DateTime.parse(createdAt),
+      updatedAt: DateTime.parse(updatedAt),
+    );
+  }
 }
