@@ -3,8 +3,8 @@ import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class AnimationLoaderWidget extends StatelessWidget {
-  const AnimationLoaderWidget({
+class AppAnimationLoaderWidget extends StatelessWidget {
+  const AppAnimationLoaderWidget({
     super.key,
     required this.text,
     required this.animation,
@@ -47,14 +47,10 @@ class AnimationLoaderWidget extends StatelessWidget {
                   width: 250,
                   child: OutlinedButton(
                     onPressed: onActionPressed,
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: AppColors.dark,
-                    ),
+                    style: OutlinedButton.styleFrom(backgroundColor: AppColors.dark),
                     child: Text(
                       actionText!,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium!.apply(color: AppColors.light),
+                      style: Theme.of(context).textTheme.bodyMedium!.apply(color: AppColors.light),
                     ),
                   ),
                 )

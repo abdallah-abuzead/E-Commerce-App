@@ -18,4 +18,5 @@ abstract class AppImages {
   // Lottie animations
   static const String docerAnimation = 'assets/images/animations/docer_animation.json';
   static const String packageAnimation = 'assets/images/animations/package_animation.json';
+  static const String defaultLoaderAnimation = 'assets/images/animations/docer_animation.json';
 }
