@@ -2,7 +2,7 @@ import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../common/widgets/loaders/animation_loader_widget.dart';
+import '../../common/widgets/loaders/app_animation_loader_widget.dart';
 import '../../common/widgets/loaders/circular_loader.dart';
 import '../helpers/helper_functions.dart';
 
@@ -15,15 +15,13 @@ class FullScreenLoader {
         return PopScope(
           canPop: false,
           child: Container(
-            color: HelperFunctions.isDarkMode(Get.context!)
-                ? AppColors.dark
-                : AppColors.white,
+            color: HelperFunctions.isDarkMode(Get.context!) ? AppColors.dark : AppColors.white,
             width: double.infinity,
             height: double.infinity,
             child: Column(
               children: [
                 const SizedBox(height: 250),
-                AnimationLoaderWidget(text: text, animation: animation),
+                AppAnimationLoaderWidget(text: text, animation: animation),
               ],
             ),
           ),

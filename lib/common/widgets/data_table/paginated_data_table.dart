@@ -5,7 +5,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../utils/constants/app_colors.dart';
 import '../../../utils/constants/app_sizes.dart';
-import '../loaders/animation_loader_widget.dart';
+import '../loaders/app_animation_loader_widget.dart';
 
 class AppPaginatedDataTable extends StatelessWidget {
   const AppPaginatedDataTable({
@@ -80,7 +80,7 @@ class AppPaginatedDataTable extends StatelessWidget {
               topRight: Radius.circular(AppSizes.borderRadiusMd),
             ),
           ),
-          empty: const AnimationLoaderWidget(
+          empty: const AppAnimationLoaderWidget(
             animation: AppImages.packageAnimation,
             text: 'Nothing Found',
             height: 200,
