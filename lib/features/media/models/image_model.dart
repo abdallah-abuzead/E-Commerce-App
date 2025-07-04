@@ -52,7 +52,7 @@ class ImageModel {
       'sizeBytes': sizeBytes,
       'fileName': fileName,
       'fullPath': fullPath,
-      'createdAt': createdAt?.toIso8601String(),
+      'createdAt': createdAt,
       'contentType': contentType,
       'mediaCategory': mediaCategory,
     };
@@ -60,7 +60,7 @@ class ImageModel {
 
   /// convert Firestore DocumentSnapshot to ImageModel
   factory ImageModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
-    if (document.data() == null) {
+    if (document.data() != null) {
       final Map<String, dynamic> data = document.data()!;
       return ImageModel(
         id: document.id,
