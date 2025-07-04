@@ -106,7 +106,10 @@ class MediaUploader extends StatelessWidget {
                                 const SizedBox(width: AppSizes.spaceBtwItems),
                                 MediaFolderDropdown(
                                   onChanged: (newValue) {
-                                    if (newValue != null) controller.selectedPath.value = newValue;
+                                    if (newValue != null) {
+                                      controller.selectedPath.value = newValue;
+                                      controller.getMediaImages();
+                                    }
                                   },
                                 ),
                               ],
