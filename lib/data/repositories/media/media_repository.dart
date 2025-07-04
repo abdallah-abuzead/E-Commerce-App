@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:appwrite/appwrite.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -71,6 +72,60 @@ class MediaRepository extends GetxController {
     try {
       final data = await FirebaseFirestore.instance.collection('images').add(image.toJson());
       return data.id;
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } on SocketException catch (e) {
+      throw e.message;
+    } on PlatformException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  // Fetch images from Firestore based on the media category and load count
+  Future<List<ImageModel>> fitchImagesFromDatabase(
+    MediaCategory mediaCategory,
+    int loadCount,
+  ) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('images')
+          .where('mediaCategory', isEqualTo: mediaCategory.name)
+          .orderBy('createdAt', descending: true)
+          .limit(loadCount)
+          .get();
+      return querySnapshot.docs.map((doc) => ImageModel.fromSnapshot(doc)).toList();
+    } on FirebaseException catch (e, stackTrace) {
+      print('FirebaseException: $e\nStackTrace: $stackTrace');
+      throw e.message!;
+    } on SocketException catch (e, stackTrace) {
+      print('SocketException: $e\nStackTrace: $stackTrace');
+      throw e.message;
+    } on PlatformException catch (e, stackTrace) {
+      print('PlatformException: $e\nStackTrace: $stackTrace');
+      throw e.message!;
+    } catch (e, stackTrace) {
+      print('Exception: $e\nStackTrace: $stackTrace');
+      throw e.toString();
+    }
+  }
+
+  // Fetch images from Firestore based on the media category, load count, and last fetched date
+  Future<List<ImageModel>> loadMoreImagesFromDatabase(
+    MediaCategory mediaCategory,
+    int loadCount,
+    DateTime lastFetchedDate,
+  ) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('images')
+          .where('mediaCategory', isEqualTo: mediaCategory.name)
+          .orderBy('createdAt', descending: true)
+          .startAfter([lastFetchedDate])
+          .limit(loadCount)
+          .get();
+      return querySnapshot.docs.map((doc) => ImageModel.fromSnapshot(doc)).toList();
     } on FirebaseException catch (e) {
       throw e.message!;
     } on SocketException catch (e) {
