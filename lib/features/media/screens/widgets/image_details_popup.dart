@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
 import 'package:ecommerce_admin_panel/common/widgets/images/app_rounded_image.dart';
+import 'package:ecommerce_admin_panel/features/media/controllers/media_controller.dart';
 import 'package:ecommerce_admin_panel/features/media/models/image_model.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
@@ -102,7 +103,7 @@ class ImageDetailsPopup extends StatelessWidget {
                   SizedBox(
                     width: 300,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () => MediaController.instance.removeCloudImageConfirmation(image),
                       child: const Text('Delete Image', style: TextStyle(color: Colors.red)),
                     ),
                   ),
