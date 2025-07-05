@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
 import 'package:ecommerce_admin_panel/common/widgets/loaders/app_loader_animation.dart';
+import 'package:ecommerce_admin_panel/features/media/screens/widgets/image_details_popup.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_images.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
@@ -58,7 +59,7 @@ class MediaContent extends StatelessWidget {
                   children: images
                       .map(
                         (image) => GestureDetector(
-                          onTap: () {},
+                          onTap: () => Get.dialog(ImageDetailsPopup(image: image)),
                           child: SizedBox(
                             width: 140,
                             height: 180,
