@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../common/widgets/loaders/app_animation_loader_widget.dart';
-import '../../common/widgets/loaders/circular_loader.dart';
+import '../../common/widgets/loaders/app_circular_loader.dart';
 import '../helpers/helper_functions.dart';
 
 class FullScreenLoader {
@@ -34,7 +34,7 @@ class FullScreenLoader {
     Get.defaultDialog(
       title: '',
       onWillPop: () async => false,
-      content: const CircularLoader(),
+      content: const AppCircularLoader(),
       backgroundColor: Colors.transparent,
     );
   }

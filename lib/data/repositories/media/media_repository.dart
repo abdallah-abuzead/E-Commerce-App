@@ -96,17 +96,13 @@ class MediaRepository extends GetxController {
           .limit(loadCount)
           .get();
       return querySnapshot.docs.map((doc) => ImageModel.fromSnapshot(doc)).toList();
-    } on FirebaseException catch (e, stackTrace) {
-      print('FirebaseException: $e\nStackTrace: $stackTrace');
+    } on FirebaseException catch (e) {
       throw e.message!;
-    } on SocketException catch (e, stackTrace) {
-      print('SocketException: $e\nStackTrace: $stackTrace');
+    } on SocketException catch (e) {
       throw e.message;
-    } on PlatformException catch (e, stackTrace) {
-      print('PlatformException: $e\nStackTrace: $stackTrace');
+    } on PlatformException catch (e) {
       throw e.message!;
-    } catch (e, stackTrace) {
-      print('Exception: $e\nStackTrace: $stackTrace');
+    } catch (e) {
       throw e.toString();
     }
   }
@@ -135,5 +131,41 @@ class MediaRepository extends GetxController {
     } catch (e) {
       throw e.toString();
     }
+  }
+
+  Future<void> deleteFileFromStorage(ImageModel image) async {
+    try {
+      await _storage.ref(image.fullPath).delete();
+      await FirebaseFirestore.instance.collection('images').doc(image.id).delete();
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } on SocketException catch (e) {
+      throw e.message;
+    } on PlatformException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  Future<void> deleteFileFromAppwrite(ImageModel image) async {
+    try {
+      final String fileId = _extractFileIdFromUrl(image.url);
+      await Appwrite.storage.deleteFile(bucketId: Appwrite.mediaBucketId, fileId: fileId);
+      await FirebaseFirestore.instance.collection('images').doc(image.id).delete();
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } on SocketException catch (e) {
+      throw e.message;
+    } on PlatformException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      throw e.toString();
+    }
+  }
+
+  String _extractFileIdFromUrl(String url) {
+    final RegExp regExp = RegExp(r'buckets/[^/]+/files/([^/]+)/view');
+    return regExp.firstMatch(url)!.group(1)!;
   }
 }

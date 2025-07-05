@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:get/get.dart';
 
+import '../../../common/widgets/loaders/app_circular_loader.dart';
 import '../../../data/repositories/media/media_repository.dart';
 import '../../../utils/constants/app_strings.dart';
 
@@ -294,5 +295,65 @@ class MediaController extends GetxController {
         path = 'Others';
     }
     return path;
+  }
+
+  void removeCloudImageConfirmation(ImageModel image) {
+    AppDialogs.defaultDialog(
+      context: Get.context!,
+      content: 'Are you sure you want to delete this image?',
+      onConfirm: () async {
+        Get.back();
+        Get.back();
+        removeCloudImage(image);
+      },
+    );
+  }
+
+  Future<void> removeCloudImage(ImageModel image) async {
+    try {
+      Get.defaultDialog(
+        title: 'Deleting Image',
+        barrierDismissible: false,
+        backgroundColor: Colors.transparent,
+        content: const PopScope(
+          canPop: false,
+          child: SizedBox(width: 150, height: 150, child: AppCircularLoader()),
+        ),
+      );
+      await mediaRepository.deleteFileFromAppwrite(image);
+
+      RxList<ImageModel> targetList;
+
+      switch (selectedPath.value) {
+        case MediaCategory.banners:
+          targetList = allBannerImages;
+          break;
+        case MediaCategory.products:
+          targetList = allProductImages;
+          break;
+        case MediaCategory.brands:
+          targetList = allBrandImages;
+          break;
+        case MediaCategory.categories:
+          targetList = allCategoryImages;
+          break;
+        case MediaCategory.users:
+          targetList = allUserImages;
+          break;
+        default:
+          return;
+      }
+      targetList.remove(image);
+      update();
+
+      FullScreenLoader.stopLoadingDialog();
+      AppLoaders.successSnackBar(
+        title: 'Image Deleted',
+        message: 'Image has been deleted successfully.',
+      );
+    } catch (e) {
+      FullScreenLoader.stopLoadingDialog();
+      AppLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
   }
 }
