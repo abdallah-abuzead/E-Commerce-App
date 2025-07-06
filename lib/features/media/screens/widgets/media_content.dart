@@ -16,10 +16,23 @@ import '../../models/image_model.dart';
 import 'media_folder_dropdown.dart';
 
 class MediaContent extends StatelessWidget {
-  const MediaContent({super.key});
+  MediaContent({
+    super.key,
+    required this.allowSelection,
+    required this.allowMultipleSelection,
+    this.alreadySelectedUrls,
+    this.onImagesSelected,
+  });
+
+  final bool allowSelection;
+  final bool allowMultipleSelection;
+  final List<String>? alreadySelectedUrls;
+  final List<ImageModel> selectedImages = [];
+  final Function(List<ImageModel> selectedImages)? onImagesSelected;
 
   @override
   Widget build(BuildContext context) {
+    bool loadPreviousSelection = false;
     final MediaController controller = MediaController.instance;
     return AppContainer(
       child: Column(
@@ -27,17 +40,24 @@ class MediaContent extends StatelessWidget {
         children: [
           /// Media images header
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
             children: [
-              Text('Selected Folder', style: Theme.of(context).textTheme.headlineSmall),
-              const SizedBox(width: AppSizes.spaceBtwItems),
-              MediaFolderDropdown(
-                onChanged: (newValue) {
-                  if (newValue != null) {
-                    controller.selectedPath.value = newValue;
-                    controller.getMediaImages();
-                  }
-                },
+              Row(
+                children: [
+                  Text('Selected Folder', style: Theme.of(context).textTheme.headlineSmall),
+                  const SizedBox(width: AppSizes.spaceBtwItems),
+                  MediaFolderDropdown(
+                    onChanged: (newValue) {
+                      if (newValue != null) {
+                        controller.selectedPath.value = newValue;
+                        controller.getMediaImages();
+                      }
+                    },
+                  ),
+                ],
               ),
+              if (allowSelection) _buildAddSelectedImagesButton(),
             ],
           ),
           const SizedBox(height: AppSizes.spaceBtwSections),
@@ -45,6 +65,23 @@ class MediaContent extends StatelessWidget {
           /// Show media
           Obx(() {
             final List<ImageModel> images = _getSelectedFolderImages(controller);
+            if (!loadPreviousSelection) {
+              if (alreadySelectedUrls != null && alreadySelectedUrls!.isNotEmpty) {
+                final selectedUrlsSet = Set<String>.from(alreadySelectedUrls!);
+                for (var image in images) {
+                  image.isSelected.value = selectedUrlsSet.contains(image.url);
+                  if (image.isSelected.value) {
+                    selectedImages.add(image);
+                  }
+                }
+              } else {
+                for (var image in images) {
+                  image.isSelected.value = false;
+                }
+              }
+              loadPreviousSelection = true;
+            }
+
             if (controller.loading.value && images.isEmpty) return const AppLoaderAnimation();
             if (images.isEmpty) return _buildEmptyAnimationWidget(context);
 
@@ -65,7 +102,9 @@ class MediaContent extends StatelessWidget {
                             height: 180,
                             child: Column(
                               children: [
-                                _buildSimpleList(image),
+                                allowSelection
+                                    ? _buildListWithCheckbox(image)
+                                    : _buildSimpleList(image),
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
@@ -148,6 +187,74 @@ class MediaContent extends StatelessWidget {
       image: image.url,
       margin: AppSizes.spaceBtwItems / 2,
       backgroundColor: AppColors.primaryBackgroundColor,
+    );
+  }
+
+  Widget _buildListWithCheckbox(ImageModel image) {
+    return Stack(
+      children: [
+        AppRoundedImage(
+          width: 140,
+          height: 140,
+          padding: AppSizes.sm,
+          imageType: ImageType.network,
+          image: image.url,
+          margin: AppSizes.spaceBtwItems / 2,
+          backgroundColor: AppColors.primaryBackgroundColor,
+        ),
+        Positioned(
+          top: AppSizes.md,
+          right: AppSizes.md,
+          child: Obx(
+            () => Checkbox(
+              value: image.isSelected.value,
+              onChanged: (selected) {
+                if (selected != null) {
+                  image.isSelected.value = selected;
+                  if (selected) {
+                    if (!allowMultipleSelection) {
+                      for (var otherImage in selectedImages) {
+                        if (image != otherImage) {
+                          otherImage.isSelected.value = false;
+                        }
+                      }
+                      selectedImages.clear();
+                    }
+                    selectedImages.add(image);
+                  } else {
+                    selectedImages.remove(image);
+                  }
+                }
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAddSelectedImagesButton() {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: 120,
+          child: OutlinedButton.icon(
+            onPressed: () => Get.back(),
+            label: const Text('Close'),
+            icon: const Icon(Iconsax.close_circle),
+          ),
+        ),
+        const SizedBox(width: AppSizes.spaceBtwItems),
+        SizedBox(
+          width: 120,
+          child: ElevatedButton.icon(
+            onPressed: () => Get.back(result: selectedImages),
+            label: const Text('Add'),
+            icon: const Icon(Iconsax.image),
+          ),
+        ),
+      ],
     );
   }
 }

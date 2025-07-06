@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:ecommerce_admin_panel/features/media/models/image_model.dart';
+import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_images.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
@@ -14,6 +15,8 @@ import 'package:get/get.dart';
 import '../../../common/widgets/loaders/app_circular_loader.dart';
 import '../../../data/repositories/media/media_repository.dart';
 import '../../../utils/constants/app_strings.dart';
+import '../screens/widgets/media_content.dart';
+import '../screens/widgets/media_uploader.dart';
 
 class MediaController extends GetxController {
   static MediaController get instance => Get.find<MediaController>();
@@ -355,5 +358,37 @@ class MediaController extends GetxController {
       FullScreenLoader.stopLoadingDialog();
       AppLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
+  }
+
+  Future<List<ImageModel>?> selectImagesFromMedia({
+    List<String>? selectedUrls,
+    bool allowSelection = true,
+    bool multipleSelection = false,
+  }) async {
+    showImagesUploaderSection.value = true;
+    final List<ImageModel>? selectedImages = await Get.bottomSheet<List<ImageModel>>(
+      isScrollControlled: true,
+      backgroundColor: AppColors.primaryBackgroundColor,
+      FractionallySizedBox(
+        heightFactor: 1,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(AppSizes.defaultSpace),
+            child: Column(
+              children: [
+                const MediaUploader(),
+                MediaContent(
+                  allowSelection: allowSelection,
+                  allowMultipleSelection: multipleSelection,
+                  alreadySelectedUrls: selectedUrls ?? [],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    return selectedImages;
   }
 }

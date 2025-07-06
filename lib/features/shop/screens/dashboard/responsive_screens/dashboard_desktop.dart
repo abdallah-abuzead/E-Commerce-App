@@ -1,7 +1,9 @@
+import 'package:ecommerce_admin_panel/features/shop/controllers/product/product_images_controller.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/dashboard/widgets/recent_orders.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/dashboard/widgets/weekly_sales_bar_chart.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../widgets/dashboard_card.dart';
 import '../widgets/order_status_pie_chart.dart';
@@ -11,6 +13,7 @@ class DashboardDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductImagesController());
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -19,6 +22,15 @@ class DashboardDesktop extends StatelessWidget {
           children: [
             /// Heading
             Text('Dashboard', style: Theme.of(context).textTheme.headlineLarge),
+            ElevatedButton(
+              onPressed: () => controller.selectThumbnailImage(),
+              child: const Text('Select Single Image'),
+            ),
+            const SizedBox(height: AppSizes.spaceBtwSections),
+            ElevatedButton(
+              onPressed: () => controller.selectMultipleProductImages(),
+              child: const Text('Select Multiple Images'),
+            ),
             const SizedBox(height: AppSizes.spaceBtwSections),
 
             /// Cards
