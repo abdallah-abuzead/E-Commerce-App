@@ -49,7 +49,7 @@ class MediaDesktop extends StatelessWidget {
             const SizedBox(height: AppSizes.spaceBtwSections),
 
             /// Media
-            const MediaContent(),
+            MediaContent(allowSelection: false, allowMultipleSelection: false),
           ],
         ),
       ),
