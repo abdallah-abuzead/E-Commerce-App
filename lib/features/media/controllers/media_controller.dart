@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:ecommerce_admin_panel/features/media/models/image_model.dart';
-import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_images.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
@@ -14,6 +13,7 @@ import 'package:get/get.dart';
 
 import '../../../common/widgets/loaders/app_circular_loader.dart';
 import '../../../data/repositories/media/media_repository.dart';
+import '../../../utils/constants/app_colors.dart';
 import '../../../utils/constants/app_strings.dart';
 import '../screens/widgets/media_content.dart';
 import '../screens/widgets/media_uploader.dart';
@@ -366,10 +366,12 @@ class MediaController extends GetxController {
     bool multipleSelection = false,
   }) async {
     showImagesUploaderSection.value = true;
-    final List<ImageModel>? selectedImages = await Get.bottomSheet<List<ImageModel>>(
-      isScrollControlled: true,
+    final List<ImageModel>? selectedImages = await showModalBottomSheet(
+      context: Get.context!,
       backgroundColor: AppColors.primaryBackgroundColor,
-      FractionallySizedBox(
+      isScrollControlled: true,
+      constraints: const BoxConstraints(maxWidth: double.infinity),
+      builder: (context) => FractionallySizedBox(
         heightFactor: 1,
         child: SingleChildScrollView(
           child: Padding(
