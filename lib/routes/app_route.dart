@@ -1,6 +1,9 @@
 import 'package:ecommerce_admin_panel/features/authentication/screens/forget_password/forget_password_screen.dart';
 import 'package:ecommerce_admin_panel/features/authentication/screens/reset_password/reset_password_screen.dart';
 import 'package:ecommerce_admin_panel/features/media/screens/media_screen.dart';
+import 'package:ecommerce_admin_panel/features/shop/screens/brands/all_brands/brands_screen.dart';
+import 'package:ecommerce_admin_panel/features/shop/screens/brands/create_brand/create_brand_screen.dart';
+import 'package:ecommerce_admin_panel/features/shop/screens/brands/edit_brand/edit_brand_screen.dart';
 import 'package:ecommerce_admin_panel/responsive_design_screen.dart';
 import 'package:ecommerce_admin_panel/routes/route_middleware.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
@@ -44,6 +47,23 @@ class AppRoute {
     GetPage(
       name: Routes.editCategory,
       page: () => const EditCategoryScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+
+    // brands
+    GetPage(
+      name: Routes.brands,
+      page: () => const BrandsScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+    GetPage(
+      name: Routes.createBrand,
+      page: () => const CreateBrandScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+    GetPage(
+      name: Routes.editBrand,
+      page: () => const EditBrandScreen(),
       middlewares: [RouteMiddleware()],
     ),
 
