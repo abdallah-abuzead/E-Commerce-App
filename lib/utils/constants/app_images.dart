@@ -3,6 +3,9 @@ abstract class AppImages {
   static const String darkAppLogo = 'assets/logos/logo_dark.png';
   static const String lightAppLogo = 'assets/logos/logo.png';
 
+  // defaults
+  static const String defaultImage = 'assets/images/content/default_image.png';
+
   // User images
   static const String user = 'assets/images/content/avatar.png';
   static const String deliveredEmailIllustration =
