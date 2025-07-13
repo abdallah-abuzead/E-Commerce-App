@@ -8,6 +8,9 @@ abstract class AppImages {
   static const String deliveredEmailIllustration =
       'assets/images/content/delivered_email_illustration.png';
 
+  // Brands logos
+  static const String acerLogo = 'assets/images/content/acer_logo.png';
+
   // Default images
   static const String defaultMultipleImageIcon = 'assets/images/content/default_images_icon.png';
 
