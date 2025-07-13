@@ -3,10 +3,16 @@ abstract class AppImages {
   static const String darkAppLogo = 'assets/logos/logo_dark.png';
   static const String lightAppLogo = 'assets/logos/logo.png';
 
+  // defaults
+  static const String defaultImage = 'assets/images/content/default_image.png';
+
   // User images
   static const String user = 'assets/images/content/avatar.png';
   static const String deliveredEmailIllustration =
       'assets/images/content/delivered_email_illustration.png';
+
+  // Brands logos
+  static const String acerLogo = 'assets/images/content/acer_logo.png';
 
   // Default images
   static const String defaultMultipleImageIcon = 'assets/images/content/default_images_icon.png';
