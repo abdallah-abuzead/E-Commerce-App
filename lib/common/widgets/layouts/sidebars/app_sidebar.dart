@@ -38,23 +38,22 @@ class AppSidebar extends StatelessWidget {
                   children: [
                     Text(
                       'MENU',
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodySmall!.apply(letterSpacingDelta: 1.2),
+                      style: Theme.of(context).textTheme.bodySmall!.apply(letterSpacingDelta: 1.2),
                     ),
                     const AppMenuItem(
                       route: Routes.dashboard,
                       icon: Iconsax.status,
                       itemName: 'Dashboard',
                     ),
+                    const AppMenuItem(route: Routes.media, icon: Iconsax.image, itemName: 'Media'),
                     const AppMenuItem(
-                      route: Routes.media,
+                      route: Routes.categories,
                       icon: Iconsax.image,
-                      itemName: 'Media',
+                      itemName: 'Categories',
                     ),
                     const AppMenuItem(
                       route: Routes.banners,
-                      icon: Iconsax.picture_frame,
+                      icon: Iconsax.category_2,
                       itemName: 'Banners',
                     ),
                   ],

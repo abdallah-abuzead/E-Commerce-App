@@ -8,19 +8,46 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../features/authentication/screens/login/login_screen.dart';
+import '../features/shop/screens/category/all_categories/categories_screen.dart';
+import '../features/shop/screens/category/create_category/create_category_screen.dart';
+import '../features/shop/screens/category/edit_category/edit_category_screen.dart';
 import '../features/shop/screens/dashboard/dashboard_screen.dart';
 
 class AppRoute {
   static final List<GetPage> pages = [
+    // auth
     GetPage(name: Routes.login, page: () => const LoginScreen()),
     GetPage(name: Routes.forgetPassword, page: () => const ForgetPasswordScreen()),
     GetPage(name: Routes.resetPassword, page: () => const ResetPasswordScreen()),
+
+    // dashboard
     GetPage(
       name: Routes.dashboard,
       page: () => const DashboardScreen(),
       middlewares: [RouteMiddleware()],
     ),
+
+    // media
     GetPage(name: Routes.media, page: () => const MediaScreen(), middlewares: [RouteMiddleware()]),
+
+    // categories
+    GetPage(
+      name: Routes.categories,
+      page: () => const CategoriesScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+    GetPage(
+      name: Routes.createCategory,
+      page: () => const CreateCategoryScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+    GetPage(
+      name: Routes.editCategory,
+      page: () => const EditCategoryScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+
+    // test responsive design
     GetPage(name: Routes.responsiveDesign, page: () => const ResponsiveDesignScreen()),
   ];
 
