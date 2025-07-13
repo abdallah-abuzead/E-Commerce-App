@@ -10,10 +10,14 @@ abstract class Routes {
   static const String createCategory = '/createCategory';
   static const String editCategory = '/editCategory';
 
+  static const String brands = '/brands';
+  static const String createBrand = '/createBrand';
+  static const String editBrand = '/editBrand';
+
   static const String banners = '/banners';
   static const String responsiveDesign = '/responsive-design';
 
-  static const List<String> sidebarMenuRoutes = [dashboard, media, categories, banners];
+  static const List<String> sidebarMenuRoutes = [dashboard, media, categories, brands, banners];
 
   static const String unknown = '/unknown';
 }

@@ -52,10 +52,16 @@ class AppSidebar extends StatelessWidget {
                       itemName: 'Categories',
                     ),
                     const AppMenuItem(
+                      route: Routes.brands,
+                      icon: Iconsax.dcube,
+                      itemName: 'Brands',
+                    ),
+                    const AppMenuItem(
                       route: Routes.banners,
                       icon: Iconsax.category_2,
                       itemName: 'Banners',
                     ),
+                    const AppMenuItem(route: 'logout', icon: Iconsax.logout, itemName: 'Logout'),
                   ],
                 ),
               ),
