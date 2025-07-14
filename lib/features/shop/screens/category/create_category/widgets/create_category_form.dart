@@ -63,7 +63,11 @@ class CreateCategoryForm extends StatelessWidget {
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields),
 
-            CheckboxMenuButton(value: true, onChanged: (value) {}, child: const Text('Featured')),
+            CheckboxMenuButton(
+              value: true,
+              onChanged: (value) {},
+              child: const Text('Featured', style: TextStyle(fontSize: AppSizes.fontSizeSm)),
+            ),
             const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
 
             SizedBox(
