@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin_panel/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +18,8 @@ class AppMenuItem extends StatelessWidget {
     final SidebarController menuController = Get.put(SidebarController());
 
     return InkWell(
-      onTap: () => menuController.menuOnTap(route),
+      onTap: () =>
+          route == 'logout' ? Get.offAllNamed(Routes.login) : menuController.menuOnTap(route),
       onHover: (isHovering) => menuController.changeHoverItem(isHovering ? route : ''),
       child: Obx(
         () => Padding(
