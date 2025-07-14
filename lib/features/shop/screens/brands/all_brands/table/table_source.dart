@@ -28,7 +28,7 @@ class BrandsRows extends DataTableSource {
                 image: AppImages.acerLogo,
                 imageType: ImageType.asset,
                 borderRadius: AppSizes.borderRadiusMd,
-                backgroundColor: AppColors.primaryBackgroundColor,
+                backgroundColor: AppColors.primaryBackground,
               ),
               const SizedBox(width: AppSizes.spaceBtwItems),
               Expanded(

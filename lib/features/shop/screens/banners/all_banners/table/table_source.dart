@@ -1,6 +1,5 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:ecommerce_admin_panel/features/shop/models/banner_model.dart';
-import 'package:ecommerce_admin_panel/utils/device/device_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -18,71 +17,20 @@ class BannersRows extends DataTableSource {
   DataRow? getRow(int index) {
     return DataRow2(
       cells: [
-        DataCell(
-          Row(
-            children: [
-              const AppRoundedImage(
-                width: 50,
-                height: 50,
-                padding: AppSizes.sm,
-                image: AppImages.acerLogo,
-                imageType: ImageType.asset,
-                borderRadius: AppSizes.borderRadiusMd,
-                backgroundColor: AppColors.primaryBackgroundColor,
-              ),
-              const SizedBox(width: AppSizes.spaceBtwItems),
-              Expanded(
-                child: Text(
-                  'Name',
-                  style: Theme.of(
-                    Get.context!,
-                  ).textTheme.bodyLarge!.apply(color: AppColors.primary),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
+        const DataCell(
+          AppRoundedImage(
+            width: 180,
+            height: 180,
+            padding: AppSizes.sm,
+            image: AppImages.acerLogo,
+            imageType: ImageType.asset,
+            borderRadius: AppSizes.borderRadiusMd,
+            backgroundColor: AppColors.primaryBackground,
+            margin: 3,
           ),
         ),
-        DataCell(
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppSizes.sm),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Wrap(
-                spacing: AppSizes.xs,
-                direction: DeviceUtils.isMobileScreen(Get.context!)
-                    ? Axis.vertical
-                    : Axis.horizontal,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: DeviceUtils.isMobileScreen(Get.context!) ? 0 : AppSizes.xs,
-                    ),
-                    child: const Chip(label: Text('Shoes'), padding: EdgeInsets.all(AppSizes.xs)),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: DeviceUtils.isMobileScreen(Get.context!) ? 0 : AppSizes.xs,
-                    ),
-                    child: const Chip(
-                      label: Text('TrackSuits'),
-                      padding: EdgeInsets.all(AppSizes.xs),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: DeviceUtils.isMobileScreen(Get.context!) ? 0 : AppSizes.xs,
-                    ),
-                    child: const Chip(label: Text('Joggers'), padding: EdgeInsets.all(AppSizes.xs)),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        const DataCell(Icon(Iconsax.heart5, color: AppColors.primary)),
-        DataCell(Text(DateTime.now().toString())),
+        const DataCell(Text('Shop')),
+        const DataCell(Icon(Iconsax.eye, color: AppColors.primary)),
         DataCell(
           AppTableActionButtons(
             onEditPressed: () => Get.toNamed(Routes.editBanner, arguments: BannerModel()),
@@ -97,7 +45,7 @@ class BannersRows extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => 20;
+  int get rowCount => 10;
 
   @override
   int get selectedRowCount => 0;

@@ -66,7 +66,7 @@ class AppImageUploader extends StatelessWidget {
                 height: height,
                 imageType: imageType,
                 memoryImage: memoryImage,
-                backgroundColor: AppColors.primaryBackgroundColor,
+                backgroundColor: AppColors.primaryBackground,
               )
             : AppRoundedImage(
                 image: image,
@@ -74,7 +74,7 @@ class AppImageUploader extends StatelessWidget {
                 height: height,
                 imageType: imageType,
                 memoryImage: memoryImage,
-                backgroundColor: AppColors.primaryBackgroundColor,
+                backgroundColor: AppColors.primaryBackground,
               ),
         Positioned(
           top: top,

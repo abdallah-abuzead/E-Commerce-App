@@ -1,14 +1,12 @@
 import 'package:ecommerce_admin_panel/features/shop/models/banner_model.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
-import '../../../../../../common/widgets/chips/app_choice_chip.dart';
 import '../../../../../../common/widgets/containers/app_container.dart';
-import '../../../../../../common/widgets/images/app_image_uploader.dart';
+import '../../../../../../common/widgets/images/app_rounded_image.dart';
+import '../../../../../../utils/constants/app_colors.dart';
 import '../../../../../../utils/constants/app_images.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
 import '../../../../../../utils/constants/enums.dart';
-import '../../../../../../utils/validators/validator.dart';
 
 class EditBannerForm extends StatelessWidget {
   const EditBannerForm({super.key, required this.banner});
@@ -26,53 +24,44 @@ class EditBannerForm extends StatelessWidget {
           children: [
             // Heading
             const SizedBox(height: AppSizes.sm),
-            Text('Edit Banner', style: Theme.of(context).textTheme.headlineMedium),
+            Text('Update Banner', style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: AppSizes.spaceBtwSections),
 
-            // Name Text Field
-            TextFormField(
-              validator: (value) => Validator.validateEmptyText('Name', value),
-              decoration: const InputDecoration(
-                labelText: 'Banner Name',
-                prefixIcon: Icon(Iconsax.box),
-              ),
-            ),
-            const SizedBox(height: AppSizes.spaceBtwInputFields),
-
-            Text('Select Categories', style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: AppSizes.spaceBtwInputFields / 2),
-            Wrap(
-              spacing: AppSizes.sm,
+            Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: AppSizes.sm),
-                  child: AppChoiceChip(text: 'Shoes', selected: true, onSelected: (value) {}),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: AppSizes.sm),
-                  child: AppChoiceChip(
-                    text: 'Track Suits',
-                    selected: false,
-                    onSelected: (value) {},
+                GestureDetector(
+                  child: const AppRoundedImage(
+                    width: 400,
+                    height: 200,
+                    backgroundColor: AppColors.primaryBackground,
+                    image: AppImages.defaultImage,
+                    imageType: ImageType.asset,
                   ),
                 ),
+                const SizedBox(height: AppSizes.spaceBtwItems),
+                TextButton(onPressed: () {}, child: const Text('Select Image')),
               ],
-            ),
-            const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
-
-            AppImageUploader(
-              width: 80,
-              height: 80,
-              image: AppImages.defaultImage,
-              imageType: ImageType.asset,
-              onIconButtonPressed: () {},
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields),
 
+            Text(
+              'Make your Banner Active or Inactive',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
             CheckboxMenuButton(
               value: true,
               onChanged: (value) {},
-              child: const Text('Featured', style: TextStyle(fontSize: AppSizes.fontSizeSm)),
+              child: const Text('Active', style: TextStyle(fontSize: AppSizes.fontSizeSm)),
+            ),
+            const SizedBox(height: AppSizes.spaceBtwInputFields),
+
+            DropdownButton<String>(
+              value: 'search',
+              onChanged: (String? newValue) {},
+              items: const [
+                DropdownMenuItem(value: 'home', child: Text('Home')),
+                DropdownMenuItem(value: 'search', child: Text('Search')),
+              ],
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
 

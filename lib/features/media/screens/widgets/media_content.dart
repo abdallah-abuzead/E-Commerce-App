@@ -185,7 +185,7 @@ class MediaContent extends StatelessWidget {
       imageType: ImageType.network,
       image: image.url,
       margin: AppSizes.spaceBtwItems / 2,
-      backgroundColor: AppColors.primaryBackgroundColor,
+      backgroundColor: AppColors.primaryBackground,
     );
   }
 
@@ -199,7 +199,7 @@ class MediaContent extends StatelessWidget {
           imageType: ImageType.network,
           image: image.url,
           margin: AppSizes.spaceBtwItems / 2,
-          backgroundColor: AppColors.primaryBackgroundColor,
+          backgroundColor: AppColors.primaryBackground,
         ),
         Positioned(
           top: AppSizes.md,

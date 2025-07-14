@@ -30,7 +30,7 @@ class MediaUploader extends StatelessWidget {
                 AppContainer(
                   showBorder: true,
                   height: 250,
-                  color: AppColors.primaryBackgroundColor,
+                  color: AppColors.primaryBackground,
                   padding: const EdgeInsets.all(AppSizes.defaultSpace),
                   child: Column(
                     children: [
@@ -151,7 +151,7 @@ class MediaUploader extends StatelessWidget {
                                   padding: AppSizes.sm,
                                   imageType: ImageType.memory,
                                   memoryImage: image.localeImageToDisplay,
-                                  backgroundColor: AppColors.primaryBackgroundColor,
+                                  backgroundColor: AppColors.primaryBackground,
                                 ),
                               )
                               .toList(),
