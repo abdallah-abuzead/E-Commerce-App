@@ -15,6 +15,9 @@ abstract class Routes {
   static const String editBrand = '/editBrand';
 
   static const String banners = '/banners';
+  static const String createBanner = '/createBanner';
+  static const String editBanner = '/editBanner';
+
   static const String responsiveDesign = '/responsive-design';
 
   static const List<String> sidebarMenuRoutes = [dashboard, media, categories, brands, banners];
