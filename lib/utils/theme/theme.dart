@@ -91,6 +91,10 @@ abstract class AppTheme {
         foregroundColor: WidgetStateProperty.all(AppColors.iconPrimary),
       ),
     ),
+
+    chipTheme: const ChipThemeData(
+      labelStyle: TextStyle(fontSize: AppSizes.fontSizeSm, color: AppColors.textPrimary),
+    ),
     textTheme: const TextTheme(
       bodySmall: TextStyle(fontSize: AppSizes.fontSizeSm, color: AppColors.textSecondary),
       bodyMedium: TextStyle(fontSize: AppSizes.fontSizeSm, color: AppColors.textPrimary),
