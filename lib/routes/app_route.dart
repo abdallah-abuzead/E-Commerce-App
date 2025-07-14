@@ -11,6 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../features/authentication/screens/login/login_screen.dart';
+import '../features/shop/screens/banners/all_banners/banners_screen.dart';
+import '../features/shop/screens/banners/create_banner/create_banner_screen.dart';
+import '../features/shop/screens/banners/edit_banner/edit_banner_screen.dart';
 import '../features/shop/screens/category/all_categories/categories_screen.dart';
 import '../features/shop/screens/category/create_category/create_category_screen.dart';
 import '../features/shop/screens/category/edit_category/edit_category_screen.dart';
@@ -64,6 +67,23 @@ class AppRoute {
     GetPage(
       name: Routes.editBrand,
       page: () => const EditBrandScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+
+    // banners
+    GetPage(
+      name: Routes.banners,
+      page: () => const BannersScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+    GetPage(
+      name: Routes.createBanner,
+      page: () => const CreateBannerScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+    GetPage(
+      name: Routes.editBanner,
+      page: () => const EditBannerScreen(),
       middlewares: [RouteMiddleware()],
     ),
 
