@@ -35,7 +35,7 @@ class ImageDetailsPopup extends StatelessWidget {
                 child: Stack(
                   children: [
                     AppContainer(
-                      color: AppColors.primaryBackgroundColor,
+                      color: AppColors.primaryBackground,
                       child: AppRoundedImage(
                         image: image.url,
                         applyImageRadius: true,

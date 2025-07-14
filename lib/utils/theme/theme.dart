@@ -7,12 +7,12 @@ abstract class AppTheme {
     fontFamily: 'Urbanist',
     brightness: Brightness.light,
     primaryColor: AppColors.primary,
-    scaffoldBackgroundColor: AppColors.primaryBackgroundColor,
+    scaffoldBackgroundColor: AppColors.primaryBackground,
     colorScheme: ColorScheme.fromSwatch().copyWith(
       primary: AppColors.primary,
       secondary: AppColors.secondary,
       error: AppColors.error,
-      surface: AppColors.primaryBackgroundColor,
+      surface: AppColors.primaryBackground,
     ),
     appBarTheme: const AppBarTheme(centerTitle: false, backgroundColor: AppColors.white),
     elevatedButtonTheme: ElevatedButtonThemeData(

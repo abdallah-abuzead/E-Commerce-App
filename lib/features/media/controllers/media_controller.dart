@@ -368,7 +368,7 @@ class MediaController extends GetxController {
     showImagesUploaderSection.value = true;
     final List<ImageModel>? selectedImages = await showModalBottomSheet(
       context: Get.context!,
-      backgroundColor: AppColors.primaryBackgroundColor,
+      backgroundColor: AppColors.primaryBackground,
       isScrollControlled: true,
       constraints: const BoxConstraints(maxWidth: double.infinity),
       builder: (context) => FractionallySizedBox(

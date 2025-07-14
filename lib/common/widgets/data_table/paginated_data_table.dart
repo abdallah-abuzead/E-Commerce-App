@@ -71,9 +71,7 @@ class AppPaginatedDataTable extends StatelessWidget {
           headingTextStyle: Theme.of(
             context,
           ).textTheme.titleMedium!.apply(color: AppColors.textSecondary),
-          headingRowColor: WidgetStateProperty.resolveWith(
-            (states) => AppColors.primaryBackgroundColor,
-          ),
+          headingRowColor: WidgetStateProperty.resolveWith((states) => AppColors.primaryBackground),
           headingRowDecoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(AppSizes.borderRadiusMd),
