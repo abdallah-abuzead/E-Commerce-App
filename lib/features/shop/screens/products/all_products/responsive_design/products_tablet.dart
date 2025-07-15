@@ -30,7 +30,7 @@ class ProductsTablet extends StatelessWidget {
                   // Table Header
                   AppTableHeader(
                     buttonText: 'Add Product',
-                    onPressed: () => Get.toNamed(Routes.createBrand),
+                    onPressed: () => Get.toNamed(Routes.createProduct),
                   ),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
