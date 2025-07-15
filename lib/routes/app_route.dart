@@ -4,6 +4,7 @@ import 'package:ecommerce_admin_panel/features/media/screens/media_screen.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/brands/all_brands/brands_screen.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/brands/create_brand/create_brand_screen.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/brands/edit_brand/edit_brand_screen.dart';
+import 'package:ecommerce_admin_panel/features/shop/screens/products/all_products/products_screen.dart';
 import 'package:ecommerce_admin_panel/responsive_design_screen.dart';
 import 'package:ecommerce_admin_panel/routes/route_middleware.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
@@ -86,6 +87,23 @@ class AppRoute {
       page: () => const EditBannerScreen(),
       middlewares: [RouteMiddleware()],
     ),
+
+    // products
+    GetPage(
+      name: Routes.products,
+      page: () => const ProductsScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+    // GetPage(
+    //   name: Routes.createProduct,
+    //   page: () => const CreateProductScreen(),
+    //   middlewares: [RouteMiddleware()],
+    // ),
+    // GetPage(
+    //   name: Routes.editProduct,
+    //   page: () => const EditProductScreen(),
+    //   middlewares: [RouteMiddleware()],
+    // ),
 
     // test responsive design
     GetPage(name: Routes.responsiveDesign, page: () => const ResponsiveDesignScreen()),
