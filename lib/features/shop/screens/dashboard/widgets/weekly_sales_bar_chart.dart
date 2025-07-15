@@ -32,7 +32,7 @@ class WeeklySalesBarChart extends StatelessWidget {
                 ),
                 gridData: const FlGridData(
                   show: true,
-                  drawHorizontalLine: false,
+                  drawHorizontalLine: true,
                   drawVerticalLine: true,
                   horizontalInterval: 200,
                 ),
