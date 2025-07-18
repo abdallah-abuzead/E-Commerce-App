@@ -22,55 +22,52 @@ class ProductAdditionalImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => SizedBox(
-        height: 300,
-        child: Column(
-          children: [
-            // Section to add additional product images
-            Expanded(
-              flex: 2,
-              child: GestureDetector(
-                onTap: onTapToAddImages,
-                child: AppContainer(
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(AppImages.defaultMultipleImageIcon, width: 50, height: 50),
-                        const Text('Add Additional Product Images'),
-                      ],
-                    ),
+    return
+    //todo:: wrap with Obx
+    SizedBox(
+      height: 300,
+      child: Column(
+        children: [
+          // Section to add additional product images
+          Expanded(
+            flex: 2,
+            child: GestureDetector(
+              onTap: onTapToAddImages,
+              child: AppContainer(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset(AppImages.defaultMultipleImageIcon, width: 50, height: 50),
+                      const Text('Add Additional Product Images'),
+                    ],
                   ),
                 ),
               ),
             ),
+          ),
 
-            // Section to display images uploaded images
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: SizedBox(height: 80, child: _uploadedImagesOrEmptyList()),
-                  ),
-                  const SizedBox(width: AppSizes.spaceBtwItems / 2),
+          // Section to display images uploaded images
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(flex: 2, child: SizedBox(height: 80, child: _uploadedImagesOrEmptyList())),
+                const SizedBox(width: AppSizes.spaceBtwItems / 2),
 
-                  // Add More Images Button
-                  AppContainer(
-                    width: 80,
-                    height: 80,
-                    showBorder: true,
-                    border: Border.all(color: AppColors.grey),
-                    color: Colors.white,
-                    onTap: onTapToAddImages,
-                    child: const Center(child: Icon(Iconsax.add)),
-                  ),
-                ],
-              ),
+                // Add More Images Button
+                AppContainer(
+                  width: 80,
+                  height: 80,
+                  showBorder: true,
+                  border: Border.all(color: AppColors.grey),
+                  color: Colors.white,
+                  onTap: onTapToAddImages,
+                  child: const Center(child: Icon(Iconsax.add)),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

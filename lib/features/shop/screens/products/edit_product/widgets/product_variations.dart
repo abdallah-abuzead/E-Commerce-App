@@ -7,7 +7,6 @@ import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 class ProductVariations extends StatelessWidget {
   const ProductVariations({super.key});
@@ -53,15 +52,15 @@ class ProductVariations extends StatelessWidget {
       title: const Text('Color: Green, Size: Small'),
       children: [
         // upload variation image
-        Obx(
-          () => AppImageUploader(
-            right: 0,
-            left: null,
-            imageType: ImageType.asset,
-            image: AppImages.defaultImage,
-            onIconButtonPressed: () {},
-          ),
+        //todo:: wrap with Obx
+        AppImageUploader(
+          right: 0,
+          left: null,
+          imageType: ImageType.asset,
+          image: AppImages.defaultImage,
+          onIconButtonPressed: () {},
         ),
+
         const SizedBox(height: AppSizes.spaceBtwInputFields),
 
         // Variations Stock, and Pricing
