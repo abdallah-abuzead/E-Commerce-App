@@ -5,6 +5,7 @@ abstract class AppImages {
 
   // defaults
   static const String defaultImage = 'assets/images/content/default_image.png';
+  static const String defaultVariationsImageIcon = 'assets/images/content/default_image.png';
 
   // User images
   static const String user = 'assets/images/content/avatar.png';
