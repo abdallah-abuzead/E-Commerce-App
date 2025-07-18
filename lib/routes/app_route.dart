@@ -20,6 +20,7 @@ import '../features/shop/screens/category/create_category/create_category_screen
 import '../features/shop/screens/category/edit_category/edit_category_screen.dart';
 import '../features/shop/screens/dashboard/dashboard_screen.dart';
 import '../features/shop/screens/products/create_product/create_product_screen.dart';
+import '../features/shop/screens/products/edit_product/edit_product_screen.dart';
 
 class AppRoute {
   static final List<GetPage> pages = [
@@ -100,11 +101,11 @@ class AppRoute {
       page: () => const CreateProductScreen(),
       middlewares: [RouteMiddleware()],
     ),
-    // GetPage(
-    //   name: Routes.editProduct,
-    //   page: () => const EditProductScreen(),
-    //   middlewares: [RouteMiddleware()],
-    // ),
+    GetPage(
+      name: Routes.editProduct,
+      page: () => const EditProductScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
 
     // test responsive design
     GetPage(name: Routes.responsiveDesign, page: () => const ResponsiveDesignScreen()),

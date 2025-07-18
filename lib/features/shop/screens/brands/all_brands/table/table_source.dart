@@ -85,7 +85,10 @@ class BrandsRows extends DataTableSource {
         DataCell(Text(DateTime.now().toString())),
         DataCell(
           AppTableActionButtons(
-            onEditPressed: () => Get.toNamed(Routes.editBrand, arguments: BrandModel()),
+            onEditPressed: () => Get.toNamed(
+              Routes.editBrand,
+              arguments: BrandModel(id: '', name: '', image: ''),
+            ),
             onDeletePressed: () {},
           ),
         ),

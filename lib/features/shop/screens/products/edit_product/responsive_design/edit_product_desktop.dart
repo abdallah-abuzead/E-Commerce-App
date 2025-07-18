@@ -11,15 +11,18 @@ import 'package:get/get.dart';
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
-import '../../edit_product/widgets/product_bottom_navigation_buttons.dart';
+import '../../../../models/product_model.dart';
 import '../widgets/product_attributes.dart';
+import '../widgets/product_bottom_navigation_buttons.dart';
 import '../widgets/product_stock_and_pricing.dart';
 import '../widgets/product_title_and_description.dart';
 import '../widgets/product_type_widget.dart';
 import '../widgets/product_variations.dart';
 
-class CreateProductDesktop extends StatelessWidget {
-  const CreateProductDesktop({super.key});
+class EditProductDesktop extends StatelessWidget {
+  const EditProductDesktop({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +37,8 @@ class CreateProductDesktop extends StatelessWidget {
               // Breadcrumbs
               const BreadcrumbWithHeading(
                 returnToPreviousScreen: true,
-                heading: 'Create Product',
-                breadcrumbItems: [Routes.products, 'Create Product'],
+                heading: 'Update Product',
+                breadcrumbItems: [Routes.products, 'Update Product'],
               ),
               const SizedBox(height: AppSizes.spaceBtwSections),
 
