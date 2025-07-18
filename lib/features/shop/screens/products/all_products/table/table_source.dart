@@ -1,6 +1,5 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:ecommerce_admin_panel/common/widgets/images/app_rounded_image.dart';
-import 'package:ecommerce_admin_panel/features/shop/models/category_model.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_images.dart';
@@ -11,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../../common/widgets/data_table/app_table_action_buttons.dart';
+import '../../../../models/product_model.dart';
 
 class CategoryRows extends DataTableSource {
   @override
@@ -48,10 +48,7 @@ class CategoryRows extends DataTableSource {
         DataCell(Text(DateTime.now().toString())),
         DataCell(
           AppTableActionButtons(
-            onEditPressed: () => Get.toNamed(
-              Routes.editCategory,
-              arguments: CategoryModel(id: '', image: '', name: ''),
-            ),
+            onEditPressed: () => Get.toNamed(Routes.editProduct, arguments: ProductModel()),
             onDeletePressed: () {},
           ),
         ),
