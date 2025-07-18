@@ -16,7 +16,7 @@ class ProductBrand extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Brand Lable
+          // Brand Label
           Text('Brand', style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: AppSizes.spaceBtwItems),
 
