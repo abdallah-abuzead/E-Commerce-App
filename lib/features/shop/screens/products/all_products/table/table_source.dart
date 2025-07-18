@@ -48,7 +48,10 @@ class CategoryRows extends DataTableSource {
         DataCell(Text(DateTime.now().toString())),
         DataCell(
           AppTableActionButtons(
-            onEditPressed: () => Get.toNamed(Routes.editCategory, arguments: CategoryModel()),
+            onEditPressed: () => Get.toNamed(
+              Routes.editCategory,
+              arguments: CategoryModel(id: '', image: '', name: ''),
+            ),
             onDeletePressed: () {},
           ),
         ),
