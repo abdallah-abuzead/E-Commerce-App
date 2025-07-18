@@ -14,7 +14,7 @@ class ProductCategories extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Brand Label
+          // Categories Label
           Text('Categories', style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: AppSizes.spaceBtwItems),
 
