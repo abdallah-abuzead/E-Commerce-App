@@ -66,6 +66,11 @@ class AppSidebar extends StatelessWidget {
                       icon: Iconsax.shopping_bag,
                       itemName: 'Products',
                     ),
+                    const AppMenuItem(
+                      route: Routes.customers,
+                      icon: Iconsax.user_tag,
+                      itemName: 'Customers',
+                    ),
                     const AppMenuItem(route: 'logout', icon: Iconsax.logout, itemName: 'Logout'),
                   ],
                 ),
