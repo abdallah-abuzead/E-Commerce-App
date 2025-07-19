@@ -68,7 +68,7 @@ class AppSidebar extends StatelessWidget {
                     ),
                     const AppMenuItem(
                       route: Routes.customers,
-                      icon: Iconsax.user_tag,
+                      icon: Iconsax.profile_2user,
                       itemName: 'Customers',
                     ),
                     const AppMenuItem(route: 'logout', icon: Iconsax.logout, itemName: 'Logout'),

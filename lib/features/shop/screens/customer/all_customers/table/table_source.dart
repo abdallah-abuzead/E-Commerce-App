@@ -1,5 +1,6 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:ecommerce_admin_panel/common/widgets/images/app_rounded_image.dart';
+import 'package:ecommerce_admin_panel/features/authentication/models/user_model.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_images.dart';
@@ -7,10 +8,8 @@ import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../../../../common/widgets/data_table/app_table_action_buttons.dart';
-import '../../../../models/product_model.dart';
 
 class CustomersRows extends DataTableSource {
   @override
@@ -24,7 +23,7 @@ class CustomersRows extends DataTableSource {
                 width: 50,
                 height: 50,
                 padding: AppSizes.sm,
-                image: AppImages.acerLogo,
+                image: AppImages.defaultImage,
                 imageType: ImageType.asset,
                 borderRadius: AppSizes.borderRadiusMd,
                 backgroundColor: AppColors.primaryBackground,
@@ -32,7 +31,7 @@ class CustomersRows extends DataTableSource {
               const SizedBox(width: AppSizes.spaceBtwItems),
               Expanded(
                 child: Text(
-                  'Name',
+                  'Admin User',
                   style: Theme.of(
                     Get.context!,
                   ).textTheme.bodyLarge!.apply(color: AppColors.primary),
@@ -43,12 +42,14 @@ class CustomersRows extends DataTableSource {
             ],
           ),
         ),
-        const DataCell(Text('Parent')),
-        const DataCell(Icon(Iconsax.heart5, color: AppColors.primary)),
+        const DataCell(Text('support@me.com')),
+        const DataCell(Text('+20 112 336 2002')),
         DataCell(Text(DateTime.now().toString())),
         DataCell(
           AppTableActionButtons(
-            onEditPressed: () => Get.toNamed(Routes.editProduct, arguments: ProductModel()),
+            view: true,
+            edit: false,
+            onViewPressed: () => Get.toNamed(Routes.customerDetails, arguments: UserModel.empty()),
             onDeletePressed: () {},
           ),
         ),
@@ -60,7 +61,7 @@ class CustomersRows extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => 5;
+  int get rowCount => 10;
 
   @override
   int get selectedRowCount => 0;
