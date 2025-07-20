@@ -25,6 +25,9 @@ abstract class Routes {
   static const String customers = '/customers';
   static const String customerDetails = '/customerDetails';
 
+  static const String orders = '/orders';
+  static const String orderDetails = '/orderDetails';
+
   static const String responsiveDesign = '/responsive-design';
 
   static const List<String> sidebarMenuRoutes = [
