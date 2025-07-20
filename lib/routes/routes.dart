@@ -22,9 +22,23 @@ abstract class Routes {
   static const String createProduct = '/createProduct';
   static const String editProduct = '/editProduct';
 
+  static const String customers = '/customers';
+  static const String customerDetails = '/customerDetails';
+
+  static const String orders = '/orders';
+  static const String orderDetails = '/orderDetails';
+
   static const String responsiveDesign = '/responsive-design';
 
-  static const List<String> sidebarMenuRoutes = [dashboard, media, categories, brands, banners];
+  static const List<String> sidebarMenuRoutes = [
+    dashboard,
+    media,
+    categories,
+    brands,
+    banners,
+    products,
+    customers,
+  ];
 
   static const String unknown = '/unknown';
 }

@@ -6,13 +6,16 @@ class AppTableHeader extends StatelessWidget {
   const AppTableHeader({
     super.key,
     this.onPressed,
-    required this.buttonText,
+    this.buttonText = 'Add',
     this.searchController,
     this.searchOnChange,
+    this.showLeftWidget = true,
   });
 
   final Function()? onPressed;
   final String buttonText;
+
+  final bool showLeftWidget;
   final TextEditingController? searchController;
   final Function(String)? searchOnChange;
 
@@ -22,19 +25,20 @@ class AppTableHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          flex: DeviceUtils.isDesktopScreen(context) ? 1 : 3,
-          child: Row(
-            children: [
-              SizedBox(
-                width: 200,
-                child: ElevatedButton(onPressed: onPressed, child: Text(buttonText)),
-              ),
-            ],
-          ),
+          flex: DeviceUtils.isDesktopScreen(context) ? 3 : 1,
+          child: showLeftWidget
+              ? Row(
+                  children: [
+                    SizedBox(
+                      width: 200,
+                      child: ElevatedButton(onPressed: onPressed, child: Text(buttonText)),
+                    ),
+                  ],
+                )
+              : const SizedBox.shrink(),
         ),
         Expanded(
           flex: DeviceUtils.isDesktopScreen(context) ? 2 : 1,
-
           child: TextFormField(
             controller: searchController,
             onChanged: searchOnChange,
