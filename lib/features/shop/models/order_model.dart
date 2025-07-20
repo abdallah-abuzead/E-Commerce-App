@@ -7,17 +7,17 @@ class OrderModel {
   final OrderStatus status;
   final double totalAmount;
   final DateTime orderDate;
-  final DateTime deliveryDate;
+  final DateTime? deliveryDate;
 
   OrderModel({
     required this.id,
     required this.status,
     required this.totalAmount,
     required this.orderDate,
-    required this.deliveryDate,
+    this.deliveryDate,
   });
 
   String get formatedOrderDate => HelperFunctions.getFormatedDate(orderDate);
 
-  String get formatedDeliveryDate => HelperFunctions.getFormatedDate(deliveryDate);
+  String get formatedDeliveryDate => HelperFunctions.getFormatedDate(deliveryDate!);
 }
