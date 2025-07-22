@@ -6,6 +6,8 @@ import 'package:ecommerce_admin_panel/features/shop/screens/brands/create_brand/
 import 'package:ecommerce_admin_panel/features/shop/screens/brands/edit_brand/edit_brand_screen.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/customer/all_customers/customers_screen.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/customer/customer_details/customer_details_screen.dart';
+import 'package:ecommerce_admin_panel/features/shop/screens/orders/all_orders/orders_screen.dart';
+import 'package:ecommerce_admin_panel/features/shop/screens/orders/order_details/order_details_screen.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/products/all_products/products_screen.dart';
 import 'package:ecommerce_admin_panel/responsive_design_screen.dart';
 import 'package:ecommerce_admin_panel/routes/route_middleware.dart';
@@ -118,6 +120,18 @@ class AppRoute {
     GetPage(
       name: Routes.customerDetails,
       page: () => const CustomerDetailsScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+
+    // orders
+    GetPage(
+      name: Routes.orders,
+      page: () => const OrdersScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+    GetPage(
+      name: Routes.orderDetails,
+      page: () => const OrderDetailsScreen(),
       middlewares: [RouteMiddleware()],
     ),
 
