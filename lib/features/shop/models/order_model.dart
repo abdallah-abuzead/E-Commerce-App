@@ -6,6 +6,7 @@ class OrderModel {
   final String id;
   final OrderStatus status;
   final double totalAmount;
+  final List<String> items;
   final DateTime orderDate;
   final DateTime? deliveryDate;
 
@@ -13,6 +14,7 @@ class OrderModel {
     required this.id,
     required this.status,
     required this.totalAmount,
+    this.items = const [],
     required this.orderDate,
     this.deliveryDate,
   });
