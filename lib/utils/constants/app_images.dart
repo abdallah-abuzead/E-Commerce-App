@@ -17,6 +17,9 @@ abstract class AppImages {
   // Brands logos
   static const String acerLogo = 'assets/images/content/acer_logo.png';
 
+  // Payment methods
+  static const String paypal = 'assets/images/content/paypal.png';
+
   // Animations
   static const String uploadImageIllustration =
       'assets/images/animations/upload_image_to_cloud.gif';

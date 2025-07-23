@@ -31,10 +31,7 @@ class OrderTransactions extends StatelessWidget {
                 flex: DeviceUtils.isMobileScreen(context) ? 2 : 1,
                 child: Row(
                   children: [
-                    const AppRoundedImage(
-                      imageType: ImageType.asset,
-                      image: AppImages.defaultImage,
-                    ),
+                    const AppRoundedImage(imageType: ImageType.asset, image: AppImages.paypal),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
