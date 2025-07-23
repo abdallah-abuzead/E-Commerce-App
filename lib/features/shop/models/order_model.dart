@@ -19,7 +19,7 @@ class OrderModel {
     this.items = const [],
     required this.orderDate,
     this.deliveryDate,
-    this.paymentMethod = 'Cash on Delivery',
+    this.paymentMethod = 'Paypal',
   });
 
   String get formatedOrderDate => HelperFunctions.getFormatedDate(orderDate);
