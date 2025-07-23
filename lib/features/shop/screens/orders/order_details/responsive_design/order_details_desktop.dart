@@ -7,7 +7,7 @@ import '../../../../models/order_model.dart';
 import '../widgets/order_customer_info.dart';
 import '../widgets/order_info.dart';
 import '../widgets/order_items.dart';
-import '../widgets/order_transaction.dart';
+import '../widgets/order_transactions.dart';
 
 class OrderDetailsDesktop extends StatelessWidget {
   const OrderDetailsDesktop({super.key, required this.order});
@@ -48,7 +48,7 @@ class OrderDetailsDesktop extends StatelessWidget {
                       const SizedBox(height: AppSizes.spaceBtwSections),
 
                       // Transactions
-                      OrderTransaction(order: order),
+                      OrderTransactions(order: order),
                     ],
                   ),
                 ),
@@ -67,7 +67,7 @@ class OrderDetailsDesktop extends StatelessWidget {
                       const SizedBox(height: AppSizes.spaceBtwSections),
 
                       // Transactions
-                      OrderTransaction(order: order),
+                      OrderTransactions(order: order),
                     ],
                   ),
                 ),
