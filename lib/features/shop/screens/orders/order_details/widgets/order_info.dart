@@ -44,7 +44,7 @@ class OrderInfo extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: DeviceUtils.isMobileScreen(context) ? 2 : 1,
+                flex: DeviceUtils.isMobileScreen(context) ? 2 : 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
