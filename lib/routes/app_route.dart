@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../features/authentication/screens/login/login_screen.dart';
+import '../features/personalization/screens/profile/profile_screen.dart';
+import '../features/personalization/screens/settings/settings_screen.dart';
 import '../features/shop/screens/banners/all_banners/banners_screen.dart';
 import '../features/shop/screens/banners/create_banner/create_banner_screen.dart';
 import '../features/shop/screens/banners/edit_banner/edit_banner_screen.dart';
@@ -132,6 +134,18 @@ class AppRoute {
     GetPage(
       name: Routes.orderDetails,
       page: () => const OrderDetailsScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+
+    // other
+    GetPage(
+      name: Routes.profile,
+      page: () => const ProfileScreen(),
+      middlewares: [RouteMiddleware()],
+    ),
+    GetPage(
+      name: Routes.settings,
+      page: () => const SettingsScreen(),
       middlewares: [RouteMiddleware()],
     ),
 
