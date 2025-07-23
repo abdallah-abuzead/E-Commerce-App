@@ -55,22 +55,7 @@ class OrderDetailsDesktop extends StatelessWidget {
                 const SizedBox(width: AppSizes.spaceBtwSections),
 
                 // Right Side Order Information
-                Expanded(
-                  child: Column(
-                    children: [
-                      // Order Customer Info
-                      OrderCustomerInfo(order: order),
-                      const SizedBox(height: AppSizes.spaceBtwSections),
-
-                      // Order Items
-                      OrderItems(order: order),
-                      const SizedBox(height: AppSizes.spaceBtwSections),
-
-                      // Transactions
-                      OrderTransactions(order: order),
-                    ],
-                  ),
-                ),
+                Expanded(child: OrderCustomerInfo(order: order)),
               ],
             ),
           ],

@@ -23,6 +23,7 @@ class OrderInfo extends StatelessWidget {
           Text('Order Information', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: AppSizes.spaceBtwSections),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Column(
@@ -48,24 +49,31 @@ class OrderInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Status'),
-                    AppContainer(
-                      radius: AppSizes.cardRadiusSm,
-                      padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm),
-                      color: HelperFunctions.getOrderStatusColor(
-                        order.status,
-                      ).withValues(alpha: 0.1),
-                      child: DropdownButton<OrderStatus>(
-                        onChanged: (value) {},
-                        items: OrderStatus.values.map((status) {
-                          return DropdownMenuItem<OrderStatus>(
-                            value: status,
-                            child: Text(
-                              status.name.capitalize.toString(),
-                              style: TextStyle(color: HelperFunctions.getOrderStatusColor(status)),
-                            ),
-                          );
-                        }).toList(),
-                      ),
+                    Row(
+                      children: [
+                        AppContainer(
+                          radius: AppSizes.cardRadiusSm,
+                          padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm, vertical: 0),
+                          color: HelperFunctions.getOrderStatusColor(
+                            order.status,
+                          ).withValues(alpha: 0.1),
+                          child: DropdownButton<OrderStatus>(
+                            onChanged: (value) {},
+                            value: OrderStatus.processing,
+                            items: OrderStatus.values.map((status) {
+                              return DropdownMenuItem<OrderStatus>(
+                                value: status,
+                                child: Text(
+                                  status.name.capitalize.toString(),
+                                  style: TextStyle(
+                                    color: HelperFunctions.getOrderStatusColor(status),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
