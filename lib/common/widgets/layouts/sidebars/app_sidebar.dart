@@ -72,6 +72,21 @@ class AppSidebar extends StatelessWidget {
                       itemName: 'Customers',
                     ),
                     const AppMenuItem(route: Routes.orders, icon: Iconsax.box, itemName: 'Orders'),
+                    // Other menu items
+                    Text(
+                      'OTHER',
+                      style: Theme.of(context).textTheme.bodySmall!.apply(letterSpacingDelta: 1.2),
+                    ),
+                    const AppMenuItem(
+                      route: Routes.profile,
+                      icon: Iconsax.user,
+                      itemName: 'Profile',
+                    ),
+                    const AppMenuItem(
+                      route: Routes.settings,
+                      icon: Iconsax.setting_2,
+                      itemName: 'Settings',
+                    ),
                     const AppMenuItem(route: 'logout', icon: Iconsax.logout, itemName: 'Logout'),
                   ],
                 ),
