@@ -15,7 +15,7 @@ class CategoriesDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(CategoriesController());
+    final controller = Get.find<CategoriesController>();
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -34,6 +34,8 @@ class CategoriesDesktop extends StatelessWidget {
                   AppTableHeader(
                     buttonText: 'Create New Category',
                     onPressed: () => Get.toNamed(Routes.createCategory),
+                    searchController: controller.searchTextController,
+                    searchOnChange: (query) => controller.searchCategories(query),
                   ),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 

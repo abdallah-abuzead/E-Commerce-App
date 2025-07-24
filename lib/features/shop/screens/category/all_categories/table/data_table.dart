@@ -12,8 +12,9 @@ class CategoryTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CategoriesController());
-    return Obx(
-      () => AppPaginatedDataTable(
+    return Obx(() {
+      Text(controller.filteredItems.length.toString());
+      return AppPaginatedDataTable(
         minWidth: 700,
         sortColumnIndex: controller.sortColumnIndex.value,
         sortAscending: controller.sortAscending.value,
@@ -31,7 +32,7 @@ class CategoryTable extends StatelessWidget {
           const DataColumn2(label: Text('Action'), fixedWidth: 100),
         ],
         source: CategoryRows(),
-      ),
-    );
+      );
+    });
   }
 }

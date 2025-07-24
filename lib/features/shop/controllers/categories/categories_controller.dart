@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/features/shop/models/category_model.dart';
 import 'package:ecommerce_admin_panel/utils/popups/app_loaders.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/repositories/categories/categories_repository.dart';
@@ -15,6 +16,8 @@ class CategoriesController extends GetxController {
   // Sorting
   RxInt sortColumnIndex = 1.obs;
   Rx<bool> sortAscending = true.obs;
+
+  final searchTextController = TextEditingController();
 
   final CategoriesRepository _categoryRepository = Get.put(CategoriesRepository());
 
@@ -60,5 +63,11 @@ class CategoriesController extends GetxController {
       final bName = b.name.toLowerCase();
       return ascending ? aName.compareTo(bName) : bName.compareTo(aName);
     });
+  }
+
+  void searchCategories(String query) {
+    filteredItems.assignAll(
+      allItems.where((item) => item.name.toLowerCase().contains(query.toLowerCase())),
+    );
   }
 }
