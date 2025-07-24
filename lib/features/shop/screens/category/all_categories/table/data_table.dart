@@ -14,6 +14,7 @@ class CategoryTable extends StatelessWidget {
     final controller = Get.put(CategoriesController());
     return Obx(() {
       Text(controller.filteredItems.length.toString());
+      Text(controller.selectedRows.length.toString());
       return AppPaginatedDataTable(
         minWidth: 700,
         sortColumnIndex: controller.sortColumnIndex.value,
