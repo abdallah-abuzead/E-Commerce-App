@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
+import 'package:ecommerce_admin_panel/common/widgets/loaders/app_loader_animation.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/category/all_categories/table/data_table.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
@@ -7,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../common/widgets/data_table/app_table_header.dart';
+import '../../../../controllers/categories/categories_controller.dart';
 
 class CategoriesDesktop extends StatelessWidget {
   const CategoriesDesktop({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CategoriesController());
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -35,7 +38,10 @@ class CategoriesDesktop extends StatelessWidget {
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
                   // Table
-                  const CategoryTable(),
+                  Obx(() {
+                    if (controller.isLoading.value) return const AppLoaderAnimation();
+                    return const CategoryTable();
+                  }),
                 ],
               ),
             ),
