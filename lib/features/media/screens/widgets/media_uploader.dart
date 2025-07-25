@@ -90,6 +90,7 @@ class MediaUploader extends StatelessWidget {
                 /// Locally selected images
                 if (controller.selectedImagesToUpload.isNotEmpty)
                   AppContainer(
+                    margin: const EdgeInsets.only(bottom: AppSizes.spaceBtwItems),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

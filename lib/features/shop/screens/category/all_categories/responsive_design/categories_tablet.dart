@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../common/widgets/containers/app_container.dart';
 import '../../../../../../common/widgets/data_table/app_table_header.dart';
+import '../../../../../../common/widgets/loaders/app_loader_animation.dart';
 import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
+import '../../../../controllers/categories/categories_controller.dart';
 import '../table/data_table.dart';
 
 class CategoriesTablet extends StatelessWidget {
@@ -13,6 +15,8 @@ class CategoriesTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<CategoriesController>();
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -31,11 +35,16 @@ class CategoriesTablet extends StatelessWidget {
                   AppTableHeader(
                     buttonText: 'Create New Category',
                     onPressed: () => Get.toNamed(Routes.createCategory),
+                    searchController: controller.searchTextController,
+                    searchOnChange: (query) => controller.searchCategories(query),
                   ),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
                   // Table
-                  const CategoryTable(),
+                  Obx(() {
+                    if (controller.isLoading.value) return const AppLoaderAnimation();
+                    return const CategoryTable();
+                  }),
                 ],
               ),
             ),
