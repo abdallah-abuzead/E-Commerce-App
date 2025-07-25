@@ -1,4 +1,7 @@
+import 'package:ecommerce_admin_panel/features/shop/controllers/brands/create_brand_controller.dart';
+import 'package:ecommerce_admin_panel/features/shop/controllers/categories/categories_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../../common/widgets/chips/app_choice_chip.dart';
@@ -14,10 +17,12 @@ class CreateBrandForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CreateBrandController());
     return AppContainer(
       width: 500,
       padding: const EdgeInsets.all(AppSizes.defaultSpace),
       child: Form(
+        key: controller.formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -28,6 +33,7 @@ class CreateBrandForm extends StatelessWidget {
 
             // Name Text Field
             TextFormField(
+              controller: controller.nameController,
               validator: (value) => Validator.validateEmptyText('Name', value),
               decoration: const InputDecoration(
                 labelText: 'Brand Name',
@@ -38,44 +44,55 @@ class CreateBrandForm extends StatelessWidget {
 
             Text('Select Categories', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: AppSizes.spaceBtwInputFields / 2),
-            Wrap(
-              spacing: AppSizes.sm,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: AppSizes.sm),
-                  child: AppChoiceChip(text: 'Shoes', selected: true, onSelected: (value) {}),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: AppSizes.sm),
-                  child: AppChoiceChip(
-                    text: 'Track Suits',
-                    selected: false,
-                    onSelected: (value) {},
-                  ),
-                ),
-              ],
+            Obx(
+              () => Wrap(
+                spacing: AppSizes.sm,
+                children: CategoriesController.instance.allItems
+                    .map(
+                      (category) => Padding(
+                        padding: const EdgeInsets.only(bottom: AppSizes.sm),
+                        child: AppChoiceChip(
+                          text: category.name,
+                          selected: controller.selectedCategories.contains(category),
+                          onSelected: (value) => controller.toggleSelection(category),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
 
-            AppImageUploader(
-              width: 80,
-              height: 80,
-              image: AppImages.defaultImage,
-              imageType: ImageType.asset,
-              onIconButtonPressed: () {},
+            Obx(
+              () => AppImageUploader(
+                width: 80,
+                height: 80,
+                image: controller.imageUrl.value.isNotEmpty
+                    ? controller.imageUrl.value
+                    : AppImages.defaultImage,
+                imageType: controller.imageUrl.value.isNotEmpty
+                    ? ImageType.network
+                    : ImageType.asset,
+                onIconButtonPressed: () async => await controller.pickImage(),
+              ),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields),
 
-            CheckboxMenuButton(
-              value: true,
-              onChanged: (value) {},
-              child: const Text('Featured', style: TextStyle(fontSize: AppSizes.fontSizeSm)),
+            Obx(
+              () => CheckboxMenuButton(
+                value: controller.isFeatured.value,
+                onChanged: (value) => controller.isFeatured.value = value ?? false,
+                child: const Text('Featured', style: TextStyle(fontSize: AppSizes.fontSizeSm)),
+              ),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
 
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(onPressed: () {}, child: const Text('Create')),
+              child: ElevatedButton(
+                onPressed: () async => await controller.createBrand(),
+                child: const Text('Create'),
+              ),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
           ],

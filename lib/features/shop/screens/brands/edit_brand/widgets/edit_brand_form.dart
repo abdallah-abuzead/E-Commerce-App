@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/features/shop/models/brand_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../../common/widgets/chips/app_choice_chip.dart';
@@ -9,6 +10,8 @@ import '../../../../../../utils/constants/app_images.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
 import '../../../../../../utils/constants/enums.dart';
 import '../../../../../../utils/validators/validator.dart';
+import '../../../../controllers/brands/edit_brand_controller.dart';
+import '../../../../controllers/categories/categories_controller.dart';
 
 class EditBrandForm extends StatelessWidget {
   const EditBrandForm({super.key, required this.brand});
@@ -17,10 +20,13 @@ class EditBrandForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(EditBrandController());
+    controller.init(brand);
     return AppContainer(
       width: 500,
       padding: const EdgeInsets.all(AppSizes.defaultSpace),
       child: Form(
+        key: controller.formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,6 +37,7 @@ class EditBrandForm extends StatelessWidget {
 
             // Name Text Field
             TextFormField(
+              controller: controller.nameController,
               validator: (value) => Validator.validateEmptyText('Name', value),
               decoration: const InputDecoration(
                 labelText: 'Brand Name',
@@ -41,44 +48,55 @@ class EditBrandForm extends StatelessWidget {
 
             Text('Select Categories', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: AppSizes.spaceBtwInputFields / 2),
-            Wrap(
-              spacing: AppSizes.sm,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: AppSizes.sm),
-                  child: AppChoiceChip(text: 'Shoes', selected: true, onSelected: (value) {}),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: AppSizes.sm),
-                  child: AppChoiceChip(
-                    text: 'Track Suits',
-                    selected: false,
-                    onSelected: (value) {},
-                  ),
-                ),
-              ],
+            Obx(
+              () => Wrap(
+                spacing: AppSizes.sm,
+                children: CategoriesController.instance.allItems
+                    .map(
+                      (category) => Padding(
+                        padding: const EdgeInsets.only(bottom: AppSizes.sm),
+                        child: AppChoiceChip(
+                          text: category.name,
+                          selected: controller.selectedCategories.contains(category),
+                          onSelected: (value) => controller.toggleSelection(category),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
 
-            AppImageUploader(
-              width: 80,
-              height: 80,
-              image: AppImages.defaultImage,
-              imageType: ImageType.asset,
-              onIconButtonPressed: () {},
+            Obx(
+              () => AppImageUploader(
+                width: 80,
+                height: 80,
+                image: controller.imageUrl.value.isNotEmpty
+                    ? controller.imageUrl.value
+                    : AppImages.defaultImage,
+                imageType: controller.imageUrl.value.isNotEmpty
+                    ? ImageType.network
+                    : ImageType.asset,
+                onIconButtonPressed: () async => await controller.pickImage(),
+              ),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields),
 
-            CheckboxMenuButton(
-              value: true,
-              onChanged: (value) {},
-              child: const Text('Featured', style: TextStyle(fontSize: AppSizes.fontSizeSm)),
+            Obx(
+              () => CheckboxMenuButton(
+                value: controller.isFeatured.value,
+                onChanged: (value) => controller.isFeatured.value = value ?? false,
+                child: const Text('Featured', style: TextStyle(fontSize: AppSizes.fontSizeSm)),
+              ),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
 
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(onPressed: () {}, child: const Text('Update')),
+              child: ElevatedButton(
+                onPressed: () async => await controller.updateBrand(brand),
+                child: const Text('Update'),
+              ),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
           ],

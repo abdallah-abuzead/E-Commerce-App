@@ -29,6 +29,7 @@ class BrandsTable extends StatelessWidget {
           DataColumn2(
             label: const Text('Brand'),
             fixedWidth: DeviceUtils.isMobileScreen(Get.context!) ? null : 200,
+            onSort: (columnIndex, ascending) => controller.sortByName(columnIndex, ascending),
           ),
           const DataColumn2(label: Text('Categories')),
           DataColumn2(
