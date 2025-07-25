@@ -4,12 +4,12 @@ import '../../../utils/formatters/app_formatter.dart';
 
 class CategoryModel {
   String id;
-  final String name;
-  final String image;
-  final String parentId;
-  final bool isFeatured;
+  String name;
+  String image;
+  String parentId;
+  bool isFeatured;
   final DateTime? createdAt;
-  final DateTime? updatedAt;
+  DateTime? updatedAt;
 
   CategoryModel({
     required this.id,

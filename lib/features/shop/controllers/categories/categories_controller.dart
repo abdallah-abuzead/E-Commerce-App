@@ -145,6 +145,14 @@ class CategoriesController extends GetxController {
     allItems.add(item);
     filteredItems.add(item);
     selectedRows.assignAll(List.filled(allItems.length, false));
-    allItems.refresh();
+    filteredItems.refresh();
+  }
+
+  void updateItemInLists(CategoryModel item) {
+    final itemIndex = allItems.indexWhere((element) => element.id == item.id);
+    final filteredItemIndex = filteredItems.indexWhere((element) => element.id == item.id);
+    if (itemIndex != -1) allItems[itemIndex] = item;
+    if (filteredItemIndex != -1) filteredItems[filteredItemIndex] = item;
+    filteredItems.refresh();
   }
 }

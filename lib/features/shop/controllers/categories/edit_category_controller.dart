@@ -10,8 +10,8 @@ import '../../../../utils/popups/app_loaders.dart';
 import '../../../../utils/popups/full_screen_loader.dart';
 import '../../../media/models/image_model.dart';
 
-class CreateCategoryController extends GetxController {
-  static CreateCategoryController get instance => Get.find<CreateCategoryController>();
+class EditCategoryController extends GetxController {
+  static EditCategoryController get instance => Get.find<EditCategoryController>();
 
   final Rx<CategoryModel> selectedParent = CategoryModel.empty().obs;
   final RxBool loading = false.obs;
@@ -20,7 +20,19 @@ class CreateCategoryController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  Future<void> createCategory() async {
+  /// Init Data
+  void init(CategoryModel category) {
+    nameController.text = category.name;
+    isFeatured.value = category.isFeatured;
+    imageUrl.value = category.image;
+    if (category.parentId.isNotEmpty) {
+      selectedParent.value = CategoriesController.instance.allItems
+          .where((item) => item.id == category.parentId)
+          .single;
+    }
+  }
+
+  Future<void> updateCategory(CategoryModel category) async {
     try {
       // Start loading
       FullScreenLoader.popUpCircular();
@@ -38,17 +50,14 @@ class CreateCategoryController extends GetxController {
         return;
       }
 
-      // Create a new category
-      final CategoryModel newRecord = CategoryModel(
-        id: '',
-        name: nameController.text.trim(),
-        image: imageUrl.value,
-        parentId: selectedParent.value.id,
-        isFeatured: isFeatured.value,
-        createdAt: DateTime.now(),
-      );
-      newRecord.id = await CategoriesRepository.instance.createCategory(newRecord);
-      CategoriesController.instance.addItemToLists(newRecord);
+      // Update category
+      category.name = nameController.text.trim();
+      category.image = imageUrl.value;
+      category.parentId = selectedParent.value.id;
+      category.isFeatured = isFeatured.value;
+      category.updatedAt = DateTime.now();
+      await CategoriesRepository.instance.updateCategory(category);
+      CategoriesController.instance.updateItemInLists(category);
 
       // Reset fields
       resetFields();
@@ -57,7 +66,7 @@ class CreateCategoryController extends GetxController {
       FullScreenLoader.stopLoadingDialog();
       AppLoaders.successSnackBar(
         title: 'Congratulations!',
-        message: 'New Record has been added successfully',
+        message: 'Item has been updated successfully',
       );
     } catch (e) {
       FullScreenLoader.stopLoadingDialog();
