@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../utils/formatters/app_formatter.dart';
 
 class CategoryModel {
-  final String id;
+  String id;
   final String name;
   final String image;
   final String parentId;
