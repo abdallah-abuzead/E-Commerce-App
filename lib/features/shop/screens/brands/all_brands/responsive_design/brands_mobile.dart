@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../common/widgets/containers/app_container.dart';
 import '../../../../../../common/widgets/data_table/app_table_header.dart';
+import '../../../../../../common/widgets/loaders/app_loader_animation.dart';
 import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
+import '../../../../controllers/brands/brands_controller.dart';
 import '../table/data_table.dart';
 
 class BrandsMobile extends StatelessWidget {
@@ -13,6 +15,7 @@ class BrandsMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BrandsController controller = Get.put(BrandsController());
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -31,11 +34,17 @@ class BrandsMobile extends StatelessWidget {
                   AppTableHeader(
                     buttonText: 'Create New Brand',
                     onPressed: () => Get.toNamed(Routes.createBrand),
+                    searchController: controller.searchTextController,
+                    searchOnChange: (query) => controller.searchQuery(query),
                   ),
                   const SizedBox(height: AppSizes.spaceBtwItems),
 
                   // Table
-                  const BrandsTable(),
+                  Obx(() {
+                    return controller.isLoading.value
+                        ? const AppLoaderAnimation()
+                        : const BrandsTable();
+                  }),
                 ],
               ),
             ),

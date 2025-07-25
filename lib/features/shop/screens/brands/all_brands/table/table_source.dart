@@ -8,32 +8,37 @@ import '../../../../../../common/widgets/data_table/app_table_action_buttons.dar
 import '../../../../../../common/widgets/images/app_rounded_image.dart';
 import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/app_colors.dart';
-import '../../../../../../utils/constants/app_images.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
 import '../../../../../../utils/constants/enums.dart';
+import '../../../../controllers/brands/brands_controller.dart';
 import '../../../../models/brand_model.dart';
 
 class BrandsRows extends DataTableSource {
+  final BrandsController controller = BrandsController.instance;
+
   @override
   DataRow? getRow(int index) {
+    final BrandModel brand = controller.filteredItems[index];
     return DataRow2(
+      selected: controller.selectedRows[index],
+      onSelectChanged: (value) => controller.selectedRows[index] = value ?? false,
       cells: [
         DataCell(
           Row(
             children: [
-              const AppRoundedImage(
+              AppRoundedImage(
                 width: 50,
                 height: 50,
                 padding: AppSizes.sm,
-                image: AppImages.acerLogo,
-                imageType: ImageType.asset,
+                image: brand.image,
+                imageType: ImageType.network,
                 borderRadius: AppSizes.borderRadiusMd,
                 backgroundColor: AppColors.primaryBackground,
               ),
               const SizedBox(width: AppSizes.spaceBtwItems),
               Expanded(
                 child: Text(
-                  'Name',
+                  brand.name,
                   style: Theme.of(
                     Get.context!,
                   ).textTheme.bodyLarge!.apply(color: AppColors.primary),
@@ -54,42 +59,35 @@ class BrandsRows extends DataTableSource {
                 direction: DeviceUtils.isMobileScreen(Get.context!)
                     ? Axis.vertical
                     : Axis.horizontal,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: DeviceUtils.isMobileScreen(Get.context!) ? 0 : AppSizes.xs,
-                    ),
-                    child: const Chip(label: Text('Shoes'), padding: EdgeInsets.all(AppSizes.xs)),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: DeviceUtils.isMobileScreen(Get.context!) ? 0 : AppSizes.xs,
-                    ),
-                    child: const Chip(
-                      label: Text('TrackSuits'),
-                      padding: EdgeInsets.all(AppSizes.xs),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: DeviceUtils.isMobileScreen(Get.context!) ? 0 : AppSizes.xs,
-                    ),
-                    child: const Chip(label: Text('Joggers'), padding: EdgeInsets.all(AppSizes.xs)),
-                  ),
-                ],
+                children: brand.brandCategories == null
+                    ? [const SizedBox.shrink()]
+                    : brand.brandCategories!
+                          .map(
+                            (category) => Padding(
+                              padding: EdgeInsets.only(
+                                bottom: DeviceUtils.isMobileScreen(Get.context!) ? 0 : AppSizes.xs,
+                              ),
+                              child: Chip(
+                                label: Text(category.name),
+                                padding: const EdgeInsets.all(AppSizes.xs),
+                              ),
+                            ),
+                          )
+                          .toList(),
               ),
             ),
           ),
         ),
-        const DataCell(Icon(Iconsax.heart5, color: AppColors.primary)),
-        DataCell(Text(DateTime.now().toString())),
+        DataCell(
+          brand.isFeatured
+              ? const Icon(Iconsax.heart5, color: AppColors.primary)
+              : const Icon(Iconsax.heart),
+        ),
+        DataCell(Text(brand.createdAt != null ? brand.formatedCreatedDate : '')),
         DataCell(
           AppTableActionButtons(
-            onEditPressed: () => Get.toNamed(
-              Routes.editBrand,
-              arguments: BrandModel(id: '', name: '', image: ''),
-            ),
-            onDeletePressed: () {},
+            onEditPressed: () => Get.toNamed(Routes.editBrand, arguments: brand),
+            onDeletePressed: () => controller.confirmAndDeleteItem(brand),
           ),
         ),
       ],
@@ -100,8 +98,8 @@ class BrandsRows extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => 20;
+  int get rowCount => controller.filteredItems.length;
 
   @override
-  int get selectedRowCount => 0;
+  int get selectedRowCount => controller.selectedRows.where((selected) => selected).length;
 }
