@@ -7,7 +7,7 @@ import '../../../../data/repositories/categories/categories_repository.dart';
 class CategoriesController extends AppBaseController<CategoryModel> {
   static CategoriesController get instance => Get.find<CategoriesController>();
 
-  final CategoriesRepository _categoryRepository = Get.put(CategoriesRepository());
+  final CategoriesRepository _categoriesRepository = Get.put(CategoriesRepository());
 
   void sortByName(int columnIndex, bool ascending) {
     sortByProperty(columnIndex, ascending, (category) => category.name.toLowerCase());
@@ -20,11 +20,11 @@ class CategoriesController extends AppBaseController<CategoryModel> {
 
   @override
   Future<void> deleteItem(CategoryModel item) async {
-    await _categoryRepository.deleteCategory(item.id);
+    await _categoriesRepository.deleteCategory(item.id);
   }
 
   @override
   Future<List<CategoryModel>> fetchItems() async {
-    return await _categoryRepository.getAllCategories();
+    return await _categoriesRepository.getAllCategories();
   }
 }

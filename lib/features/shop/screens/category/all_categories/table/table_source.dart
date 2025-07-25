@@ -74,5 +74,5 @@ class CategoryRows extends DataTableSource {
   int get rowCount => controller.filteredItems.length;
 
   @override
-  int get selectedRowCount => 0;
+  int get selectedRowCount => controller.selectedRows.where((selected) => selected).length;
 }
