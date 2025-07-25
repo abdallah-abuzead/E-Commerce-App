@@ -44,7 +44,7 @@ class MediaContent extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text('Selected Folder', style: Theme.of(context).textTheme.headlineSmall),
+                  Text('Select Folder', style: Theme.of(context).textTheme.headlineSmall),
                   const SizedBox(width: AppSizes.spaceBtwItems),
                   MediaFolderDropdown(
                     onChanged: (newValue) {
