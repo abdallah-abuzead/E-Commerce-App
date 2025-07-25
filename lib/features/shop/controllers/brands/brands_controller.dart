@@ -1,6 +1,5 @@
 import 'package:ecommerce_admin_panel/features/shop/models/brand_model.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/exceptions/exceptions.dart';
 
 import '../../../../data/abstract/app_base_controller.dart';
 import '../../../../data/repositories/brands/brands_repository.dart';
@@ -40,6 +39,6 @@ class BrandsController extends AppBaseController<BrandModel> {
 
   @override
   Future<void> deleteItem(BrandModel item) async {
-    throw UnauthorizedException();
+    await _brandsRepository.deleteBrand(item);
   }
 }
