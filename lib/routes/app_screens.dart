@@ -23,6 +23,9 @@ abstract class AppScreens {
   static const String onBoarding = '/on-boarding';
 
   static List<String> allAppScreenItems = [
+    onBoarding,
+    signIn,
+    signup,
     home,
     store,
     favorites,
@@ -38,12 +41,9 @@ abstract class AppScreens {
     allProducts,
     userProfile,
     userAddress,
-    signup,
     signupSuccess,
     verifyEmail,
-    signIn,
     resetPassword,
     forgetPassword,
-    onBoarding,
   ];
 }
