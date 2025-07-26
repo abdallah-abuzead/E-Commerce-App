@@ -35,7 +35,7 @@ class BannersDesktop extends StatelessWidget {
                         children: [
                           // Table Header
                           AppTableHeader(
-                            buttonText: 'Create New Banner',
+                            buttonText: 'Create Banner',
                             onPressed: () => Get.toNamed(Routes.createBanner),
                           ),
                           const SizedBox(height: AppSizes.spaceBtwItems),
