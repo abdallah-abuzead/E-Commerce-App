@@ -8,33 +8,43 @@ import '../../../../../../common/widgets/data_table/app_table_action_buttons.dar
 import '../../../../../../common/widgets/images/app_rounded_image.dart';
 import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/app_colors.dart';
-import '../../../../../../utils/constants/app_images.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
 import '../../../../../../utils/constants/enums.dart';
+import '../../../../controllers/banners/banners_controller.dart';
 
 class BannersRows extends DataTableSource {
+  final controller = BannersController.instance;
+
   @override
   DataRow? getRow(int index) {
+    final BannerModel banner = controller.allItems[index];
     return DataRow2(
+      selected: controller.selectedRows[index],
+      onSelectChanged: (value) => controller.selectedRows[index] = value ?? false,
+      onTap: () => Get.toNamed(Routes.editBanner, arguments: banner),
       cells: [
-        const DataCell(
+        DataCell(
           AppRoundedImage(
             width: 180,
             height: 180,
             padding: AppSizes.sm,
-            image: AppImages.acerLogo,
-            imageType: ImageType.asset,
+            image: banner.imageUrl,
+            imageType: ImageType.network,
             borderRadius: AppSizes.borderRadiusMd,
             backgroundColor: AppColors.primaryBackground,
             margin: 3,
           ),
         ),
-        const DataCell(Text('Shop')),
-        const DataCell(Icon(Iconsax.eye, color: AppColors.primary)),
+        DataCell(Text(controller.formatRoute(banner.targetScreen))),
+        DataCell(
+          banner.active
+              ? const Icon(Iconsax.eye, color: AppColors.primary)
+              : const Icon(Iconsax.eye_slash),
+        ),
         DataCell(
           AppTableActionButtons(
-            onEditPressed: () => Get.toNamed(Routes.editBanner, arguments: BannerModel()),
-            onDeletePressed: () {},
+            onEditPressed: () => Get.toNamed(Routes.editBanner, arguments: banner),
+            onDeletePressed: () => controller.confirmAndDeleteItem(banner),
           ),
         ),
       ],
@@ -45,8 +55,8 @@ class BannersRows extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => 10;
+  int get rowCount => controller.allItems.length;
 
   @override
-  int get selectedRowCount => 0;
+  int get selectedRowCount => controller.selectedRows.where((selected) => selected).length;
 }
