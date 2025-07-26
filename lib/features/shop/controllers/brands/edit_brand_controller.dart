@@ -108,7 +108,7 @@ class EditBrandController extends GetxController {
       FullScreenLoader.stopLoadingDialog();
       AppLoaders.successSnackBar(
         title: 'Congratulations!',
-        message: 'New Record has been added successfully',
+        message: 'Record has been updated successfully',
       );
     } catch (e) {
       FullScreenLoader.stopLoadingDialog();
