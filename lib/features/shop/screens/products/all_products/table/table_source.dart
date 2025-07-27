@@ -10,28 +10,35 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../common/widgets/data_table/app_table_action_buttons.dart';
+import '../../../../controllers/products/products_controller.dart';
 
 class ProductRows extends DataTableSource {
+  final ProductsController controller = ProductsController.instance;
+
   @override
   DataRow? getRow(int index) {
+    final ProductModel product = controller.filteredItems[index];
     return DataRow2(
+      selected: controller.selectedRows[index],
+      onSelectChanged: (value) => controller.selectedRows[index] = value ?? false,
+      onTap: () => Get.toNamed(Routes.editProduct, arguments: product),
       cells: [
         DataCell(
           Row(
             children: [
-              const AppRoundedImage(
+              AppRoundedImage(
                 width: 50,
                 height: 50,
                 padding: AppSizes.xs,
-                image: AppImages.acerLogo,
-                imageType: ImageType.asset,
+                image: product.thumbnail,
+                imageType: ImageType.network,
                 borderRadius: AppSizes.borderRadiusMd,
                 backgroundColor: AppColors.primaryBackground,
               ),
               const SizedBox(width: AppSizes.spaceBtwItems),
               Flexible(
                 child: Text(
-                  'Product Title',
+                  product.title,
                   style: Theme.of(
                     Get.context!,
                   ).textTheme.bodyLarge!.apply(color: AppColors.primary),
@@ -41,23 +48,24 @@ class ProductRows extends DataTableSource {
             ],
           ),
         ),
-        const DataCell(Text('256')),
+        DataCell(Text(controller.getProductStockTotal(product))),
+        DataCell(Text(controller.getProductSoldQuantity(product))),
         DataCell(
           Row(
             children: [
-              const AppRoundedImage(
+              AppRoundedImage(
                 width: 35,
                 height: 35,
                 padding: AppSizes.xs,
-                image: AppImages.acerLogo,
-                imageType: ImageType.asset,
+                image: product.brand?.image != null ? product.brand!.image : AppImages.defaultImage,
+                imageType: product.brand?.image != null ? ImageType.network : ImageType.asset,
                 borderRadius: AppSizes.borderRadiusMd,
                 backgroundColor: AppColors.primaryBackground,
               ),
               const SizedBox(width: AppSizes.spaceBtwItems),
               Flexible(
                 child: Text(
-                  'Nike',
+                  product.brand?.name ?? '',
                   style: Theme.of(
                     Get.context!,
                   ).textTheme.bodyLarge!.apply(color: AppColors.primary),
@@ -67,12 +75,12 @@ class ProductRows extends DataTableSource {
             ],
           ),
         ),
-        const DataCell(Text('\$99.9')),
-        DataCell(Text(DateTime.now().toString())),
+        DataCell(Text('\$${controller.getProductPrice(product)}')),
+        DataCell(Text(product.formatedDate)),
         DataCell(
           AppTableActionButtons(
             onEditPressed: () => Get.toNamed(Routes.editProduct, arguments: ProductModel.empty()),
-            onDeletePressed: () {},
+            onDeletePressed: () => controller.confirmAndDeleteItem(product),
           ),
         ),
       ],
@@ -83,8 +91,8 @@ class ProductRows extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => 100;
+  int get rowCount => controller.filteredItems.length;
 
   @override
-  int get selectedRowCount => 0;
+  int get selectedRowCount => controller.selectedRows.where((selected) => selected).length;
 }
