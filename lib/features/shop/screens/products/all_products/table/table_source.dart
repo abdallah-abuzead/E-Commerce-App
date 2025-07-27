@@ -71,7 +71,7 @@ class ProductRows extends DataTableSource {
         DataCell(Text(DateTime.now().toString())),
         DataCell(
           AppTableActionButtons(
-            onEditPressed: () => Get.toNamed(Routes.editProduct, arguments: ProductModel()),
+            onEditPressed: () => Get.toNamed(Routes.editProduct, arguments: ProductModel.empty()),
             onDeletePressed: () {},
           ),
         ),

@@ -2,7 +2,7 @@ import 'package:ecommerce_admin_panel/features/shop/models/banner_model.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/abstract/app_base_controller.dart';
-import '../../../../data/repositories/banners_repository/banners_repository.dart';
+import '../../../../data/repositories/banners/banners_repository.dart';
 
 class BannersController extends AppBaseController<BannerModel> {
   static BannersController get instance => Get.find<BannersController>();

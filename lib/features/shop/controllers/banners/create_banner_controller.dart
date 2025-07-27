@@ -4,7 +4,7 @@ import 'package:ecommerce_admin_panel/utils/helpers/network_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../../data/repositories/banners_repository/banners_repository.dart';
+import '../../../../data/repositories/banners/banners_repository.dart';
 import '../../../../utils/popups/app_loaders.dart';
 import '../../../../utils/popups/full_screen_loader.dart';
 import '../../../media/models/image_model.dart';
