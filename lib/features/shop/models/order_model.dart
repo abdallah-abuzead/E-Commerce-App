@@ -42,19 +42,57 @@ class OrderModel {
 
   String get formatedDeliveryDate => HelperFunctions.getFormatedDate(deliveryDate!);
 
+  String get orderStatusText => status == OrderStatus.delivered
+      ? 'Delivered'
+      : status == OrderStatus.shipped
+      ? 'Shipment on the way'
+      : 'Processing';
+
   Map<String, dynamic> toJson() {
-    return {'status': status, 'totalAmount': totalAmount, 'items': items, 'orderDate': orderDate};
+    return {
+      'id': id,
+      'userId': userId,
+      'status': status.name,
+      'totalAmount': totalAmount,
+      'shippingCost': shippingCost,
+      'taxCost': taxCost,
+      'orderDate': orderDate,
+      'paymentMethod': paymentMethod,
+      'billingAddress': billingAddress?.toJson(),
+      'shippingAddress': shippingAddress?.toJson(),
+      'deliveryDate': deliveryDate,
+      'billingAddressSameAsShipping': billingAddressSameAsShipping,
+      'items': items.map((item) => item.toJson()).toList(),
+    };
   }
 
-  factory OrderModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
-    if (document.data() != null) {
-      final Map<String, dynamic> data = document.data()!;
+  factory OrderModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    if (snapshot.data() != null) {
+      final Map<String, dynamic> data = snapshot.data()!;
       return OrderModel(
-        id: document.id,
-        status: data['status'] ?? '',
+        docId: snapshot.id,
+        id: data['id'] ?? '',
+        userId: data['userId'] ?? '',
+        status: data['status'] == null
+            ? OrderStatus.pending
+            : OrderStatus.values.firstWhere((e) => e.name == data['status']),
         totalAmount: data['totalAmount'] ?? 0,
-        items: data['items'] ?? [],
-        orderDate: data['orderDate']?.toDate(),
+        shippingCost: data['shippingCost'] ?? 0,
+        taxCost: data['taxCost'] ?? 0,
+        orderDate: data['orderDate']?.toDate() ?? DateTime.now(),
+        paymentMethod: data['paymentMethod'] ?? '',
+        billingAddressSameAsShipping: data['billingAddressSameAsShipping'] ?? true,
+        billingAddress: data['billingAddress'] == null
+            ? AddressModel.empty()
+            : AddressModel.fromMap(data['billingAddress']),
+        shippingAddress: data['shippingAddress'] == null
+            ? AddressModel.empty()
+            : AddressModel.fromMap(data['shippingAddress']),
+        deliveryDate: data['deliveryDate']?.toDate(),
+
+        items: data['items'] == null
+            ? []
+            : (data['items'] as List).map((item) => CartItemModel.fromJson(item)).toList(),
       );
     } else {
       return OrderModel.empty();

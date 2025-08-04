@@ -1,42 +1,54 @@
 class CartItemModel {
-  final String? id;
+  final String productId;
   final String title;
-  final String description;
   final double price;
-  final double quantity;
-  final double totalAmount;
   final String? image;
-  final Map<String, dynamic>? selectedVariations;
+  final int quantity;
+  final String variationId;
+  final String? brandName;
+  final Map<String, String>? selectedVariation;
 
   CartItemModel({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.price,
+    required this.productId,
     required this.quantity,
-    this.totalAmount = 0,
+    this.variationId = '',
     this.image,
-    this.selectedVariations,
+    this.price = 0,
+    this.title = '',
+    this.brandName,
+    this.selectedVariation,
   });
 
-  factory CartItemModel.fromJson(Map<String, dynamic> json) {
-    return CartItemModel(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      price: json['price'],
-      quantity: json['quantity'],
-      image: json['imageUrl'],
-    );
-  }
+  /// calculate total amount
+  String get totalAmount => (price * quantity).toStringAsFixed(1);
 
   Map<String, dynamic> toJson() {
     return {
+      'productId': productId,
       'title': title,
-      'description': description,
       'price': price,
+      'image': image,
       'quantity': quantity,
-      'imageUrl': image,
+      'description': variationId,
+      'brandName': brandName,
+      'selectedVariation': selectedVariation,
     };
   }
+
+  factory CartItemModel.fromJson(Map<String, dynamic> json) {
+    return CartItemModel(
+      productId: json['productId'],
+      title: json['title'],
+      price: json['price']?.toDouble(),
+      image: json['image'],
+      quantity: json['quantity'],
+      variationId: json['variationId'],
+      brandName: json['brandName'],
+      selectedVariation: json['selectedVariation'] != null
+          ? Map<String, String>.from(json['selectedVariation'])
+          : null,
+    );
+  }
+
+  factory CartItemModel.empty() => CartItemModel(productId: '', quantity: 0);
 }

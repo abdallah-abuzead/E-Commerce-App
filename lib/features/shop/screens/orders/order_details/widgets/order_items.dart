@@ -57,9 +57,9 @@ class OrderItems extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
-                              if (item.selectedVariations != null)
+                              if (item.selectedVariation != null)
                                 Text(
-                                  item.selectedVariations!.entries
+                                  item.selectedVariation!.entries
                                       .map((e) => '${e.key}: ${e.value}')
                                       .toString(),
                                 ),
@@ -91,7 +91,7 @@ class OrderItems extends StatelessWidget {
                         ? AppSizes.xl * 1.4
                         : AppSizes.xl * 2,
                     child: Text(
-                      '\$${item.totalAmount}',
+                      '\$${item.brandName}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ),
