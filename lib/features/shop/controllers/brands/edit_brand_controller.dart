@@ -67,13 +67,13 @@ class EditBrandController extends GetxController {
       // Check Internet connection
       final bool isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
-        FullScreenLoader.stopLoadingDialog();
+        FullScreenLoader.stopLoading();
         return;
       }
 
       // Form validation
       if (!formKey.currentState!.validate()) {
-        FullScreenLoader.stopLoadingDialog();
+        FullScreenLoader.stopLoading();
         return;
       }
 
@@ -105,13 +105,13 @@ class EditBrandController extends GetxController {
       resetFields();
 
       // Stop the loader
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.successSnackBar(
         title: 'Congratulations!',
         message: 'Record has been updated successfully',
       );
     } catch (e) {
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }
