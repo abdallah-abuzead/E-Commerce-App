@@ -21,7 +21,8 @@ class ProductsRepository extends GetxController {
       throw AppFirebaseException(e.code).message;
     } on PlatformException catch (e) {
       throw AppPlatformException(e.code).message;
-    } catch (e) {
+    } catch (e, s) {
+      print(s);
       throw ('Something went wrong. Please try again');
     }
   }
@@ -118,6 +119,26 @@ class ProductsRepository extends GetxController {
   Future<void> updateProductSpecificValue(String id, Map<String, dynamic> data) async {
     try {
       await _db.collection('products').doc(id).update(data);
+    } on FirebaseException catch (e) {
+      throw AppFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw AppPlatformException(e.code).message;
+    } catch (e) {
+      throw ('Something went wrong. Please try again');
+    }
+  }
+
+  Future<void> removeProductCategory(String productId, String categoryId) async {
+    try {
+      final result = await _db
+          .collection('productsCategories')
+          .where('productId', isEqualTo: productId)
+          .where('categoryId', isEqualTo: categoryId)
+          .get();
+
+      for (var doc in result.docs) {
+        await doc.reference.delete();
+      }
     } on FirebaseException catch (e) {
       throw AppFirebaseException(e.code).message;
     } on PlatformException catch (e) {
