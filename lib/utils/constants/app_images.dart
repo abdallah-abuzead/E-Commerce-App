@@ -8,6 +8,8 @@ abstract class AppImages {
   static const String defaultVariationsImageIcon = 'assets/images/content/default_image.png';
   static const String defaultSingleImageSelection = 'assets/images/content/default_image.png';
   static const String defaultMultipleImageIcon = 'assets/images/content/default_images_icon.png';
+  static const String productIllustration = 'assets/images/content/default_images_icon.png';
+  static const String creatingProductIllustration = 'assets/images/content/default_images_icon.png';
 
   // User images
   static const String user = 'assets/images/content/avatar.png';

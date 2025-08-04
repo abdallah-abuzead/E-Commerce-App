@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../common/widgets/containers/app_container.dart';
 import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
+import '../../../../controllers/products/product_images_controller.dart';
 import '../../../../models/product_model.dart';
 import '../widgets/product_additional_images.dart';
 import '../widgets/product_attributes.dart';
@@ -25,8 +26,10 @@ class EditProductMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProductImagesController controller = Get.put(ProductImagesController());
+
     return Scaffold(
-      bottomNavigationBar: const ProductBottomNavigationButtons(),
+      bottomNavigationBar: ProductBottomNavigationButtons(product: product),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -46,7 +49,7 @@ class EditProductMobile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Basic Information
-                  const ProductTitleAndDescription(),
+                  ProductTitleAndDescription(product: product),
                   const SizedBox(height: AppSizes.spaceBtwSections),
 
                   // Stock & Pricing
@@ -59,15 +62,15 @@ class EditProductMobile extends StatelessWidget {
                         const SizedBox(height: AppSizes.spaceBtwItems),
 
                         // Product Type
-                        const ProductTypeWidget(),
+                        ProductTypeWidget(product: product),
                         const SizedBox(height: AppSizes.spaceBtwInputFields),
 
                         // Stock
-                        const ProductStockAndPricing(),
+                        ProductStockAndPricing(product: product),
                         const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // Attributes
-                        const ProductAttributes(),
+                        ProductAttributes(product: product),
                         const SizedBox(height: AppSizes.spaceBtwSections),
                       ],
                     ),
@@ -75,11 +78,11 @@ class EditProductMobile extends StatelessWidget {
                   const SizedBox(height: AppSizes.spaceBtwSections),
 
                   // Variations
-                  const ProductVariations(),
+                  ProductVariations(product: product),
                   const SizedBox(width: AppSizes.defaultSpace),
 
                   // Product Thumbnail
-                  const ProductThumbnailImage(),
+                  ProductThumbnailImage(product: product),
                   const SizedBox(height: AppSizes.spaceBtwSections),
 
                   // Product Images
@@ -93,9 +96,10 @@ class EditProductMobile extends StatelessWidget {
                         ),
                         const SizedBox(height: AppSizes.spaceBtwItems),
                         ProductAdditionalImages(
-                          additionalProductImagesURLs: RxList<String>.empty(),
-                          onTapToAddImages: () {},
-                          onTapToRemoveImages: (index) {},
+                          product: product,
+                          additionalProductImagesURLs: controller.additionalProductImagesUrls,
+                          onTapToAddImages: () => controller.selectMultipleProductImages(),
+                          onTapToRemoveImages: (index) => controller.removeImage(index),
                         ),
                       ],
                     ),
@@ -103,15 +107,15 @@ class EditProductMobile extends StatelessWidget {
                   const SizedBox(height: AppSizes.spaceBtwSections),
 
                   // Product Brand
-                  const ProductBrand(),
+                  ProductBrand(product: product),
                   const SizedBox(height: AppSizes.spaceBtwSections),
 
                   // Product Categories
-                  const ProductCategories(),
+                  ProductCategories(product: product),
                   const SizedBox(height: AppSizes.spaceBtwSections),
 
                   // Product Visibility
-                  const ProductVisibilityWidget(),
+                  ProductVisibilityWidget(product: product),
                   const SizedBox(height: AppSizes.spaceBtwSections),
                 ],
               ),

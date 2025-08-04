@@ -1,9 +1,4 @@
 import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
-import 'package:ecommerce_admin_panel/features/shop/screens/products/create_product/widgets/product_additional_images.dart';
-import 'package:ecommerce_admin_panel/features/shop/screens/products/create_product/widgets/product_brand.dart';
-import 'package:ecommerce_admin_panel/features/shop/screens/products/create_product/widgets/product_categories.dart';
-import 'package:ecommerce_admin_panel/features/shop/screens/products/create_product/widgets/product_thumbnail_image.dart';
-import 'package:ecommerce_admin_panel/features/shop/screens/products/create_product/widgets/product_visibility_widget.dart';
 import 'package:ecommerce_admin_panel/utils/device/device_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,13 +6,19 @@ import 'package:get/get.dart';
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
+import '../../../../controllers/products/product_images_controller.dart';
 import '../../../../models/product_model.dart';
+import '../widgets/product_additional_images.dart';
 import '../widgets/product_attributes.dart';
 import '../widgets/product_bottom_navigation_buttons.dart';
+import '../widgets/product_brand.dart';
+import '../widgets/product_categories.dart';
 import '../widgets/product_stock_and_pricing.dart';
+import '../widgets/product_thumbnail_image.dart';
 import '../widgets/product_title_and_description.dart';
 import '../widgets/product_type_widget.dart';
 import '../widgets/product_variations.dart';
+import '../widgets/product_visibility_widget.dart';
 
 class EditProductDesktop extends StatelessWidget {
   const EditProductDesktop({super.key, required this.product});
@@ -26,8 +27,10 @@ class EditProductDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProductImagesController controller = Get.put(ProductImagesController());
+
     return Scaffold(
-      bottomNavigationBar: const ProductBottomNavigationButtons(),
+      bottomNavigationBar: ProductBottomNavigationButtons(product: product),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -52,7 +55,7 @@ class EditProductDesktop extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Basic Information
-                        const ProductTitleAndDescription(),
+                        ProductTitleAndDescription(product: product),
                         const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // Stock & Pricing
@@ -68,15 +71,15 @@ class EditProductDesktop extends StatelessWidget {
                               const SizedBox(height: AppSizes.spaceBtwItems),
 
                               // Product Type
-                              const ProductTypeWidget(),
+                              ProductTypeWidget(product: product),
                               const SizedBox(height: AppSizes.spaceBtwInputFields),
 
                               // Stock
-                              const ProductStockAndPricing(),
+                              ProductStockAndPricing(product: product),
                               const SizedBox(height: AppSizes.spaceBtwSections),
 
                               // Attributes
-                              const ProductAttributes(),
+                              ProductAttributes(product: product),
                               const SizedBox(height: AppSizes.spaceBtwSections),
                             ],
                           ),
@@ -84,7 +87,7 @@ class EditProductDesktop extends StatelessWidget {
                         const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // Variations
-                        const ProductVariations(),
+                        ProductVariations(product: product),
                       ],
                     ),
                   ),
@@ -95,7 +98,7 @@ class EditProductDesktop extends StatelessWidget {
                     child: Column(
                       children: [
                         // Product Thumbnail
-                        const ProductThumbnailImage(),
+                        ProductThumbnailImage(product: product),
                         const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // Product Images
@@ -109,9 +112,10 @@ class EditProductDesktop extends StatelessWidget {
                               ),
                               const SizedBox(height: AppSizes.spaceBtwItems),
                               ProductAdditionalImages(
-                                additionalProductImagesURLs: RxList<String>.empty(),
-                                onTapToAddImages: () {},
-                                onTapToRemoveImages: (index) {},
+                                product: product,
+                                additionalProductImagesURLs: controller.additionalProductImagesUrls,
+                                onTapToAddImages: () => controller.selectMultipleProductImages(),
+                                onTapToRemoveImages: (index) => controller.removeImage(index),
                               ),
                             ],
                           ),
@@ -119,15 +123,15 @@ class EditProductDesktop extends StatelessWidget {
                         const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // Product Brand
-                        const ProductBrand(),
+                        ProductBrand(product: product),
                         const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // Product Categories
-                        const ProductCategories(),
+                        ProductCategories(product: product),
                         const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // Product Visibility
-                        const ProductVisibilityWidget(),
+                        ProductVisibilityWidget(product: product),
                         const SizedBox(height: AppSizes.spaceBtwSections),
                       ],
                     ),

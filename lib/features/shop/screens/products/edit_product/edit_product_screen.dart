@@ -4,12 +4,16 @@ import 'package:ecommerce_admin_panel/features/shop/screens/products/edit_produc
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/products/edit_product_controller.dart';
+
 class EditProductScreen extends StatelessWidget {
   const EditProductScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final product = Get.arguments;
+    final controller = Get.put(EditProductController());
+    controller.initProductData(product);
     return SiteLayoutTemplate(
       desktop: EditProductDesktop(product: product),
       mobile: EditProductMobile(product: product),
