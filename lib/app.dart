@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:ecommerce_admin_panel/routes/app_route.dart';
 import 'package:ecommerce_admin_panel/routes/app_route_observer.dart';
 import 'package:ecommerce_admin_panel/routes/routes.dart';
@@ -15,6 +17,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: AppBindings(),
+      // for scrolling on web horizontally
+      scrollBehavior: const MaterialScrollBehavior().copyWith(
+        dragDevices: {PointerDeviceKind.mouse},
+      ),
       debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
       themeMode: ThemeMode.light,
