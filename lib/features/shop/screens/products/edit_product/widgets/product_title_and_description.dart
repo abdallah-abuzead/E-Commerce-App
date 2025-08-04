@@ -3,13 +3,21 @@ import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:ecommerce_admin_panel/utils/validators/validator.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../controllers/products/edit_product_controller.dart';
+import '../../../../models/product_model.dart';
+
 class ProductTitleAndDescription extends StatelessWidget {
-  const ProductTitleAndDescription({super.key});
+  const ProductTitleAndDescription({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final EditProductController controller = EditProductController.instance;
+
     return AppContainer(
       child: Form(
+        key: controller.titleDescriptionFormKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -19,6 +27,7 @@ class ProductTitleAndDescription extends StatelessWidget {
 
             // Product title input field
             TextFormField(
+              controller: controller.title,
               validator: (value) => Validator.validateEmptyText('Product Title', value),
               decoration: const InputDecoration(labelText: 'Product Title'),
             ),
@@ -28,6 +37,7 @@ class ProductTitleAndDescription extends StatelessWidget {
             SizedBox(
               height: 300,
               child: TextFormField(
+                controller: controller.description,
                 expands: true,
                 maxLines: null,
                 textAlign: TextAlign.start,

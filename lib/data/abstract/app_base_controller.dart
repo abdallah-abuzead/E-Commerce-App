@@ -120,7 +120,7 @@ abstract class AppBaseController<T> extends GetxController {
   Future<void> deleteOnConfirm(T item) async {
     try {
       // Remove the confirmation dialog
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
 
       // Start the loader
       FullScreenLoader.popUpCircular();
@@ -132,13 +132,13 @@ abstract class AppBaseController<T> extends GetxController {
       removeItemFromLists(item);
 
       // Stop the loader
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.successSnackBar(
         title: 'Item Deleted',
         message: 'Your item has been deleted successfully',
       );
     } catch (e) {
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }

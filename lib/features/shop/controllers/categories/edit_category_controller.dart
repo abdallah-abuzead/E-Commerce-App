@@ -40,13 +40,13 @@ class EditCategoryController extends GetxController {
       // Check Internet connection
       final bool isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
-        FullScreenLoader.stopLoadingDialog();
+        FullScreenLoader.stopLoading();
         return;
       }
 
       // Form validation
       if (!formKey.currentState!.validate()) {
-        FullScreenLoader.stopLoadingDialog();
+        FullScreenLoader.stopLoading();
         return;
       }
 
@@ -63,13 +63,13 @@ class EditCategoryController extends GetxController {
       resetFields();
 
       // Stop the loader
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.successSnackBar(
         title: 'Congratulations!',
         message: 'Item has been updated successfully',
       );
     } catch (e) {
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }

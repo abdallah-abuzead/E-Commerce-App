@@ -86,7 +86,7 @@ class ProductModel {
         categoryId: data['categoryId'] ?? '',
         description: data['description'] ?? '',
         productType: data['productType'] ?? '',
-        brand: BrandModel.fromJson(data['date']),
+        brand: BrandModel.fromJson(data['brand']),
         images: List<String>.from(data['images'] ?? []),
         productAttributes: (data['productAttributes'] as List)
             .map((e) => ProductAttributeModel.fromJson(e))

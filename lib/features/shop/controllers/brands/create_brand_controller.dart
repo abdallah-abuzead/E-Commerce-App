@@ -39,13 +39,13 @@ class CreateBrandController extends GetxController {
       // Check Internet connection
       final bool isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
-        FullScreenLoader.stopLoadingDialog();
+        FullScreenLoader.stopLoading();
         return;
       }
 
       // Form validation
       if (!formKey.currentState!.validate()) {
-        FullScreenLoader.stopLoadingDialog();
+        FullScreenLoader.stopLoading();
         return;
       }
 
@@ -82,13 +82,13 @@ class CreateBrandController extends GetxController {
       resetFields();
 
       // Stop the loader
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.successSnackBar(
         title: 'Congratulations!',
         message: 'New Record has been added successfully',
       );
     } catch (e) {
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }
