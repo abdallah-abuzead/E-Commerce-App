@@ -39,7 +39,7 @@ class FullScreenLoader {
     );
   }
 
-  static void stopLoadingDialog() {
+  static void stopLoading() {
     Navigator.of(Get.overlayContext!).pop();
   }
 }

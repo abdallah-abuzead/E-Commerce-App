@@ -189,9 +189,9 @@ class MediaController extends GetxController {
         selectedImagesToUpload.removeAt(i);
         targetList.add(uploadedImage);
       }
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
     } catch (e) {
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.warningSnackBar(
         title: 'Error Uploading Images',
         message: 'Something went wrong while uploading your images.',
@@ -243,9 +243,9 @@ class MediaController extends GetxController {
         selectedImagesToUpload.removeAt(i);
         targetList.add(uploadedImage);
       }
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
     } catch (e) {
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.warningSnackBar(
         title: 'Error Uploading Images',
         message: 'Something went wrong while uploading your images.',
@@ -349,13 +349,13 @@ class MediaController extends GetxController {
       targetList.remove(image);
       update();
 
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.successSnackBar(
         title: 'Image Deleted',
         message: 'Image has been deleted successfully.',
       );
     } catch (e) {
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }

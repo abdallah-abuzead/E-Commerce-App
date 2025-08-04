@@ -37,12 +37,12 @@ class LoginController extends GetxController {
       FullScreenLoader.openLoadingDialog('Logging you in ...', AppImages.docerAnimation);
       final bool isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
-        FullScreenLoader.stopLoadingDialog();
+        FullScreenLoader.stopLoading();
         return;
       }
 
       if (!loginFormKey.currentState!.validate()) {
-        FullScreenLoader.stopLoadingDialog();
+        FullScreenLoader.stopLoading();
         return;
       }
 
@@ -59,7 +59,7 @@ class LoginController extends GetxController {
       // fetch the user from Firestore and assign it to user controller
       final UserModel user = await UserController.instance.fetchUserDetails();
 
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
 
       if (user.role != AppRole.admin) {
         await AuthRepository.instance.logout();
@@ -73,7 +73,7 @@ class LoginController extends GetxController {
         AuthRepository.instance.screenRedirect();
       }
     } catch (e) {
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     }
   }
@@ -84,7 +84,7 @@ class LoginController extends GetxController {
 
       final bool isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
-        FullScreenLoader.stopLoadingDialog();
+        FullScreenLoader.stopLoading();
         return;
       }
 
@@ -110,11 +110,11 @@ class LoginController extends GetxController {
         ),
       );
 
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
 
       AuthRepository.instance.screenRedirect();
     } catch (e) {
-      FullScreenLoader.stopLoadingDialog();
+      FullScreenLoader.stopLoading();
       AppLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     }
   }
