@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../common/widgets/containers/app_container.dart';
 import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
+import '../../../../controllers/products/product_images_controller.dart';
 import '../widgets/product_additional_images.dart';
 import '../widgets/product_attributes.dart';
 import '../widgets/product_bottom_navigation_buttons.dart';
@@ -22,6 +23,8 @@ class CreateProductMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProductImagesController controller = Get.put(ProductImagesController());
+
     return Scaffold(
       bottomNavigationBar: const ProductBottomNavigationButtons(),
       body: SingleChildScrollView(
@@ -90,9 +93,9 @@ class CreateProductMobile extends StatelessWidget {
                         ),
                         const SizedBox(height: AppSizes.spaceBtwItems),
                         ProductAdditionalImages(
-                          additionalProductImagesURLs: RxList<String>.empty(),
-                          onTapToAddImages: () {},
-                          onTapToRemoveImages: (index) {},
+                          additionalProductImagesURLs: controller.additionalProductImagesUrls,
+                          onTapToAddImages: () => controller.selectMultipleProductImages(),
+                          onTapToRemoveImages: (index) => controller.removeImage(index),
                         ),
                       ],
                     ),

@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/features/media/controllers/media_controller.dart';
 import 'package:ecommerce_admin_panel/features/media/models/image_model.dart';
+import 'package:ecommerce_admin_panel/features/shop/models/product_variation_model.dart';
 import 'package:get/get.dart';
 
 class ProductImagesController extends GetxController {
@@ -36,5 +37,15 @@ class ProductImagesController extends GetxController {
   /// Function to Remove Product Image
   Future<void> removeImage(int index) async {
     additionalProductImagesUrls.removeAt(index);
+  }
+
+  /// Pick Variation Image from Media
+  Future<void> selectVariationImage(ProductVariationModel variation) async {
+    final controller = Get.put(MediaController());
+    final List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
+    if (selectedImages != null && selectedImages.isNotEmpty) {
+      final ImageModel selectedImage = selectedImages.first;
+      variation.image.value = selectedImage.url;
+    }
   }
 }

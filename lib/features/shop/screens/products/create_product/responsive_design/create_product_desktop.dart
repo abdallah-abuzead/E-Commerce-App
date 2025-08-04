@@ -1,4 +1,5 @@
 import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
+import 'package:ecommerce_admin_panel/features/shop/controllers/products/product_images_controller.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/products/create_product/widgets/product_additional_images.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/products/create_product/widgets/product_brand.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/products/create_product/widgets/product_categories.dart';
@@ -11,8 +12,8 @@ import 'package:get/get.dart';
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
-import '../../edit_product/widgets/product_bottom_navigation_buttons.dart';
 import '../widgets/product_attributes.dart';
+import '../widgets/product_bottom_navigation_buttons.dart';
 import '../widgets/product_stock_and_pricing.dart';
 import '../widgets/product_title_and_description.dart';
 import '../widgets/product_type_widget.dart';
@@ -23,6 +24,7 @@ class CreateProductDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProductImagesController controller = Get.put(ProductImagesController());
     return Scaffold(
       bottomNavigationBar: const ProductBottomNavigationButtons(),
       body: SingleChildScrollView(
@@ -106,9 +108,9 @@ class CreateProductDesktop extends StatelessWidget {
                               ),
                               const SizedBox(height: AppSizes.spaceBtwItems),
                               ProductAdditionalImages(
-                                additionalProductImagesURLs: RxList<String>.empty(),
-                                onTapToAddImages: () {},
-                                onTapToRemoveImages: (index) {},
+                                additionalProductImagesURLs: controller.additionalProductImagesUrls,
+                                onTapToAddImages: () => controller.selectMultipleProductImages(),
+                                onTapToRemoveImages: (index) => controller.removeImage(index),
                               ),
                             ],
                           ),
