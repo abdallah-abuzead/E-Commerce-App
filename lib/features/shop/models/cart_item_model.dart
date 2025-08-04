@@ -1,4 +1,4 @@
-class ItemModel {
+class CartItemModel {
   final String? id;
   final String title;
   final String description;
@@ -8,7 +8,7 @@ class ItemModel {
   final String? image;
   final Map<String, dynamic>? selectedVariations;
 
-  ItemModel({
+  CartItemModel({
     required this.id,
     required this.title,
     required this.description,
@@ -19,8 +19,8 @@ class ItemModel {
     this.selectedVariations,
   });
 
-  factory ItemModel.fromJson(Map<String, dynamic> json) {
-    return ItemModel(
+  factory CartItemModel.fromJson(Map<String, dynamic> json) {
+    return CartItemModel(
       id: json['id'],
       title: json['title'],
       description: json['description'],
