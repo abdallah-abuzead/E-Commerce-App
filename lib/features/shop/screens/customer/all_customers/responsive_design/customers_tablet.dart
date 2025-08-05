@@ -1,6 +1,9 @@
+import 'package:ecommerce_admin_panel/common/widgets/loaders/app_loader_animation.dart';
+import 'package:ecommerce_admin_panel/features/shop/controllers/customers/customers_controller.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/customer/all_customers/table/customers_table.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../common/widgets/containers/app_container.dart';
@@ -12,26 +15,36 @@ class CustomersTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    final controller = Get.put(CustomersController());
+
+    return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all(AppSizes.defaultSpace),
+        padding: const EdgeInsets.all(AppSizes.defaultSpace),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Breadcrumbs
-            BreadcrumbWithHeading(heading: 'Customers', breadcrumbItems: ['Customers']),
-            SizedBox(height: AppSizes.spaceBtwSections),
+            const BreadcrumbWithHeading(heading: 'Customers', breadcrumbItems: ['Customers']),
+            const SizedBox(height: AppSizes.spaceBtwSections),
 
             // Table Body
             AppContainer(
               child: Column(
                 children: [
                   // Table Header
-                  AppTableHeader(showLeftWidget: false),
-                  SizedBox(height: AppSizes.spaceBtwItems),
+                  AppTableHeader(
+                    showLeftWidget: false,
+                    searchController: controller.searchTextController,
+                    searchOnChange: (query) => controller.searchQuery(query),
+                  ),
+                  const SizedBox(height: AppSizes.spaceBtwItems),
 
                   // Table
-                  CustomersTable(),
+                  Obx(
+                    () => controller.isLoading.value
+                        ? const AppLoaderAnimation()
+                        : const CustomersTable(),
+                  ),
                 ],
               ),
             ),

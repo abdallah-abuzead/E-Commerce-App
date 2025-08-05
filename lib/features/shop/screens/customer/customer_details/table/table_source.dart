@@ -3,29 +3,28 @@ import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.da
 import 'package:ecommerce_admin_panel/features/shop/models/order_model.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
-import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
 import 'package:ecommerce_admin_panel/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../routes/routes.dart';
+import '../../../../controllers/customers/customer_details_controller.dart';
 
 class CustomerOrdersRows extends DataTableSource {
+  final controller = CustomerDetailsController.instance;
+
   @override
   DataRow? getRow(int index) {
-    final OrderModel order = OrderModel(
-      id: 'id',
-      status: OrderStatus.shipped,
-      totalAmount: 235.5,
-      orderDate: DateTime.now(),
-      items: [],
-      shippingCost: 0,
-      taxCost: 0,
+    final OrderModel order = controller.filteredCustomerOrders[index];
+    final totalAmount = order.items.fold(
+      0.0,
+      (previousValue, element) => previousValue + element.price,
     );
-    const String totalAmount = '2563.5';
     return DataRow2(
-      selected: false,
-      onTap: () => Get.toNamed(Routes.orderDetails, arguments: order),
+      selected: controller.selectedRows[index],
+      onSelectChanged: (value) => controller.selectedRows[index] = value ?? false,
+      onTap: () =>
+          Get.toNamed(Routes.orderDetails, arguments: order, parameters: {'orderId': order.docId}),
       cells: [
         DataCell(
           Text(
@@ -34,7 +33,7 @@ class CustomerOrdersRows extends DataTableSource {
           ),
         ),
         DataCell(Text(order.formatedOrderDate)),
-        const DataCell(Text('${5} Items')),
+        DataCell(Text('${order.items.length} Items')),
         DataCell(
           AppContainer(
             height: AppSizes.xl,
@@ -47,7 +46,7 @@ class CustomerOrdersRows extends DataTableSource {
             ),
           ),
         ),
-        const DataCell(Text('\$$totalAmount')),
+        DataCell(Text('\$$totalAmount')),
       ],
     );
   }
@@ -56,8 +55,8 @@ class CustomerOrdersRows extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => 5;
+  int get rowCount => controller.filteredCustomerOrders.length;
 
   @override
-  int get selectedRowCount => 0;
+  int get selectedRowCount => controller.selectedRows.where((selected) => selected).length;
 }

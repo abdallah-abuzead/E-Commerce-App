@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_admin_panel/features/shop/models/address_model.dart';
+import 'package:ecommerce_admin_panel/features/shop/models/order_model.dart';
 
 import '../../../utils/constants/enums.dart';
 import '../../../utils/formatters/app_formatter.dart';
@@ -14,6 +16,8 @@ class UserModel {
   final AppRole role;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  List<OrderModel>? orders;
+  List<AddressModel>? addresses;
 
   UserModel({
     this.id,
@@ -26,7 +30,21 @@ class UserModel {
     this.role = AppRole.user,
     this.createdAt,
     this.updatedAt,
+    // this.orders,
+    // this.addresses,
   });
+
+  // static method to create an empty user model
+  static UserModel empty() => UserModel(email: '');
+
+  /// Helper methods
+  String get fullName => '$firstName $lastName'.trim();
+
+  String get formatedCreatedDate => AppFormatter.formatDate(createdAt);
+
+  String get formatedUpdatedDate => AppFormatter.formatDate(updatedAt);
+
+  String get formatedPhoneNo => AppFormatter.formatPhoneNumber(phoneNumber);
 
   Map<String, dynamic> toJson() {
     return {
@@ -42,21 +60,7 @@ class UserModel {
     };
   }
 
-  // static method to create an empty user model
-  static UserModel empty() => UserModel(email: '');
-
-  /// Helper methods
-  String get fullName => '$firstName $lastName'.trim();
-
-  String get formatedCreatedDate => AppFormatter.formatDate(createdAt);
-
-  String get formatedUpdatedDate => AppFormatter.formatDate(updatedAt);
-
-  String get formatedPhoneNo => AppFormatter.formatPhoneNumber(phoneNumber);
-
-  factory UserModel.fromSnapshot(
-    DocumentSnapshot<Map<String, dynamic>> document,
-  ) {
+  factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final Map<String, dynamic> data = document.data()!;
       return UserModel(
