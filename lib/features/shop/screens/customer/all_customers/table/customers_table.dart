@@ -1,24 +1,37 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/customer/all_customers/table/table_source.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../common/widgets/data_table/paginated_data_table.dart';
+import '../../../../controllers/customers/customers_controller.dart';
 
 class CustomersTable extends StatelessWidget {
   const CustomersTable({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AppPaginatedDataTable(
-      minWidth: 700,
-      columns: const [
-        DataColumn2(label: Text('Customer')),
-        DataColumn2(label: Text('Email')),
-        DataColumn2(label: Text('Phone Number')),
-        DataColumn2(label: Text('Registered')),
-        DataColumn2(label: Text('Action'), fixedWidth: 100),
-      ],
-      source: CustomersRows(),
-    );
+    final controller = Get.put(CustomersController());
+
+    return Obx(() {
+      Text(controller.filteredItems.length.toString());
+      Text(controller.selectedRows.length.toString());
+      return AppPaginatedDataTable(
+        minWidth: 700,
+        sortAscending: controller.sortAscending.value,
+        sortColumnIndex: controller.sortColumnIndex.value,
+        columns: [
+          DataColumn2(
+            label: const Text('Customer'),
+            onSort: (columnIndex, ascending) => controller.sortByName(columnIndex, ascending),
+          ),
+          const DataColumn2(label: Text('Email')),
+          const DataColumn2(label: Text('Phone Number')),
+          const DataColumn2(label: Text('Registered')),
+          const DataColumn2(label: Text('Action'), fixedWidth: 100),
+        ],
+        source: CustomersRows(),
+      );
+    });
   }
 }
