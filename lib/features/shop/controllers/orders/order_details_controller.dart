@@ -12,8 +12,7 @@ class OrderDetailsController extends GetxController {
   Rx<OrderModel> order = OrderModel.empty().obs;
   Rx<UserModel> customer = UserModel.empty().obs;
 
-  ///--- Load customer orders
-
+  ///--- Load current order customer
   Future<void> getCustomerOfCurrentOrder() async {
     try {
       loading.value = true;
