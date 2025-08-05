@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_admin_panel/utils/helpers/helper_functions.dart';
 
 import '../../../utils/constants/enums.dart';
-import 'address_model.dart';
+import '../../personalization/models/address_model.dart';
 import 'cart_item_model.dart';
 
 class OrderModel {

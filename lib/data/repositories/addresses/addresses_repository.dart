@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../features/shop/models/address_model.dart';
+import '../../../features/personalization/models/address_model.dart';
 import '../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../utils/exceptions/firebase_exceprions.dart';
 import '../../../utils/exceptions/format_exeptions.dart';
