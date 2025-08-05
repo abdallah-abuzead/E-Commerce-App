@@ -34,7 +34,7 @@ class OrderDetailsDesktop extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Lest Side Order Information
+                // Left Side Order Information
                 Expanded(
                   flex: 2,
                   child: Column(
