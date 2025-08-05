@@ -26,11 +26,13 @@ class CustomerInfo extends StatelessWidget {
           // Personal Information Card
           Row(
             children: [
-              const AppRoundedImage(
+              AppRoundedImage(
                 padding: 0,
                 backgroundColor: AppColors.primaryBackground,
-                image: AppImages.user,
-                imageType: ImageType.asset,
+                image: customer.profilePicture.isNotEmpty
+                    ? customer.profilePicture
+                    : AppImages.user,
+                imageType: customer.profilePicture.isNotEmpty ? ImageType.network : ImageType.asset,
               ),
               const SizedBox(width: AppSizes.spaceBtwItems),
               Expanded(
@@ -39,12 +41,12 @@ class CustomerInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Omar Alaa',
+                      customer.fullName,
                       style: Theme.of(context).textTheme.titleLarge,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                    const Text('support@me.com', overflow: TextOverflow.ellipsis, maxLines: 1),
+                    Text(customer.email, overflow: TextOverflow.ellipsis, maxLines: 1),
                   ],
                 ),
               ),
@@ -58,7 +60,9 @@ class CustomerInfo extends StatelessWidget {
               const SizedBox(width: 120, child: Text('Username')),
               const Text(':'),
               const SizedBox(width: AppSizes.spaceBtwItems / 2),
-              Expanded(child: Text('admin', style: Theme.of(context).textTheme.titleMedium)),
+              Expanded(
+                child: Text(customer.username, style: Theme.of(context).textTheme.titleMedium),
+              ),
             ],
           ),
           const SizedBox(height: AppSizes.spaceBtwItems),
@@ -77,7 +81,10 @@ class CustomerInfo extends StatelessWidget {
               const Text(':'),
               const SizedBox(width: AppSizes.spaceBtwItems / 2),
               Expanded(
-                child: Text('+20-112-336-2002', style: Theme.of(context).textTheme.titleMedium),
+                child: Text(
+                  customer.formatedPhoneNo,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               ),
             ],
           ),

@@ -1,8 +1,10 @@
 import 'package:ecommerce_admin_panel/features/authentication/models/user_model.dart';
+import 'package:ecommerce_admin_panel/features/shop/controllers/customers/customer_details_controller.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/customer/customer_details/widgets/customer_info.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/customer/customer_details/widgets/customer_orders.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/customer/customer_details/widgets/shipping_address.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../routes/routes.dart';
@@ -15,6 +17,8 @@ class CustomerDetailsDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CustomerDetailsController());
+    controller.customer.value = customer;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -22,10 +26,10 @@ class CustomerDetailsDesktop extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Breadcrumbs
-            const BreadcrumbWithHeading(
+            BreadcrumbWithHeading(
               returnToPreviousScreen: true,
-              heading: 'Omar Alaa',
-              breadcrumbItems: [Routes.customers, 'Details'],
+              heading: customer.fullName,
+              breadcrumbItems: const [Routes.customers, 'Details'],
             ),
             const SizedBox(height: AppSizes.spaceBtwSections),
 
