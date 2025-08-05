@@ -3,7 +3,6 @@ import 'package:ecommerce_admin_panel/common/widgets/images/app_rounded_image.da
 import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:ecommerce_admin_panel/utils/device/device_utils.dart';
-import 'package:ecommerce_admin_panel/utils/helpers/app_pricing_calculator.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../utils/constants/app_images.dart';
@@ -57,9 +56,9 @@ class OrderItems extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
-                              if (item.selectedVariations != null)
+                              if (item.selectedVariation != null)
                                 Text(
-                                  item.selectedVariations!.entries
+                                  item.selectedVariation!.entries
                                       .map((e) => '${e.key}: ${e.value}')
                                       .toString(),
                                 ),
@@ -128,7 +127,7 @@ class OrderItems extends StatelessWidget {
                   children: [
                     Text('Shipping', style: Theme.of(context).textTheme.titleLarge),
                     Text(
-                      '\$${AppPricingCalculator.calculateShippingCost(subtotal, '')}',
+                      '\$${order.shippingCost.toStringAsFixed(2)}',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
@@ -139,7 +138,7 @@ class OrderItems extends StatelessWidget {
                   children: [
                     Text('Tax', style: Theme.of(context).textTheme.titleLarge),
                     Text(
-                      '\$${AppPricingCalculator.calculateTax(subtotal, '')}',
+                      '\$${order.taxCost.toStringAsFixed(2)}',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
@@ -152,7 +151,7 @@ class OrderItems extends StatelessWidget {
                   children: [
                     Text('Total', style: Theme.of(context).textTheme.titleLarge),
                     Text(
-                      '\$${AppPricingCalculator.calculateTotalPrice(subtotal, '')}',
+                      '\$${order.totalAmount.toStringAsFixed(2)}',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],

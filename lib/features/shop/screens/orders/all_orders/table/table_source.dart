@@ -1,7 +1,6 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
 import 'package:ecommerce_admin_panel/common/widgets/data_table/app_table_action_buttons.dart';
-import 'package:ecommerce_admin_panel/features/shop/controllers/dashboard/dashboard_controller.dart';
 import 'package:ecommerce_admin_panel/features/shop/models/order_model.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
@@ -10,22 +9,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../routes/routes.dart';
+import '../../../../controllers/orders/orders_controller.dart';
 
 class OrdersRows extends DataTableSource {
+  final controller = OrdersController.instance;
+
   @override
   DataRow? getRow(int index) {
-    final OrderModel order = DashboardController.orders[index];
-    // final OrderModel order = OrderModel(
-    //   id: 'id',
-    //   status: OrderStatus.pending,
-    //   totalAmount: 365,
-    //   orderDate: DateTime.now(),
-    //   items: [],
-    // );
+    final OrderModel order = controller.filteredItems[index];
     return DataRow2(
-      onTap: () => Get.toNamed(Routes.orderDetails, arguments: order),
-      selected: false,
-      onSelectChanged: (value) {},
+      onTap: () =>
+          Get.toNamed(Routes.orderDetails, arguments: order, parameters: {'orderId': order.docId}),
+      selected: controller.selectedRows[index],
+      onSelectChanged: (value) => controller.selectedRows[index] = value ?? false,
       cells: [
         DataCell(
           Text(
@@ -56,8 +52,12 @@ class OrdersRows extends DataTableSource {
           AppTableActionButtons(
             view: true,
             edit: false,
-            onViewPressed: () => Get.toNamed(Routes.orderDetails, arguments: order),
-            onDeletePressed: () {},
+            onViewPressed: () => Get.toNamed(
+              Routes.orderDetails,
+              arguments: order,
+              parameters: {'orderId': order.docId},
+            ),
+            onDeletePressed: () => controller.confirmAndDeleteItem(order),
           ),
         ),
       ],
@@ -68,8 +68,8 @@ class OrdersRows extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => DashboardController.orders.length;
+  int get rowCount => controller.filteredItems.length;
 
   @override
-  int get selectedRowCount => 0;
+  int get selectedRowCount => controller.selectedRows.where((selected) => selected).length;
 }

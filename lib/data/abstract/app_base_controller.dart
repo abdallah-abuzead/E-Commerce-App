@@ -75,14 +75,14 @@ abstract class AppBaseController<T> extends GetxController {
   }
 
   /// common method for deleting an item from the lists
-  void removeItemFromLists(T category) {
-    allItems.remove(category);
-    filteredItems.remove(category);
+  void removeItemFromLists(T item) {
+    allItems.remove(item);
+    filteredItems.remove(item);
     selectedRows.assignAll(List.filled(allItems.length, false));
   }
 
   /// common method for confirming deletion and performing the deletion of an item
-  void confirmAndDeleteItem(T category) {
+  void confirmAndDeleteItem(T item) {
     // Show confirmation dialog before deleting
     Get.defaultDialog(
       title: 'Delete Item',
@@ -90,7 +90,7 @@ abstract class AppBaseController<T> extends GetxController {
       confirm: SizedBox(
         width: 60,
         child: ElevatedButton(
-          onPressed: () async => await deleteOnConfirm(category),
+          onPressed: () async => await deleteOnConfirm(item),
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: AppSizes.buttonHeight / 2),
             shape: RoundedRectangleBorder(

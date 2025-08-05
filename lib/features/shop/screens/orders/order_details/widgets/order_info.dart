@@ -6,6 +6,7 @@ import 'package:ecommerce_admin_panel/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../controllers/orders/orders_controller.dart';
 import '../../../../models/order_model.dart';
 
 class OrderInfo extends StatelessWidget {
@@ -15,6 +16,8 @@ class OrderInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OrdersController());
+    controller.orderStatus.value = order.status;
     return AppContainer(
       padding: const EdgeInsets.all(AppSizes.defaultSpace),
       child: Column(
@@ -49,31 +52,42 @@ class OrderInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Status'),
-                    Row(
-                      children: [
-                        AppContainer(
-                          radius: AppSizes.cardRadiusSm,
-                          padding: const EdgeInsets.symmetric(horizontal: AppSizes.sm, vertical: 0),
-                          color: HelperFunctions.getOrderStatusColor(
-                            order.status,
-                          ).withValues(alpha: 0.1),
-                          child: DropdownButton<OrderStatus>(
-                            onChanged: (value) {},
-                            value: OrderStatus.processing,
-                            items: OrderStatus.values.map((status) {
-                              return DropdownMenuItem<OrderStatus>(
-                                value: status,
-                                child: Text(
-                                  status.name.capitalize.toString(),
-                                  style: TextStyle(
-                                    color: HelperFunctions.getOrderStatusColor(status),
+                    Obx(
+                      () => Row(
+                        children: [
+                          AppContainer(
+                            radius: AppSizes.cardRadiusSm,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSizes.sm,
+                              vertical: 0,
+                            ),
+                            color: HelperFunctions.getOrderStatusColor(
+                              controller.orderStatus.value,
+                            ).withValues(alpha: 0.1),
+                            child: DropdownButton<OrderStatus>(
+                              padding: EdgeInsets.zero,
+                              onChanged: (value) {
+                                if (value != null) {
+                                  controller.orderStatus.value = value;
+                                }
+                              },
+
+                              value: controller.orderStatus.value,
+                              items: OrderStatus.values.map((status) {
+                                return DropdownMenuItem<OrderStatus>(
+                                  value: status,
+                                  child: Text(
+                                    status.name.capitalize.toString(),
+                                    style: TextStyle(
+                                      color: HelperFunctions.getOrderStatusColor(status),
+                                    ),
                                   ),
-                                ),
-                              );
-                            }).toList(),
+                                );
+                              }).toList(),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

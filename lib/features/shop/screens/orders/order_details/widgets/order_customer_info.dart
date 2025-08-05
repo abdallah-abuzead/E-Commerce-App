@@ -1,8 +1,10 @@
 import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
 import 'package:ecommerce_admin_panel/common/widgets/images/app_rounded_image.dart';
+import 'package:ecommerce_admin_panel/features/shop/controllers/orders/order_details_controller.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../utils/constants/app_images.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
@@ -15,6 +17,9 @@ class OrderCustomerInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OrderDetailsController());
+    controller.order.value = order;
+    controller.getCustomerOfCurrentOrder();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,31 +32,41 @@ class OrderCustomerInfo extends StatelessWidget {
               Text('Customer', style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: AppSizes.spaceBtwSections),
 
-              Row(
-                children: [
-                  const AppRoundedImage(
-                    padding: 0,
-                    backgroundColor: AppColors.primaryBackground,
-                    imageType: ImageType.asset,
-                    image: AppImages.user,
-                  ),
-                  const SizedBox(width: AppSizes.spaceBtwItems),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Ahmed Ali',
-                          style: Theme.of(context).textTheme.titleLarge,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
-                        const Text('support@me.com', overflow: TextOverflow.ellipsis, maxLines: 1),
-                      ],
+              Obx(
+                () => Row(
+                  children: [
+                    AppRoundedImage(
+                      padding: 0,
+                      backgroundColor: AppColors.primaryBackground,
+                      imageType: controller.customer.value.profilePicture.isNotEmpty
+                          ? ImageType.network
+                          : ImageType.asset,
+                      image: controller.customer.value.profilePicture.isNotEmpty
+                          ? controller.customer.value.profilePicture
+                          : AppImages.user,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: AppSizes.spaceBtwItems),
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller.customer.value.fullName,
+                            style: Theme.of(context).textTheme.titleLarge,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                          Text(
+                            controller.customer.value.email,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -59,18 +74,31 @@ class OrderCustomerInfo extends StatelessWidget {
         const SizedBox(height: AppSizes.spaceBtwSections),
 
         // Contact Info
-        AppContainer(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text('Contact Person', style: Theme.of(context).textTheme.headlineMedium),
-              const SizedBox(height: AppSizes.spaceBtwSections),
-              Text('Ahmed Ali', style: Theme.of(context).textTheme.titleSmall),
-              const SizedBox(height: AppSizes.spaceBtwItems / 2),
-              Text('support@me.com', style: Theme.of(context).textTheme.titleSmall),
-              const SizedBox(height: AppSizes.spaceBtwItems / 2),
-              Text('+20 *** *** ****', style: Theme.of(context).textTheme.titleSmall),
-            ],
+        Obx(
+          () => AppContainer(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text('Contact Person', style: Theme.of(context).textTheme.headlineMedium),
+                const SizedBox(height: AppSizes.spaceBtwSections),
+                Text(
+                  controller.customer.value.fullName,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: AppSizes.spaceBtwItems / 2),
+                Text(
+                  controller.customer.value.email,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(height: AppSizes.spaceBtwItems / 2),
+                Text(
+                  controller.customer.value.phoneNumber.isNotEmpty
+                      ? controller.customer.value.formatedPhoneNo
+                      : '+20 *** *** ****',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: AppSizes.spaceBtwSections),
@@ -84,10 +112,13 @@ class OrderCustomerInfo extends StatelessWidget {
               children: [
                 Text('Shipping Address', style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: AppSizes.spaceBtwSections),
-                Text('2B Nasr City', style: Theme.of(context).textTheme.titleSmall),
+                Text(
+                  order.shippingAddress?.name ?? '',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
                 const SizedBox(height: AppSizes.spaceBtwItems / 2),
                 Text(
-                  '13B Suze-Al-Methak Str., Nasr City, Cairo, Egypt',
+                  order.shippingAddress?.toString() ?? '',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],
@@ -105,10 +136,17 @@ class OrderCustomerInfo extends StatelessWidget {
               children: [
                 Text('Billing Address', style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: AppSizes.spaceBtwSections),
-                Text('2B Nasr City', style: Theme.of(context).textTheme.titleSmall),
+                Text(
+                  order.billingAddressSameAsShipping
+                      ? order.shippingAddress?.name ?? ''
+                      : order.billingAddress?.name ?? '',
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
                 const SizedBox(height: AppSizes.spaceBtwItems / 2),
                 Text(
-                  '13B Suze-Al-Methak Str., Nasr City, Cairo, Egypt',
+                  order.billingAddressSameAsShipping
+                      ? order.shippingAddress?.toString() ?? ''
+                      : order.billingAddress?.toString() ?? '',
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],

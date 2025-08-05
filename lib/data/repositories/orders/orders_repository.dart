@@ -13,7 +13,7 @@ class OrdersRepository extends GetxController {
   // Get all orders from 'orders' collection
   Future<List<OrderModel>> getAllOrders() async {
     try {
-      final snapshot = await _db.collection('orders').get();
+      final snapshot = await _db.collection('orders').orderBy('orderDate', descending: true).get();
       return snapshot.docs.map((doc) => OrderModel.fromSnapshot(doc)).toList();
     } on FirebaseException catch (e) {
       throw AppFirebaseException(e.code).message;
@@ -49,9 +49,9 @@ class OrdersRepository extends GetxController {
     }
   }
 
-  Future<void> updateOrder(OrderModel order) async {
+  Future<void> updateOrderSpecificValue(String orderId, Map<String, dynamic> data) async {
     try {
-      await _db.collection('orders').doc(order.id).update(order.toJson());
+      await _db.collection('orders').doc(orderId).update(data);
     } on FirebaseException catch (e) {
       throw AppFirebaseException(e.code).message;
     } on PlatformException catch (e) {
