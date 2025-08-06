@@ -3,9 +3,12 @@ import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_images.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../features/personalization/controllers/settings_controller.dart';
 import '../../../../routes/routes.dart';
+import '../../../../utils/constants/enums.dart';
 import 'menu/app_menu_item.dart';
 
 class AppSidebar extends StatelessWidget {
@@ -13,6 +16,8 @@ class AppSidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = SettingsController.instance;
+
     return Drawer(
       shape: const BeveledRectangleBorder(),
       child: Container(
@@ -23,11 +28,31 @@ class AppSidebar extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const AppCircularImage(
-                width: 100,
-                height: 100,
-                image: AppImages.user,
-                backgroundColor: Colors.transparent,
+              Obx(
+                () => Row(
+                  children: [
+                    AppCircularImage(
+                      width: 45,
+                      height: 45,
+                      padding: 0,
+                      margin: AppSizes.sm,
+                      backgroundColor: Colors.transparent,
+                      imageType: controller.settings.value.appLogo.isNotEmpty
+                          ? ImageType.network
+                          : ImageType.asset,
+                      image: controller.settings.value.appLogo.isNotEmpty
+                          ? controller.settings.value.appLogo
+                          : AppImages.defaultImage,
+                    ),
+                    Expanded(
+                      child: Text(
+                        controller.settings.value.appName,
+                        style: Theme.of(context).textTheme.headlineLarge,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(width: AppSizes.spaceBtwSections),
               Padding(

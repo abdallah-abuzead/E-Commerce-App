@@ -1,10 +1,10 @@
 import 'package:ecommerce_admin_panel/common/widgets/loaders/app_loader_animation.dart';
-import 'package:ecommerce_admin_panel/features/shop/models/address_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../common/widgets/containers/app_container.dart';
 import '../../../../../../utils/constants/app_sizes.dart';
+import '../../../../../personalization/models/address_model.dart';
 import '../../../../controllers/customers/customer_details_controller.dart';
 
 class ShippingAddress extends StatelessWidget {

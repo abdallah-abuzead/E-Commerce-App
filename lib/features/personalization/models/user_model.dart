@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecommerce_admin_panel/features/shop/models/address_model.dart';
 import 'package:ecommerce_admin_panel/features/shop/models/order_model.dart';
 
 import '../../../utils/constants/enums.dart';
 import '../../../utils/formatters/app_formatter.dart';
+import 'address_model.dart';
 
 class UserModel {
   final String? id;
@@ -30,8 +30,6 @@ class UserModel {
     this.role = AppRole.user,
     this.createdAt,
     this.updatedAt,
-    // this.orders,
-    // this.addresses,
   });
 
   // static method to create an empty user model

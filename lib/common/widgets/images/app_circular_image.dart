@@ -20,6 +20,7 @@ class AppCircularImage extends StatelessWidget {
     this.image,
     this.fit = BoxFit.contain,
     this.padding = AppSizes.sm,
+    this.margin = 0,
     this.file,
   });
 
@@ -30,7 +31,7 @@ class AppCircularImage extends StatelessWidget {
   final Color? overlayColor;
   final Color? backgroundColor;
   final Uint8List? memoryImage;
-  final double width, height, padding;
+  final double width, height, padding, margin;
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +39,12 @@ class AppCircularImage extends StatelessWidget {
       width: width,
       height: height,
       padding: EdgeInsets.all(padding),
+      margin: EdgeInsets.all(margin),
       decoration: BoxDecoration(
         color:
             backgroundColor ??
-            (Theme.of(context).brightness == Brightness.dark
-                ? Colors.black
-                : Colors.white),
-        borderRadius: BorderRadius.circular(
-          width >= height ? width / 2 : height / 2,
-        ),
+            (Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white),
+        borderRadius: BorderRadius.circular(width >= height ? width / 2 : height / 2),
       ),
       child: _buildImageWidget(),
     );
@@ -70,9 +68,7 @@ class AppCircularImage extends StatelessWidget {
     }
 
     return ClipRRect(
-      borderRadius: BorderRadius.circular(
-        width >= height ? width / 2 : height / 2,
-      ),
+      borderRadius: BorderRadius.circular(width >= height ? width / 2 : height / 2),
       child: imageWidget,
     );
   }
@@ -93,11 +89,7 @@ class AppCircularImage extends StatelessWidget {
   Widget _buildMemoryImage() {
     return memoryImage == null
         ? Container()
-        : Image(
-            image: MemoryImage(memoryImage!),
-            fit: fit,
-            color: overlayColor,
-          );
+        : Image(image: MemoryImage(memoryImage!), fit: fit, color: overlayColor);
   }
 
   Widget _buildFileImage() {

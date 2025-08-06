@@ -1,4 +1,4 @@
-import 'package:ecommerce_admin_panel/features/authentication/models/user_model.dart';
+import 'package:ecommerce_admin_panel/features/personalization/models/user_model.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/abstract/app_base_controller.dart';

@@ -2,7 +2,7 @@ import 'package:ecommerce_admin_panel/utils/popups/app_loaders.dart';
 import 'package:get/get.dart';
 
 import '../../../data/repositories/user/user_repository.dart';
-import '../models/user_model.dart';
+import '../../personalization/models/user_model.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find<UserController>();
@@ -27,10 +27,7 @@ class UserController extends GetxController {
       return user;
     } catch (e) {
       loading.value = false;
-      AppLoaders.errorSnackBar(
-        title: 'Something went wrong',
-        message: e.toString(),
-      );
+      AppLoaders.errorSnackBar(title: 'Something went wrong', message: e.toString());
       return UserModel.empty();
     }
   }
