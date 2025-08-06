@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
 import 'package:ecommerce_admin_panel/common/widgets/images/app_circular_image.dart';
 import 'package:ecommerce_admin_panel/common/widgets/images/app_rounded_image.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
@@ -24,7 +25,11 @@ class AppImageUploader extends StatelessWidget {
     this.bottom = 0,
     this.right,
     this.left = 0,
+    this.loading = false,
   });
+
+  /// Whether to display loading instead of icon
+  final bool loading;
 
   /// Whether to display the image in the circular shape
   final bool circular;
@@ -81,13 +86,23 @@ class AppImageUploader extends StatelessWidget {
           left: left,
           right: right,
           bottom: bottom,
-          child: AppCircularIcon(
-            icon: icon,
-            size: AppSizes.md,
-            color: Colors.white,
-            onPressed: onIconButtonPressed,
-            backgroundColor: AppColors.primary.withValues(alpha: 0.9),
-          ),
+          child: loading
+              ? const AppContainer(
+                  width: AppSizes.xl,
+                  height: AppSizes.xl,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    backgroundColor: AppColors.primary,
+                    color: Colors.white,
+                  ),
+                )
+              : AppCircularIcon(
+                  icon: icon,
+                  size: AppSizes.md,
+                  color: Colors.white,
+                  onPressed: onIconButtonPressed,
+                  backgroundColor: AppColors.primary.withValues(alpha: 0.9),
+                ),
         ),
       ],
     );
