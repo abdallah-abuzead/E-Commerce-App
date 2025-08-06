@@ -74,7 +74,7 @@ class SettingsController extends GetxController {
     }
   }
 
-  /// Get Thumbnail image from media
+  /// update settings
   Future<void> updateSettingsInformation() async {
     try {
       loading.value = true;

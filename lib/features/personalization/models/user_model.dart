@@ -7,12 +7,12 @@ import 'address_model.dart';
 
 class UserModel {
   final String? id;
-  final String firstName;
-  final String lastName;
+  String firstName;
+  String lastName;
   final String username;
   final String email;
-  final String phoneNumber;
-  final String profilePicture;
+  String phoneNumber;
+  String profilePicture;
   final AppRole role;
   final DateTime? createdAt;
   final DateTime? updatedAt;
