@@ -32,8 +32,8 @@ class AppSidebar extends StatelessWidget {
                 () => Row(
                   children: [
                     AppCircularImage(
-                      width: 60,
-                      height: 60,
+                      width: 45,
+                      height: 45,
                       padding: 0,
                       margin: AppSizes.sm,
                       backgroundColor: Colors.transparent,
