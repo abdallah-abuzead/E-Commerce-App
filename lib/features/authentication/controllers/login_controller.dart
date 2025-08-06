@@ -1,5 +1,6 @@
 import 'package:ecommerce_admin_panel/data/repositories/user/user_repository.dart';
 import 'package:ecommerce_admin_panel/features/authentication/controllers/user_controller.dart';
+import 'package:ecommerce_admin_panel/features/personalization/models/settings_model.dart';
 import 'package:ecommerce_admin_panel/features/personalization/models/user_model.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_images.dart';
 import 'package:ecommerce_admin_panel/utils/constants/enums.dart';
@@ -9,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../data/repositories/auth/auth_repository.dart';
+import '../../../data/repositories/settings/settings_repository.dart';
 import '../../../utils/constants/app_strings.dart';
 import '../../../utils/helpers/network_manager.dart';
 import '../../../utils/popups/full_screen_loader.dart';
@@ -108,6 +110,12 @@ class LoginController extends GetxController {
           role: AppRole.admin,
           createdAt: DateTime.now(),
         ),
+      );
+
+      // Register settings
+      final SettingsRepository settingsRepository = Get.put(SettingsRepository());
+      await settingsRepository.registerSettings(
+        SettingsModel(appName: 'EC Store', appLogo: '', taxRate: 0, shippingCost: 0),
       );
 
       FullScreenLoader.stopLoading();
