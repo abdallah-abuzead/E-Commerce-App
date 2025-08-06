@@ -1,19 +1,24 @@
 import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../utils/constants/app_sizes.dart';
+import '../../../controllers/settings_controller.dart';
 
 class SettingsForm extends StatelessWidget {
   const SettingsForm({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = SettingsController.instance;
+
     return Column(
       children: [
         AppContainer(
           padding: const EdgeInsets.symmetric(horizontal: AppSizes.md, vertical: AppSizes.lg),
           child: Form(
+            key: controller.formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -22,6 +27,7 @@ class SettingsForm extends StatelessWidget {
 
                 // App Name
                 TextFormField(
+                  controller: controller.appNameController,
                   decoration: const InputDecoration(
                     hintText: 'App Name',
                     label: Text('App Name'),
@@ -36,6 +42,7 @@ class SettingsForm extends StatelessWidget {
                     // Tax
                     Expanded(
                       child: TextFormField(
+                        controller: controller.taxController,
                         decoration: const InputDecoration(
                           hintText: 'Tax %',
                           label: Text('Tax Rate (%)'),
@@ -47,6 +54,7 @@ class SettingsForm extends StatelessWidget {
                     // Shipping Cost
                     Expanded(
                       child: TextFormField(
+                        controller: controller.shippingController,
                         decoration: const InputDecoration(
                           hintText: 'Shipping Cost',
                           label: Text('Shipping Cost (\$)'),
@@ -58,6 +66,7 @@ class SettingsForm extends StatelessWidget {
                     // Free Shipping Threshold
                     Expanded(
                       child: TextFormField(
+                        controller: controller.freeShippingThresholdController,
                         decoration: const InputDecoration(
                           hintText: 'Free Shipping After (\$)',
                           label: Text('Free Shipping Threshold (\$)'),
@@ -71,7 +80,16 @@ class SettingsForm extends StatelessWidget {
 
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(onPressed: () {}, child: const Text('Update App Settings')),
+                  child: Obx(
+                    () => ElevatedButton(
+                      onPressed: controller.loading.value
+                          ? () {}
+                          : () => controller.updateSettingsInformation(),
+                      child: controller.loading.value
+                          ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
+                          : const Text('Update App Settings'),
+                    ),
+                  ),
                 ),
               ],
             ),
