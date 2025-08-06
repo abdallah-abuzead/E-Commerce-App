@@ -3,7 +3,7 @@ import 'package:ecommerce_admin_panel/features/shop/models/order_model.dart';
 
 import '../../../utils/constants/enums.dart';
 import '../../../utils/formatters/app_formatter.dart';
-import '../../personalization/models/address_model.dart';
+import 'address_model.dart';
 
 class UserModel {
   final String? id;

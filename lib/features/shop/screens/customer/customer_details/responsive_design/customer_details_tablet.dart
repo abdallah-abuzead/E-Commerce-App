@@ -1,4 +1,4 @@
-import 'package:ecommerce_admin_panel/features/authentication/models/user_model.dart';
+import 'package:ecommerce_admin_panel/features/personalization/models/user_model.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/customer/customer_details/widgets/customer_info.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/customer/customer_details/widgets/customer_orders.dart';
 import 'package:ecommerce_admin_panel/features/shop/screens/customer/customer_details/widgets/shipping_address.dart';

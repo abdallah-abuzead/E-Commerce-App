@@ -1,5 +1,5 @@
 import 'package:ecommerce_admin_panel/data/repositories/addresses/addresses_repository.dart';
-import 'package:ecommerce_admin_panel/features/authentication/models/user_model.dart';
+import 'package:ecommerce_admin_panel/features/personalization/models/user_model.dart';
 import 'package:ecommerce_admin_panel/features/shop/models/order_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';

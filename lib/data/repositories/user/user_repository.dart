@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_admin_panel/data/repositories/auth/auth_repository.dart';
-import 'package:ecommerce_admin_panel/features/authentication/models/user_model.dart';
+import 'package:ecommerce_admin_panel/features/personalization/models/user_model.dart';
 import 'package:ecommerce_admin_panel/features/shop/models/order_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
