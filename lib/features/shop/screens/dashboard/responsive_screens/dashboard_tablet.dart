@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 import '../../../../../utils/constants/app_sizes.dart';
+import '../../../controllers/dashboard/dashboard_controller.dart';
 import '../widgets/dashboard_card.dart';
 import '../widgets/order_status_pie_chart.dart';
 import '../widgets/recent_orders.dart';
@@ -11,6 +14,7 @@ class DashboardTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(DashboardController());
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -20,26 +24,68 @@ class DashboardTablet extends StatelessWidget {
             // Dashboard Header
             Text('Dashboard', style: Theme.of(context).textTheme.headlineLarge),
             const SizedBox(height: AppSizes.spaceBtwSections),
-            const Row(
+            Row(
               children: [
                 Expanded(
-                  child: DashboardCard(title: 'Sales total', subtitle: '\$365.6', stats: 25),
+                  child: Obx(
+                    () => DashboardCard(
+                      headingIcon: Iconsax.note,
+                      headingIconColor: Colors.blue,
+                      headingIconBgColor: Colors.blue.withValues(alpha: 0.1),
+                      context: context,
+                      title: 'Sales total',
+                      stats: 25,
+                      subtitle:
+                          '\$${controller.ordersController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount).toStringAsFixed(2)}',
+                    ),
+                  ),
                 ),
-                SizedBox(width: AppSizes.spaceBtwItems),
+                const SizedBox(width: AppSizes.spaceBtwItems),
                 Expanded(
-                  child: DashboardCard(title: 'Average order value', subtitle: '\$25', stats: 15),
+                  child: Obx(
+                    () => DashboardCard(
+                      headingIcon: Iconsax.external_drive,
+                      headingIconColor: Colors.green,
+                      headingIconBgColor: Colors.green.withValues(alpha: 0.1),
+                      context: context,
+                      title: 'Average order value',
+                      stats: 15,
+                      subtitle:
+                          '\$${(controller.ordersController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount) / controller.ordersController.allItems.length).toStringAsFixed(2)}',
+                    ),
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: AppSizes.spaceBtwItems),
-            const Row(
+            Row(
               children: [
                 Expanded(
-                  child: DashboardCard(title: 'Total orders', subtitle: '36', stats: 44),
+                  child: Obx(
+                    () => DashboardCard(
+                      headingIcon: Iconsax.box,
+                      headingIconColor: Colors.deepPurple,
+                      headingIconBgColor: Colors.deepPurple.withValues(alpha: 0.1),
+                      context: context,
+                      title: 'Total orders',
+                      stats: 44,
+                      subtitle: controller.ordersController.allItems.length.toString(),
+                    ),
+                  ),
                 ),
-                SizedBox(width: AppSizes.spaceBtwItems),
+                const SizedBox(width: AppSizes.spaceBtwItems),
                 Expanded(
-                  child: DashboardCard(title: 'Visitors', subtitle: '25,35', stats: 2),
+                  child: Obx(
+                    () => DashboardCard(
+                      headingIcon: Iconsax.user,
+                      headingIconColor: Colors.deepOrange,
+                      headingIconBgColor: Colors.deepOrange.withValues(alpha: 0.1),
+                      context: context,
+                      title: 'Visitors',
+                      stats: 2,
+                      subtitle: controller.customersController.allItems.length.toString(),
+                    ),
+                  ),
                 ),
               ],
             ),
