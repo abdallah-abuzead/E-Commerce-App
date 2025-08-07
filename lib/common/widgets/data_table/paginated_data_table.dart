@@ -19,6 +19,7 @@ class AppPaginatedDataTable extends StatelessWidget {
     this.dataRowHeight = AppSizes.xl * 2,
     this.sortAscending = true,
     this.minWidth = 1000,
+    this.emptyWidgetHeight = 200,
   });
 
   /// whether to sort the data in ascending or descending order
@@ -47,6 +48,9 @@ class AppPaginatedDataTable extends StatelessWidget {
 
   /// Minimum width of the entire DataTable
   final double? minWidth;
+
+  /// Empty widget height
+  final double? emptyWidgetHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -78,10 +82,10 @@ class AppPaginatedDataTable extends StatelessWidget {
               topRight: Radius.circular(AppSizes.borderRadiusMd),
             ),
           ),
-          empty: const AppAnimationLoaderWidget(
+          empty: AppAnimationLoaderWidget(
             animation: AppImages.packageAnimation,
             text: 'Nothing Found',
-            height: 200,
+            height: emptyWidgetHeight,
             width: 200,
           ),
 

@@ -1,5 +1,4 @@
 import 'package:ecommerce_admin_panel/common/widgets/containers/app_container.dart';
-import 'package:ecommerce_admin_panel/common/widgets/loaders/app_loader_animation.dart';
 import 'package:ecommerce_admin_panel/utils/constants/app_colors.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../common/widgets/icons/app_circular_icon.dart';
+import '../../../../../common/widgets/loaders/app_animation_loader_widget.dart';
+import '../../../../../utils/constants/app_images.dart';
 import '../../../../../utils/constants/app_sizes.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 import '../../../controllers/dashboard/dashboard_controller.dart';
@@ -67,7 +68,14 @@ class OrderStatusPieChart extends StatelessWidget {
                     height: 250,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [AppLoaderAnimation()],
+                      children: [
+                        AppAnimationLoaderWidget(
+                          animation: AppImages.packageAnimation,
+                          text: 'Nothing Found',
+                          height: 150,
+                          width: 200,
+                        ),
+                      ],
                     ),
                   ),
           ),
