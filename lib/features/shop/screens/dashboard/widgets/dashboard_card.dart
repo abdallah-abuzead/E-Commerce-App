@@ -1,3 +1,4 @@
+import 'package:ecommerce_admin_panel/common/widgets/icons/app_circular_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -9,17 +10,22 @@ import '../../../../../utils/constants/app_sizes.dart';
 class DashboardCard extends StatelessWidget {
   const DashboardCard({
     super.key,
+    required this.context,
     required this.title,
     required this.subtitle,
     required this.stats,
     this.icon = Iconsax.arrow_up_3,
     this.color = AppColors.success,
     this.onTap,
+    required this.headingIcon,
+    required this.headingIconColor,
+    required this.headingIconBgColor,
   });
 
+  final BuildContext context;
+  final IconData icon, headingIcon;
   final String title, subtitle;
-  final IconData icon;
-  final Color color;
+  final Color color, headingIconColor, headingIconBgColor;
   final int stats;
   final void Function()? onTap;
 
@@ -31,7 +37,18 @@ class DashboardCard extends StatelessWidget {
       child: Column(
         children: [
           /// Section Heading
-          AppSectionHeading(title: title, textColor: AppColors.textSecondary),
+          Row(
+            children: [
+              AppCircularIcon(
+                icon: headingIcon,
+                color: headingIconColor,
+                backgroundColor: headingIconBgColor,
+                size: AppSizes.md,
+              ),
+              const SizedBox(width: AppSizes.spaceBtwItems),
+              AppSectionHeading(title: title, textColor: AppColors.textSecondary),
+            ],
+          ),
           const SizedBox(height: AppSizes.spaceBtwItems),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
