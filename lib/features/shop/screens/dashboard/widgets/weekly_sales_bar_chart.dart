@@ -85,7 +85,7 @@ class WeeklySalesBarChart extends StatelessWidget {
                     height: 250,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [AppLoaderAnimation()],
+                      children: [AppLoaderAnimation(height: 200)],
                     ),
                   ),
           ),

@@ -51,7 +51,7 @@ class DashboardTablet extends StatelessWidget {
                       title: 'Average order value',
                       stats: 15,
                       subtitle:
-                          '\$${(controller.ordersController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount) / controller.ordersController.allItems.length).toStringAsFixed(2)}',
+                          '\$${(controller.ordersController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount) / (controller.ordersController.allItems.isNotEmpty ? controller.ordersController.allItems.length : 1)).toStringAsFixed(2)}',
                     ),
                   ),
                 ),

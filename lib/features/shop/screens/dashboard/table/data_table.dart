@@ -22,6 +22,7 @@ class DashboardOrderTable extends StatelessWidget {
         dataRowHeight: AppSizes.xl * 1.3,
         sortAscending: controller.sortAscending.value,
         sortColumnIndex: controller.sortColumnIndex.value,
+        emptyWidgetHeight: 150,
         columns: [
           DataColumn2(
             label: const Text('Order ID'),
