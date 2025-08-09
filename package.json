@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "node-domexception": "^2.0.2"
+  },
+  "engine": {
+    "node": ">=18"
+  }
+}
